@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
   s.files = [
     "Rakefile",
     "VERSION",
+    "devops_common.gemspec",
     "lib/common/api/json_request.rb",
     "lib/common/api/json_response.rb",
     "lib/common/api/modules/base_module.rb",
