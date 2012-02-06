@@ -1,5 +1,5 @@
 
-require 'util/http_client'
+require 'common/util/http_client'
 
 class BaseModule
 

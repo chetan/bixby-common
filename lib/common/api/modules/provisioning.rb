@@ -1,8 +1,8 @@
 
-require 'api/json_request'
-require 'api/json_response'
+require 'common/api/json_request'
+require 'common/api/json_response'
 
-require 'api/modules/base_module'
+require 'common/api/modules/base_module'
 
 class Provisioning < BaseModule
 
