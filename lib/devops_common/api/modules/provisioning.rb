@@ -1,9 +1,4 @@
 
-require 'common/api/json_request'
-require 'common/api/json_response'
-
-require 'common/api/modules/base_module'
-
 class Provisioning < BaseModule
 
     class << self

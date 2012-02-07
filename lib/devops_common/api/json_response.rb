@@ -1,6 +1,4 @@
 
-require "common/util/jsonify"
-
 class JsonResponse
 
     include Jsonify

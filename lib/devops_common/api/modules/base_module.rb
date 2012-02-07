@@ -1,6 +1,4 @@
 
-require 'common/util/http_client'
-
 class BaseModule
 
     class << self

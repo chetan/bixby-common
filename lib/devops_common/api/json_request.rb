@@ -1,9 +1,4 @@
 
-require "common/util/http_client"
-require "common/util/jsonify"
-require "common/api/json_response"
-require "common/api/modules/base_module"
-
 class JsonRequest
 
     include Jsonify
