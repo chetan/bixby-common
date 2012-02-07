@@ -24,8 +24,6 @@ Gem::Specification.new do |s|
     "lib/devops_common/api/json_response.rb",
     "lib/devops_common/api/modules/base_module.rb",
     "lib/devops_common/api/modules/bundle_repository.rb",
-    "lib/devops_common/api/modules/inventory.rb",
-    "lib/devops_common/api/modules/provisioning.rb",
     "lib/devops_common/command_spec.rb",
     "lib/devops_common/exception/bundle_not_found.rb",
     "lib/devops_common/exception/command_not_found.rb",
