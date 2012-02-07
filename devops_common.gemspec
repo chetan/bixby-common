@@ -9,24 +9,28 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chetan Sarva"]
-  s.date = "2012-02-06"
+  s.date = "2012-02-07"
   s.description = "Devops Common files/libs"
   s.email = "chetan@pixelcop.net"
   s.files = [
+    ".document",
+    "Gemfile",
+    "Gemfile.lock",
     "Rakefile",
     "VERSION",
     "devops_common.gemspec",
-    "lib/common/api/json_request.rb",
-    "lib/common/api/json_response.rb",
-    "lib/common/api/modules/base_module.rb",
-    "lib/common/api/modules/bundle_repository.rb",
-    "lib/common/api/modules/inventory.rb",
-    "lib/common/api/modules/provisioning.rb",
-    "lib/common/command_spec.rb",
-    "lib/common/exception/bundle_not_found.rb",
-    "lib/common/exception/command_not_found.rb",
-    "lib/common/util/http_client.rb",
-    "lib/common/util/jsonify.rb"
+    "lib/devops_common.rb",
+    "lib/devops_common/api/json_request.rb",
+    "lib/devops_common/api/json_response.rb",
+    "lib/devops_common/api/modules/base_module.rb",
+    "lib/devops_common/api/modules/bundle_repository.rb",
+    "lib/devops_common/api/modules/inventory.rb",
+    "lib/devops_common/api/modules/provisioning.rb",
+    "lib/devops_common/command_spec.rb",
+    "lib/devops_common/exception/bundle_not_found.rb",
+    "lib/devops_common/exception/command_not_found.rb",
+    "lib/devops_common/util/http_client.rb",
+    "lib/devops_common/util/jsonify.rb"
   ]
   s.homepage = "http://github.com/chetan/devops"
   s.require_paths = ["lib"]
