@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chetan Sarva"]
-  s.date = "2012-02-07"
+  s.date = "2012-02-09"
   s.description = "Devops Common files/libs"
   s.email = "chetan@pixelcop.net"
   s.files = [
@@ -39,24 +39,39 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<json>, [">= 0"])
+      s.add_runtime_dependency(%q<curb>, [">= 0"])
       s.add_development_dependency(%q<yard>, ["~> 0.7"])
-      s.add_development_dependency(%q<cucumber>, [">= 0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.3"])
       s.add_development_dependency(%q<simplecov>, [">= 0"])
+      s.add_development_dependency(%q<rcov>, [">= 0"])
+      s.add_development_dependency(%q<minitest>, [">= 0"])
+      s.add_development_dependency(%q<test-unit>, [">= 0"])
+      s.add_development_dependency(%q<turn>, [">= 0"])
     else
+      s.add_dependency(%q<json>, [">= 0"])
+      s.add_dependency(%q<curb>, [">= 0"])
       s.add_dependency(%q<yard>, ["~> 0.7"])
-      s.add_dependency(%q<cucumber>, [">= 0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.3"])
       s.add_dependency(%q<simplecov>, [">= 0"])
+      s.add_dependency(%q<rcov>, [">= 0"])
+      s.add_dependency(%q<minitest>, [">= 0"])
+      s.add_dependency(%q<test-unit>, [">= 0"])
+      s.add_dependency(%q<turn>, [">= 0"])
     end
   else
+    s.add_dependency(%q<json>, [">= 0"])
+    s.add_dependency(%q<curb>, [">= 0"])
     s.add_dependency(%q<yard>, ["~> 0.7"])
-    s.add_dependency(%q<cucumber>, [">= 0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.3"])
     s.add_dependency(%q<simplecov>, [">= 0"])
+    s.add_dependency(%q<rcov>, [">= 0"])
+    s.add_dependency(%q<minitest>, [">= 0"])
+    s.add_dependency(%q<test-unit>, [">= 0"])
+    s.add_dependency(%q<turn>, [">= 0"])
   end
 end
 
