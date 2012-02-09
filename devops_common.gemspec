@@ -28,7 +28,9 @@ Gem::Specification.new do |s|
     "lib/devops_common/exception/bundle_not_found.rb",
     "lib/devops_common/exception/command_not_found.rb",
     "lib/devops_common/util/http_client.rb",
-    "lib/devops_common/util/jsonify.rb"
+    "lib/devops_common/util/jsonify.rb",
+    "test/helper.rb",
+    "test/test_devops_common.rb"
   ]
   s.homepage = "http://github.com/chetan/devops"
   s.require_paths = ["lib"]
