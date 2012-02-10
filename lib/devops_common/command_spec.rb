@@ -13,7 +13,7 @@ class CommandSpec
     #   env (optional)
     def initialize(params = nil)
         return if params.nil? or params.empty?
-        params.each{ |k,v| self.send("#{k}=", v) }
+        params.each{ |k,v| self.send("#{k}=", v) if self.respond_to? "#{k}=" }
     end
 
     def to_hash
@@ -45,7 +45,7 @@ class CommandSpec
             # only resolve the special "local" repo for Agents
             return File.expand_path(File.join(AGENT_ROOT, "../../repo", @bundle))
         end
-        File.join(BundleRepository.repository_path, @repo, @bundle)
+        File.join(BundleRepository.path, @repo, @bundle)
     end
 
     def bundle_exists?
