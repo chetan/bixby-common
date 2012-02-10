@@ -2,6 +2,7 @@ source "http://rubygems.org"
 
 gem "json"
 gem "curb"
+gem "systemu"
 
 group :development do
   gem "yard", "~> 0.7"
