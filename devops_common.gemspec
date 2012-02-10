@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chetan Sarva"]
-  s.date = "2012-02-09"
+  s.date = "2012-02-10"
   s.description = "Devops Common files/libs"
   s.email = "chetan@pixelcop.net"
   s.files = [
@@ -30,6 +30,8 @@ Gem::Specification.new do |s|
     "lib/devops_common/util/http_client.rb",
     "lib/devops_common/util/jsonify.rb",
     "test/helper.rb",
+    "test/support/test_bundle/bin/echo",
+    "test/test_command_spec.rb",
     "test/test_devops_common.rb"
   ]
   s.homepage = "http://github.com/chetan/devops"
@@ -43,6 +45,7 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<json>, [">= 0"])
       s.add_runtime_dependency(%q<curb>, [">= 0"])
+      s.add_runtime_dependency(%q<systemu>, [">= 0"])
       s.add_development_dependency(%q<yard>, ["~> 0.7"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.3"])
@@ -54,6 +57,7 @@ Gem::Specification.new do |s|
     else
       s.add_dependency(%q<json>, [">= 0"])
       s.add_dependency(%q<curb>, [">= 0"])
+      s.add_dependency(%q<systemu>, [">= 0"])
       s.add_dependency(%q<yard>, ["~> 0.7"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.3"])
@@ -66,6 +70,7 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<json>, [">= 0"])
     s.add_dependency(%q<curb>, [">= 0"])
+    s.add_dependency(%q<systemu>, [">= 0"])
     s.add_dependency(%q<yard>, ["~> 0.7"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.3"])
