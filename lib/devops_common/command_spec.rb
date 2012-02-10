@@ -1,4 +1,6 @@
 
+require 'systemu'
+
 class CommandSpec
 
     include Jsonify
