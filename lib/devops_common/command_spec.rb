@@ -19,8 +19,7 @@ class CommandSpec
     end
 
     def to_hash
-        { :repo => self.repo, :bundle => self.bundle, :command => self.command,
-          :args => self.args, :env => self.env }
+        self.instance_variables.inject({}) { |m,v| m[v[1,v.length].to_sym] = instance_variable_get(v); m }
     end
 
     # returns triplet of [ status, stdout, stderr ]
