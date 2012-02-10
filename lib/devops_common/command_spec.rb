@@ -55,7 +55,7 @@ class CommandSpec
     def bundle_dir
         if @repo == "local" and Module.constants.include? "AGENT_ROOT" then
             # only resolve the special "local" repo for Agents
-            return File.expand_path(File.join(AGENT_ROOT, "../../repo", @bundle))
+            return File.expand_path(File.join(AGENT_ROOT, "../repo", @bundle))
         end
         File.join(BundleRepository.path, @repo, @bundle)
     end
