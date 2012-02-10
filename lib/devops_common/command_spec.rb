@@ -35,7 +35,7 @@ class CommandSpec
         else
             cmd = "sh -c '#{self.command_file}"
         end
-        cmd += @args ? "#{@args}'" : "'"
+        cmd += @args ? " #{@args}'" : "'"
 
         puts cmd
         status, stdout, stderr = systemu(cmd)
