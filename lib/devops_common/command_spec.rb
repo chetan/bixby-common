@@ -1,11 +1,13 @@
 
+require 'tempfile'
+
 require 'systemu'
 
 class CommandSpec
 
     include Jsonify
 
-    attr_accessor :repo, :bundle, :command, :args, :env
+    attr_accessor :repo, :bundle, :command, :args, :stdin, :env
 
     # params hash contains:
     #   repo
@@ -24,8 +26,17 @@ class CommandSpec
 
     # returns triplet of [ status, stdout, stderr ]
     def execute
-        puts @args
-        cmd = "sh -c '#{self.command_file} #{@args}'"
+        if @stdin and not @stdin.empty? then
+            temp = Tempfile.new("input-")
+            temp << @stdin
+            temp.flush
+            temp.close
+            cmd = "sh -c 'cat #{temp.path} | #{self.command_file}"
+        else
+            cmd = "sh -c '#{self.command_file}"
+        end
+        cmd += @args ? "#{@args}'" : "'"
+
         puts cmd
         status, stdout, stderr = systemu(cmd)
     end

@@ -48,4 +48,13 @@ class TestCommandSpec < MiniTest::Unit::TestCase
     assert_equal("", stderr)
   end
 
+  def test_execute_stdin
+    @c.command = "cat"
+    @c.stdin = "hi"
+    (status, stdout, stderr) = @c.execute
+    assert(status.success?)
+    assert_equal("hi", stdout)
+    assert_equal("", stderr)
+  end
+
 end
