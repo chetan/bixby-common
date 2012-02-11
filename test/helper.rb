@@ -28,6 +28,8 @@ class MiniTest::Unit::TestCase
     begin
       yield
     rescue Exception => ex
+      puts "#{ex.class}: #{ex.message}"
+      puts ex.backtrace.join("\n")
       if clazz.to_s == ex.class.name then
         if msg.nil?
           return
