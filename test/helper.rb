@@ -12,7 +12,9 @@ require 'turn'
 
 begin
   require 'simplecov'
-  SimpleCov.start
+  SimpleCov.start do
+    add_filter "/test/"
+  end
 rescue Exception => ex
 end
 
