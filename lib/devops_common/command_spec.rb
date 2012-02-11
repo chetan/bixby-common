@@ -6,6 +6,7 @@ require 'systemu'
 class CommandSpec
 
     include Jsonify
+    include Hashify
 
     attr_accessor :repo, :bundle, :command, :args, :stdin, :env
 
@@ -18,10 +19,6 @@ class CommandSpec
     def initialize(params = nil)
         return if params.nil? or params.empty?
         params.each{ |k,v| self.send("#{k}=", v) if self.respond_to? "#{k}=" }
-    end
-
-    def to_hash
-        self.instance_variables.inject({}) { |m,v| m[v[1,v.length].to_sym] = instance_variable_get(v); m }
     end
 
     # returns triplet of [ status, stdout, stderr ]
@@ -49,15 +46,20 @@ class CommandSpec
         if not command_exists? then
             raise CommandNotFound.new("repo = #{@repo}; bundle = #{@bundle}; command = #{@command}")
         end
+        return true
     end
 
     # resolve the given bundle
     def bundle_dir
-        if @repo == "local" and Module.constants.include? "AGENT_ROOT" then
+        if @repo == "local" and Module.constants.include? :AGENT_ROOT then
             # only resolve the special "local" repo for Agents
             return File.expand_path(File.join(AGENT_ROOT, "../repo", @bundle))
         end
-        File.join(BundleRepository.path, @repo, @bundle)
+        File.join(BundleRepository.path, self.relative_path)
+    end
+
+    def relative_path
+        File.join(@repo, @bundle)
     end
 
     def bundle_exists?

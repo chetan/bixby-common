@@ -12,3 +12,4 @@ autoload :CommandNotFound, "devops_common/exception/command_not_found"
 
 autoload :HttpClient, "devops_common/util/http_client"
 autoload :Jsonify, "devops_common/util/jsonify"
+autoload :Hashify, "devops_common/util/hashify"
