@@ -1,10 +1,22 @@
 
+# Wraps a JSON Response
+#
+# @attr [String] status  Status of operaiton ("success" or "fail")
+# @attr [String] message  Response message
+# @attr [Hash] data  Response data as key/value pairs
+# @attr [FixNum] code  Response code
 class JsonResponse
 
     include Jsonify
 
     attr_accessor :status, :message, :data, :code
 
+    # Create a new JsonResponse
+    #
+    # @param [String] status  Status of operaiton ("success" or "fail")
+    # @param [String] message  Response message
+    # @param [Hash] data  Response data as key/value pairs
+    # @param [FixNum] code  Response code
     def initialize(status = nil, message = nil, data = nil, code = nil)
         @status = status
         @message = message
@@ -12,22 +24,37 @@ class JsonResponse
         @code = code
     end
 
+    # Was operation successful?
+    #
+    # @return [Boolean] True if @status == "success"
     def success?
         @status && @status == "success"
     end
 
+    # Was operation unsuccessful?
+    #
+    # @return [Boolean] True if @status == "fail"
     def fail?
         @status && @status == "fail"
     end
 
+    # Create a JsonResponse representing an invalid request
+    #
+    # @param [String] msg Optional message (default: "invalid request")
     def self.invalid_request(msg = nil)
         new("fail", (msg || "invalid request"), nil, 400)
     end
 
+    # Create a JsonResponse indicating "bundle not found"
+    #
+    # @param [String] bundle  Name of bundle
     def self.bundle_not_found(bundle)
         new("fail", "bundle not found: #{bundle}", nil, 404)
     end
 
+    # Create a JsonResponse indicating "command not found"
+    #
+    # @param [String] command  Name of command
     def self.command_not_found(command)
         new("fail", "command not found: #{command}", nil, 404)
     end
