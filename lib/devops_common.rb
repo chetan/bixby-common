@@ -1,4 +1,5 @@
 
+autoload :CommandResponse, "devops_common/command_response"
 autoload :CommandSpec, "devops_common/command_spec"
 
 autoload :JsonRequest, "devops_common/api/json_request"
