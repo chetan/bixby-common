@@ -10,18 +10,19 @@ class CommandSpec
 
     attr_accessor :repo, :bundle, :command, :args, :stdin, :env
 
-    # params hash contains:
-    #   repo
-    #   bundle
-    #   command
-    #   args (optional)
-    #   env (optional)
+    # Create new CommandSpec
+    #
+    # @params [Hash] params  Hash of attributes to initialize with
     def initialize(params = nil)
         return if params.nil? or params.empty?
         params.each{ |k,v| self.send("#{k}=", v) if self.respond_to? "#{k}=" }
     end
 
-    # returns triplet of [ status, stdout, stderr ]
+    # Execute this command
+    #
+    # @param [String] cmd  Command string to execute
+    #
+    # @return [Array<FixNum, String, String>] status, stdout, stderr
     def execute
         if @stdin and not @stdin.empty? then
             temp = Tempfile.new("input-")
@@ -34,10 +35,14 @@ class CommandSpec
         end
         cmd += @args ? " #{@args}'" : "'"
 
-        puts cmd
-        status, stdout, stderr = systemu(cmd)
+        status, stdout, stderr = system_exec(cmd)
     end
 
+    # Validate the existence of this Command on the local system
+    #
+    # @return [Boolean] returns true if available, else raises error
+    # @raise [BundleNotFound]
+    # @raise [CommandNotFound]
     def validate
         if not bundle_exists? then
             raise BundleNotFound.new("repo = #{@repo}; bundle = #{@bundle}")
@@ -72,6 +77,24 @@ class CommandSpec
 
     def command_exists?
         File.exists? self.command_file
+    end
+
+
+    private
+
+    # Cleanup the ENV before executing command
+    #
+    # @param [String] cmd  Command string to execute
+    #
+    # @return [Array<FixNum, String, String>] status, stdout, stderr
+    def system_exec(cmd)
+        rem = [ "BUNDLE_BIN_PATH", "BUNDLE_GEMFILE", "RUBYOPT" ]
+        old_env = {}
+        rem.each{ |r| old_env[r] = ENV.delete(r) }
+        status, stdout, stderr = systemu(cmd)
+        rem.each{ |r| ENV[r] = old_env[r] if old_env[r] }
+
+        return [ status, stdout, stderr ]
     end
 
 end
