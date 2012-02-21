@@ -79,6 +79,37 @@ class CommandSpec
         File.exists? self.command_file
     end
 
+    def digest_file
+        File.join(self.bundle_dir, "digest")
+    end
+
+    def digest
+        @digest ||= JSON.parse(File.read(digest_file))
+    end
+
+    def update_digest
+
+        path = self.bundle_dir
+        sha = Digest::SHA2.new
+        bundle_sha = Digest::SHA2.new
+
+        digests = []
+        Dir.glob("#{path}/**/*").sort.each do |f|
+          next if File.directory? f || File.basename(f) == "digest"
+          bundle_sha.file(f)
+          sha.reset()
+          digests << { :file => f.gsub(/#{path}\//, ''), :digest => sha.file(f).hexdigest() }
+        end
+
+        @digest = { :digest => bundle_sha.hexdigest(), :files => digests }
+        File.new(path+"/digest", 'w').write(JSON.pretty_generate(@digest) + "\n")
+
+    end
+
+    def validate_digest(other)
+        other["digest"] == self.digest["digest"]
+    end
+
 
     private
 
