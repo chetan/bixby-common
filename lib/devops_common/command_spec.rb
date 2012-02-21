@@ -8,7 +8,7 @@ class CommandSpec
   include Jsonify
   include Hashify
 
-  attr_accessor :repo, :bundle, :command, :args, :stdin, :env
+  attr_accessor :repo, :digest, :bundle, :command, :args, :stdin, :env
 
   # Create new CommandSpec
   #
@@ -16,6 +16,9 @@ class CommandSpec
   def initialize(params = nil)
     return if params.nil? or params.empty?
     params.each{ |k,v| self.send("#{k}=", v) if self.respond_to? "#{k}=" }
+
+    digest = load_digest()
+    @digest = digest["digest"] if digest
   end
 
   # Execute this command
@@ -83,8 +86,12 @@ class CommandSpec
     File.join(self.bundle_dir, "digest")
   end
 
-  def digest
-    @digest ||= JSON.parse(File.read(digest_file))
+  def load_digest
+    begin
+      return JSON.parse(File.read(digest_file))
+    rescue => ex
+    end
+    nil
   end
 
   def update_digest
@@ -102,12 +109,8 @@ class CommandSpec
     end
 
     @digest = { :digest => bundle_sha.hexdigest(), :files => digests }
-    File.new(path+"/digest", 'w').write(JSON.pretty_generate(@digest) + "\n")
+    File.open(path+"/digest", 'w'){ |f| f.write(JSON.pretty_generate(@digest) + "\n") }
 
-  end
-
-  def validate_digest(other)
-    other["digest"] == self.digest["digest"]
   end
 
 

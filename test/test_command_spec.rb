@@ -57,4 +57,30 @@ class TestCommandSpec < MiniTest::Unit::TestCase
     assert_equal("", stderr)
   end
 
+  def test_digest
+    assert_equal "2429629015110c29f8fae8ca97e0e494410a28b981653c0e094cfe4a7567f1b7", @c.digest
+  end
+
+  def test_digest_no_err
+    c = CommandSpec.new({ :repo => "support", :bundle => "test_bundle", 'command' => "echofoo" })
+  end
+
+  def test_update_digest
+    expected = JSON.parse(File.read(BundleRepository.path + "/support/test_bundle/digest"))
+
+    t = "/tmp/foobar_test_repo"
+    d = "#{t}/support/test_bundle/digest"
+    `mkdir -p #{t}`
+    `cp -a #{BundleRepository.path}/support #{t}/`
+    `rm #{d}`
+    BundleRepository.path = t
+
+    refute File.exist? d
+    @c.update_digest
+    assert File.exist? d
+
+    assert_equal expected.to_json, JSON.parse(File.read(d)).to_json
+    `rm -rf #{t}`
+  end
+
 end
