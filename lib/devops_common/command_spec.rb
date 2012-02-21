@@ -82,6 +82,18 @@ class CommandSpec
     File.exists? self.command_file
   end
 
+  def config_file
+    command_file + ".json"
+  end
+
+  def load_config
+    if File.exists? config_file then
+      JSON.parse(File.read(config_file))
+    else
+      {}
+    end
+  end
+
   def digest_file
     File.join(self.bundle_dir, "digest")
   end
