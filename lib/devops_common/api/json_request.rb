@@ -25,7 +25,11 @@ class JsonRequest
     # @return [JsonResponse]
     def exec(uri = nil)
         uri ||= api_uri
-        return JsonResponse.from_json(http_post_json(uri, self.to_json))
+        begin
+            return JsonResponse.from_json(http_post_json(uri, self.to_json))
+        rescue Curl::Err::ConnectionFailedError => ex
+            return JsonResponse.new("fail", ex.message, ex.backtrace)
+        end
     end
 
     # Download the file specified by this request and save it to download_path
