@@ -14,4 +14,8 @@ class CommandResponse
     @status.to_i == 0
   end
 
+  def error?
+    not success?
+  end
+
 end
