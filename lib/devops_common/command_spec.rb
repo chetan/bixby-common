@@ -88,7 +88,7 @@ class CommandSpec
 
   def load_config
     if File.exists? config_file then
-      JSON.parse(File.read(config_file))
+      MultiJson.load(File.read(config_file))
     else
       {}
     end
@@ -100,7 +100,7 @@ class CommandSpec
 
   def load_digest
     begin
-      return JSON.parse(File.read(digest_file))
+      return MultiJson.load(File.read(digest_file))
     rescue => ex
     end
     nil
@@ -121,7 +121,7 @@ class CommandSpec
     end
 
     @digest = { :digest => bundle_sha.hexdigest(), :files => digests }
-    File.open(path+"/digest", 'w'){ |f| f.write(JSON.pretty_generate(@digest) + "\n") }
+    File.open(path+"/digest", 'w'){ |f| f.write(MultiJson.dump(@digest, :pretty => true) + "\n") }
 
   end
 

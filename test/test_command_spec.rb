@@ -66,7 +66,7 @@ class TestCommandSpec < MiniTest::Unit::TestCase
   end
 
   def test_update_digest
-    expected = JSON.parse(File.read(BundleRepository.path + "/support/test_bundle/digest"))
+    expected = MultiJson.load(File.read(BundleRepository.path + "/support/test_bundle/digest"))
 
     t = "/tmp/foobar_test_repo"
     d = "#{t}/support/test_bundle/digest"
@@ -79,7 +79,7 @@ class TestCommandSpec < MiniTest::Unit::TestCase
     @c.update_digest
     assert File.exist? d
 
-    assert_equal expected.to_json, JSON.parse(File.read(d)).to_json
+    assert_equal MultiJson.dump(expected), MultiJson.dump(MultiJson.load(File.read(d)))
     `rm -rf #{t}`
   end
 

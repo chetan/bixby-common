@@ -1,6 +1,6 @@
 
 require 'curb'
-require 'json'
+require 'multi_json'
 
 # Utilities for creating HTTP Clients. Just a thin wrapper around curb and JSON
 # for common cases.
@@ -19,7 +19,7 @@ module HttpClient
   # @param [String] url
   # @return [Object] Result of calling JSON.parse() on the response body
   def http_get_json(url)
-    JSON.parse(http_get(url))
+    MultiJson.load(http_get(url))
   end
 
   # Convert a Hash into a Curl::Postfield Array
@@ -47,7 +47,7 @@ module HttpClient
   # @param [Hash] data  Key/Value pairs to POST
   # @return [Object] Result of calling JSON.parse() on the response body
   def http_post_json(url, data)
-    JSON.parse(http_post(url, data))
+    MultiJson.load(http_post(url, data))
   end
 
   # Execute an HTTP post request and save the response body
