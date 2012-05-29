@@ -1,5 +1,5 @@
 
-require 'json'
+require 'multi_json'
 
 module Jsonify
 

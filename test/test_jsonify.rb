@@ -1,7 +1,7 @@
 
 require 'helper'
 
-class TestCommandSpec < MiniTest::Unit::TestCase
+class TestJsonify < MiniTest::Unit::TestCase
 
   def test_to_json
     j = JFoo.new
@@ -17,6 +17,9 @@ class TestCommandSpec < MiniTest::Unit::TestCase
 
     j2 = JFoo.from_json(j1.to_json)
     assert_equal "baz", j2.bar
+
+    j3 = JFoo.from_json('{"bar":"baz"}')
+    assert_equal "baz", j3.bar
   end
 
 end
