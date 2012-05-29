@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chetan Sarva"]
-  s.date = "2012-02-10"
+  s.date = "2012-05-29"
   s.description = "Devops Common files/libs"
   s.email = "chetan@pixelcop.net"
   s.files = [
@@ -24,26 +24,34 @@ Gem::Specification.new do |s|
     "lib/devops_common/api/json_response.rb",
     "lib/devops_common/api/modules/base_module.rb",
     "lib/devops_common/api/modules/bundle_repository.rb",
+    "lib/devops_common/command_response.rb",
     "lib/devops_common/command_spec.rb",
     "lib/devops_common/exception/bundle_not_found.rb",
     "lib/devops_common/exception/command_not_found.rb",
+    "lib/devops_common/util/hashify.rb",
     "lib/devops_common/util/http_client.rb",
     "lib/devops_common/util/jsonify.rb",
     "test/helper.rb",
+    "test/support/test_bundle/bin/cat",
     "test/support/test_bundle/bin/echo",
+    "test/support/test_bundle/digest",
+    "test/support/test_bundle/manifest.json",
     "test/test_command_spec.rb",
-    "test/test_devops_common.rb"
+    "test/test_devops_common.rb",
+    "test/test_jsonify.rb",
+    "test_guard.rb"
   ]
   s.homepage = "http://github.com/chetan/devops"
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.10"
+  s.rubygems_version = "1.8.24"
   s.summary = "Devops Common"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<json>, [">= 0"])
+      s.add_runtime_dependency(%q<multi_json>, [">= 0"])
+      s.add_runtime_dependency(%q<oj>, [">= 0"])
       s.add_runtime_dependency(%q<curb>, [">= 0"])
       s.add_runtime_dependency(%q<systemu>, [">= 0"])
       s.add_development_dependency(%q<yard>, ["~> 0.7"])
@@ -55,7 +63,8 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<test-unit>, [">= 0"])
       s.add_development_dependency(%q<turn>, [">= 0"])
     else
-      s.add_dependency(%q<json>, [">= 0"])
+      s.add_dependency(%q<multi_json>, [">= 0"])
+      s.add_dependency(%q<oj>, [">= 0"])
       s.add_dependency(%q<curb>, [">= 0"])
       s.add_dependency(%q<systemu>, [">= 0"])
       s.add_dependency(%q<yard>, ["~> 0.7"])
@@ -68,7 +77,8 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<turn>, [">= 0"])
     end
   else
-    s.add_dependency(%q<json>, [">= 0"])
+    s.add_dependency(%q<multi_json>, [">= 0"])
+    s.add_dependency(%q<oj>, [">= 0"])
     s.add_dependency(%q<curb>, [">= 0"])
     s.add_dependency(%q<systemu>, [">= 0"])
     s.add_dependency(%q<yard>, ["~> 0.7"])
