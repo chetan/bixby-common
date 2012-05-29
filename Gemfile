@@ -1,6 +1,7 @@
 source "http://rubygems.org"
 
-gem "json"
+gem "multi_json"
+gem "oj"
 gem "curb"
 gem "systemu"
 

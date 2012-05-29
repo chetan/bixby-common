@@ -4,7 +4,7 @@ require 'json'
 module Jsonify
 
   def to_json(options = nil)
-    self.to_json_properties.inject({}) { |h,k| h[k[1,k.length]] = self.instance_eval(k.to_s); h }.to_json
+    MultiJson.dump(self.to_json_properties.inject({}) { |h,k| h[k[1,k.length]] = self.instance_eval(k.to_s); h })
   end
 
   def to_json_properties
@@ -13,7 +13,7 @@ module Jsonify
 
   module ClassMethods
     def from_json(json)
-      json = JSON.parse(json) if json.kind_of? String
+      json = MultiJson.load(json) if json.kind_of? String
       obj = self.allocate
       json.each{ |k,v| obj.send("#{k}=".to_sym, v) }
       obj
