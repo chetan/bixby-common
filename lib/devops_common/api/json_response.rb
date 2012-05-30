@@ -11,6 +11,9 @@ class JsonResponse
 
   attr_accessor :status, :message, :data, :code
 
+  SUCCESS = "success"
+  FAIL    = "fail"
+
   # Create a new JsonResponse
   #
   # @param [String] status  Status of operaiton ("success" or "fail")
@@ -28,14 +31,14 @@ class JsonResponse
   #
   # @return [Boolean] True if @status == "success"
   def success?
-    @status && @status == "success"
+    @status && @status == SUCCESS
   end
 
   # Was operation unsuccessful?
   #
   # @return [Boolean] True if @status != "success"
   def fail?
-    @status && @status == "fail"
+    @status && @status == FAIL
   end
 
   # Create a JsonResponse representing an invalid request
