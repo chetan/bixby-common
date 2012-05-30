@@ -18,4 +18,12 @@ class CommandResponse
     not success?
   end
 
+  def decode
+    MultiJson.parse(@stdout)
+  end
+
+  def decode_stderr
+    MultiJson.parse(@stderr)
+  end
+
 end
