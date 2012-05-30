@@ -19,11 +19,11 @@ class CommandResponse
   end
 
   def decode
-    MultiJson.parse(@stdout)
+    MultiJson.load(@stdout)
   end
 
   def decode_stderr
-    MultiJson.parse(@stderr)
+    MultiJson.load(@stderr)
   end
 
 end
