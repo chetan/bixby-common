@@ -13,11 +13,11 @@ require 'rake'
 require 'jeweler'
 
 Jeweler::Tasks.new do |gemspec|
-  gemspec.name = "devops_common"
-  gemspec.summary = "Devops Common"
-  gemspec.description = "Devops Common files/libs"
+  gemspec.name = "bixby_common"
+  gemspec.summary = "Bixby Common"
+  gemspec.description = "Bixby Common files/libs"
   gemspec.email = "chetan@pixelcop.net"
-  gemspec.homepage = "http://github.com/chetan/devops"
+  gemspec.homepage = "http://github.com/chetan/devops_common"
   gemspec.authors = ["Chetan Sarva"]
 end
 Jeweler::RubygemsDotOrgTasks.new
@@ -31,15 +31,17 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
-begin
-  require 'rcov/rcovtask'
-  Rcov::RcovTask.new do |test|
-    test.libs << 'test'
-    test.pattern = 'test/**/test_*.rb'
-    test.verbose = true
-    test.rcov_opts << '--exclude "gems/*"'
+if Module.const_defined? :Rcov then
+  begin
+    require 'rcov/rcovtask'
+    Rcov::RcovTask.new do |test|
+      test.libs << 'test'
+      test.pattern = 'test/**/test_*.rb'
+      test.verbose = true
+      test.rcov_opts << '--exclude "gems/*"'
+    end
+  rescue Exception => ex
   end
-rescue Exception => ex
 end
 
 task :default => :test
