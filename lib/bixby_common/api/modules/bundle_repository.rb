@@ -1,10 +1,12 @@
 
 # path should be initialized on Agent or Manager start
 
-class BundleRepository < BaseModule
+module Bixby
 
-  class << self
-    attr_accessor :path
-  end
+  class BundleRepository < BaseModule
+    class << self
+      attr_accessor :path
+    end
+  end # BundleRepository
 
-end
+end # Bixby

@@ -2,6 +2,8 @@
 require 'curb'
 require 'multi_json'
 
+module Bixby
+
 # Utilities for creating HTTP Clients. Just a thin wrapper around curb and JSON
 # for common cases.
 module HttpClient
@@ -87,4 +89,6 @@ module HttpClient
     "#{manager_uri}#{path}"
   end
 
-end
+end # HttpClient
+
+end # Bixby

@@ -3,6 +3,7 @@ require 'tempfile'
 
 require 'systemu'
 
+module Bixby
 class CommandSpec
 
   include Jsonify
@@ -143,4 +144,5 @@ class CommandSpec
     return [ status, stdout, stderr ]
   end
 
-end
+end # CommandSpec
+end # Bixby

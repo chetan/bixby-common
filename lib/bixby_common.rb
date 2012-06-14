@@ -1,16 +1,20 @@
 
-autoload :CommandResponse, "devops_common/command_response"
-autoload :CommandSpec, "devops_common/command_spec"
+module Bixby
 
-autoload :JsonRequest, "devops_common/api/json_request"
-autoload :JsonResponse, "devops_common/api/json_response"
+  autoload :CommandResponse, "bixby_common/command_response"
+  autoload :CommandSpec, "bixby_common/command_spec"
 
-autoload :BaseModule, "devops_common/api/modules/base_module"
-autoload :BundleRepository, "devops_common/api/modules/bundle_repository"
+  autoload :JsonRequest, "bixby_common/api/json_request"
+  autoload :JsonResponse, "bixby_common/api/json_response"
 
-autoload :BundleNotFound, "devops_common/exception/bundle_not_found"
-autoload :CommandNotFound, "devops_common/exception/command_not_found"
+  autoload :BaseModule, "bixby_common/api/modules/base_module"
+  autoload :BundleRepository, "bixby_common/api/modules/bundle_repository"
 
-autoload :HttpClient, "devops_common/util/http_client"
-autoload :Jsonify, "devops_common/util/jsonify"
-autoload :Hashify, "devops_common/util/hashify"
+  autoload :BundleNotFound, "bixby_common/exception/bundle_not_found"
+  autoload :CommandNotFound, "bixby_common/exception/command_not_found"
+
+  autoload :HttpClient, "bixby_common/util/http_client"
+  autoload :Jsonify, "bixby_common/util/jsonify"
+  autoload :Hashify, "bixby_common/util/hashify"
+
+end

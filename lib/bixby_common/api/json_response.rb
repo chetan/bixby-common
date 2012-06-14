@@ -1,4 +1,6 @@
 
+module Bixby
+
 # Wraps a JSON Response
 #
 # @attr [String] status  Status of operaiton ("success" or "fail")
@@ -62,4 +64,6 @@ class JsonResponse
     new("fail", "command not found: #{command}", nil, 404)
   end
 
-end
+end # JsonResponse
+
+end # Bixby

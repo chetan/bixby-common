@@ -1,6 +1,9 @@
 
 require 'helper'
 
+module Bixby
+module Test
+
 class TestJsonify < MiniTest::Unit::TestCase
 
   def test_to_json
@@ -22,9 +25,12 @@ class TestJsonify < MiniTest::Unit::TestCase
     assert_equal "baz", j3.bar
   end
 
-end
+end # Jsonify
 
 class JFoo
   include Jsonify
   attr_accessor :bar
 end
+
+end # Test
+end # Bixby

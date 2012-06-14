@@ -1,6 +1,7 @@
 
 require 'multi_json'
 
+module Bixby
 module Jsonify
 
   def to_json(options = nil)
@@ -24,4 +25,5 @@ module Jsonify
     receiver.extend(ClassMethods)
   end
 
-end
+end # Jsonify
+end # Bixby

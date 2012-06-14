@@ -1,4 +1,5 @@
 
+module Bixby
 class CommandResponse
 
   include Jsonify
@@ -26,4 +27,5 @@ class CommandResponse
     MultiJson.load(@stderr)
   end
 
-end
+end # CommandResponse
+end # Bixby

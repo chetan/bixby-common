@@ -2,6 +2,9 @@
 
 require 'helper'
 
+module Bixby
+module Test
+
 class TestCommandSpec < MiniTest::Unit::TestCase
 
   def setup
@@ -83,4 +86,7 @@ class TestCommandSpec < MiniTest::Unit::TestCase
     `rm -rf #{t}`
   end
 
-end
+end # TestCommandSpec
+
+end # Test
+end # Bixby

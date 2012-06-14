@@ -1,4 +1,5 @@
 
-class BundleNotFound < Exception
-
+module Bixby
+  class BundleNotFound < Exception
+  end
 end

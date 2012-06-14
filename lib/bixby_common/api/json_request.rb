@@ -1,4 +1,6 @@
 
+module Bixby
+
 # Wraps a JSON Request
 #
 # @attr [String] operation  Name of operation
@@ -41,4 +43,6 @@ class JsonRequest
     http_post_download(uri, self.to_json, download_path)
   end
 
-end
+end # JsonRequest
+
+end # Bixby

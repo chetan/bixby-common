@@ -1,6 +1,9 @@
 require 'helper'
 
-class TestDevopsCommon < MiniTest::Unit::TestCase
+module Bixby
+module Test
+
+class TestBixbyCommon < MiniTest::Unit::TestCase
 
   def test_autoloading
     assert_equal(JsonRequest, JsonRequest.new(nil, nil).class)
@@ -20,3 +23,6 @@ class TestDevopsCommon < MiniTest::Unit::TestCase
   end
 
 end
+
+end # Test
+end # Bixby
