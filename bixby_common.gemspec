@@ -4,13 +4,13 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = "devops_common"
+  s.name = "bixby_common"
   s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chetan Sarva"]
-  s.date = "2012-05-29"
-  s.description = "Devops Common files/libs"
+  s.date = "2012-06-14"
+  s.description = "Bixby Common files/libs"
   s.email = "chetan@pixelcop.net"
   s.files = [
     ".document",
@@ -18,33 +18,32 @@ Gem::Specification.new do |s|
     "Gemfile.lock",
     "Rakefile",
     "VERSION",
-    "devops_common.gemspec",
-    "lib/devops_common.rb",
-    "lib/devops_common/api/json_request.rb",
-    "lib/devops_common/api/json_response.rb",
-    "lib/devops_common/api/modules/base_module.rb",
-    "lib/devops_common/api/modules/bundle_repository.rb",
-    "lib/devops_common/command_response.rb",
-    "lib/devops_common/command_spec.rb",
-    "lib/devops_common/exception/bundle_not_found.rb",
-    "lib/devops_common/exception/command_not_found.rb",
-    "lib/devops_common/util/hashify.rb",
-    "lib/devops_common/util/http_client.rb",
-    "lib/devops_common/util/jsonify.rb",
+    "lib/bixby_common.rb",
+    "lib/bixby_common/api/json_request.rb",
+    "lib/bixby_common/api/json_response.rb",
+    "lib/bixby_common/api/modules/base_module.rb",
+    "lib/bixby_common/api/modules/bundle_repository.rb",
+    "lib/bixby_common/command_response.rb",
+    "lib/bixby_common/command_spec.rb",
+    "lib/bixby_common/exception/bundle_not_found.rb",
+    "lib/bixby_common/exception/command_not_found.rb",
+    "lib/bixby_common/util/hashify.rb",
+    "lib/bixby_common/util/http_client.rb",
+    "lib/bixby_common/util/jsonify.rb",
     "test/helper.rb",
     "test/support/test_bundle/bin/cat",
     "test/support/test_bundle/bin/echo",
     "test/support/test_bundle/digest",
     "test/support/test_bundle/manifest.json",
+    "test/test_bixby_common.rb",
     "test/test_command_spec.rb",
-    "test/test_devops_common.rb",
     "test/test_jsonify.rb",
     "test_guard.rb"
   ]
-  s.homepage = "http://github.com/chetan/devops"
+  s.homepage = "http://github.com/chetan/devops_common"
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.24"
-  s.summary = "Devops Common"
+  s.summary = "Bixby Common"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
@@ -54,8 +53,8 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<oj>, [">= 0"])
       s.add_runtime_dependency(%q<curb>, [">= 0"])
       s.add_runtime_dependency(%q<systemu>, [">= 0"])
-      s.add_development_dependency(%q<yard>, ["~> 0.7"])
-      s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_development_dependency(%q<yard>, ["~> 0.8"])
+      s.add_development_dependency(%q<bundler>, ["~> 1.1"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.3"])
       s.add_development_dependency(%q<simplecov>, [">= 0"])
       s.add_development_dependency(%q<rcov>, [">= 0"])
@@ -67,8 +66,8 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<oj>, [">= 0"])
       s.add_dependency(%q<curb>, [">= 0"])
       s.add_dependency(%q<systemu>, [">= 0"])
-      s.add_dependency(%q<yard>, ["~> 0.7"])
-      s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_dependency(%q<yard>, ["~> 0.8"])
+      s.add_dependency(%q<bundler>, ["~> 1.1"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.3"])
       s.add_dependency(%q<simplecov>, [">= 0"])
       s.add_dependency(%q<rcov>, [">= 0"])
@@ -81,8 +80,8 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<oj>, [">= 0"])
     s.add_dependency(%q<curb>, [">= 0"])
     s.add_dependency(%q<systemu>, [">= 0"])
-    s.add_dependency(%q<yard>, ["~> 0.7"])
-    s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+    s.add_dependency(%q<yard>, ["~> 0.8"])
+    s.add_dependency(%q<bundler>, ["~> 1.1"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.3"])
     s.add_dependency(%q<simplecov>, [">= 0"])
     s.add_dependency(%q<rcov>, [">= 0"])
