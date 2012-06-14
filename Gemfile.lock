@@ -42,4 +42,4 @@ DEPENDENCIES
   systemu
   test-unit
   turn
-  yard (~> 0.7)
+  yard (~> 0.8)
