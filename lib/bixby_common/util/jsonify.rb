@@ -4,12 +4,10 @@ require 'multi_json'
 module Bixby
 module Jsonify
 
-  def to_json(options = nil)
-    MultiJson.dump(self.to_json_properties.inject({}) { |h,k| h[k[1,k.length]] = self.instance_eval(k.to_s); h })
-  end
+  include Hashify
 
-  def to_json_properties
-    self.instance_variables
+  def to_json
+    MultiJson.dump(self.to_hash)
   end
 
   module ClassMethods
