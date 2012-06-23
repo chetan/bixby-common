@@ -65,30 +65,6 @@ module HttpClient
     end
   end
 
-  # Get the URI for the Manager
-  #
-  # @return [String] Manager URI
-  def get_manager_uri
-    BaseModule.manager_uri
-  end
-
-  # Get the Manager API URI
-  #
-  # @return [String]
-  def api_uri
-    create_url("/api")
-  end
-
-  # Create a Manager URL with the given path
-  #
-  # @param [String] path
-  # @return [String] Manager URL
-  def create_url(path)
-    path = "/#{path}" if path[0,1] != '/'
-    manager_uri = get_manager_uri()
-    "#{manager_uri}#{path}"
-  end
-
 end # HttpClient
 
 end # Bixby
