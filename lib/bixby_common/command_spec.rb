@@ -1,4 +1,5 @@
 
+require 'digest'
 require 'tempfile'
 
 require 'systemu'
@@ -26,7 +27,7 @@ class CommandSpec
   #
   # @param [String] cmd  Command string to execute
   #
-  # @return [Array<FixNum, String, String>] status, stdout, stderr
+  # @return [Array<FixNum, String, String>] status code, stdout, stderr
   def execute
     if @stdin and not @stdin.empty? then
       temp = Tempfile.new("input-")
