@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chetan Sarva"]
-  s.date = "2012-06-14"
+  s.date = "2012-07-27"
   s.description = "Bixby Common files/libs"
   s.email = "chetan@pixelcop.net"
   s.files = [
@@ -18,15 +18,17 @@ Gem::Specification.new do |s|
     "Gemfile.lock",
     "Rakefile",
     "VERSION",
+    "bixby_common.gemspec",
     "lib/bixby_common.rb",
+    "lib/bixby_common/api/base_module.rb",
+    "lib/bixby_common/api/bundle_repository.rb",
     "lib/bixby_common/api/json_request.rb",
     "lib/bixby_common/api/json_response.rb",
-    "lib/bixby_common/api/modules/base_module.rb",
-    "lib/bixby_common/api/modules/bundle_repository.rb",
     "lib/bixby_common/command_response.rb",
     "lib/bixby_common/command_spec.rb",
     "lib/bixby_common/exception/bundle_not_found.rb",
     "lib/bixby_common/exception/command_not_found.rb",
+    "lib/bixby_common/util/crypto_util.rb",
     "lib/bixby_common/util/hashify.rb",
     "lib/bixby_common/util/http_client.rb",
     "lib/bixby_common/util/jsonify.rb",
