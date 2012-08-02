@@ -1,13 +1,14 @@
 
 require 'base64'
 require 'openssl'
+require 'digest'
 
 module Bixby
   module CryptoUtil
 
     class << self
 
-      def encrypt(data, key_pem, iv_pem)
+      def encrypt(data, uuid, key_pem, iv_pem)
         c = new_cipher()
         c.encrypt
         key = c.random_key
@@ -15,6 +16,8 @@ module Bixby
         encrypted = c.update(data) + c.final
 
         out = []
+        out << uuid
+        out << create_hmac(data)
         out << w( key_pem.public_encrypt(key) )
         out << w( iv_pem.private_encrypt(iv) )
         out << e64(encrypted)
@@ -23,7 +26,8 @@ module Bixby
       end
 
       def decrypt(data, key_pem, iv_pem)
-        data = StringIO.new(data, 'rb')
+        data = StringIO.new(data, 'rb') if not data.kind_of? StringIO
+        hmac = data.readline.strip
         key = key_pem.private_decrypt(read_next(data))
         iv  = iv_pem.public_decrypt(read_next(data))
 
@@ -33,10 +37,24 @@ module Bixby
         c.iv = iv
 
         ret = c.update(d64(data.read)) + c.final
+
+        if not verify_hmac(hmac, ret) then
+          raise "hmac verification failed"
+        end
+
+        ret
       end
 
 
       private
+
+      def create_hmac(payload)
+        Digest::SHA2.new(256).hexdigest(payload)
+      end
+
+      def verify_hmac(hmac, payload)
+        Digest::SHA2.new(256).hexdigest(payload) == hmac
+      end
 
       def new_cipher
         OpenSSL::Cipher.new("AES-256-CBC")
