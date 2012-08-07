@@ -8,6 +8,12 @@ module Bixby
 
     class << self
 
+      # Encrypt the given payload for over-the-wire transmission
+      #
+      # @param [Object] data      payload, usually a JSON-encoded String
+      # @param [String] uuid      UUID of the sender
+      # @param [OpenSSL::PKey::RSA] key_pem     Public key of the receiver
+      # @param [OpenSSL::PKey::RSA] iv_pem     Private key of the sender
       def encrypt(data, uuid, key_pem, iv_pem)
         c = new_cipher()
         c.encrypt
@@ -25,6 +31,11 @@ module Bixby
         return out.join("\n")
       end
 
+      # Decrypt the given payload from over-the-wire transmission
+      #
+      # @param [Object] data      encrypted payload, usually a JSON-encoded String
+      # @param [OpenSSL::PKey::RSA] key_pem     Private key of the receiver
+      # @param [OpenSSL::PKey::RSA] iv_pem      Public key of the sender
       def decrypt(data, key_pem, iv_pem)
         data = StringIO.new(data, 'rb') if not data.kind_of? StringIO
         hmac = data.readline.strip
