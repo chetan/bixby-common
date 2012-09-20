@@ -17,7 +17,7 @@ Jeweler::Tasks.new do |gemspec|
   gemspec.summary = "Bixby Common"
   gemspec.description = "Bixby Common files/libs"
   gemspec.email = "chetan@pixelcop.net"
-  gemspec.homepage = "http://github.com/chetan/devops_common"
+  gemspec.homepage = "http://github.com/chetan/bixby-common"
   gemspec.authors = ["Chetan Sarva"]
 end
 Jeweler::RubygemsDotOrgTasks.new
