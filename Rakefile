@@ -13,7 +13,7 @@ require 'rake'
 require 'jeweler'
 
 Jeweler::Tasks.new do |gemspec|
-  gemspec.name = "bixby_common"
+  gemspec.name = "bixby-common"
   gemspec.summary = "Bixby Common"
   gemspec.description = "Bixby Common files/libs"
   gemspec.email = "chetan@pixelcop.net"
