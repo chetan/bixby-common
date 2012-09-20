@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chetan Sarva"]
-  s.date = "2012-07-27"
+  s.date = "2012-09-20"
   s.description = "Bixby Common files/libs"
   s.email = "chetan@pixelcop.net"
   s.files = [
@@ -42,7 +42,7 @@ Gem::Specification.new do |s|
     "test/test_jsonify.rb",
     "test_guard.rb"
   ]
-  s.homepage = "http://github.com/chetan/devops_common"
+  s.homepage = "http://github.com/chetan/bixby-common"
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.24"
   s.summary = "Bixby Common"
