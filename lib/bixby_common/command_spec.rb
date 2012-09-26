@@ -142,7 +142,7 @@ class CommandSpec
     status, stdout, stderr = systemu(cmd)
     rem.each{ |r| ENV[r] = old_env[r] if old_env[r] }
 
-    return [ status, stdout, stderr ]
+    return [ status.exitstatus, stdout, stderr ]
   end
 
 end # CommandSpec
