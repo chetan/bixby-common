@@ -24,9 +24,10 @@ module HttpClient
     MultiJson.load(http_get(url))
   end
 
-  # Convert a Hash into a Curl::Postfield Array
+  # Convert a Hash into a Curl::Postfield array for use with Curb
   #
   # @param [Hash] data
+  # @return [Array<Curl::PostField>]
   def create_post_data(data)
     if data.kind_of? Hash then
       data = data.map{ |k,v| Curl::PostField.content(k, v) }
