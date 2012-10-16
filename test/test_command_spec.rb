@@ -46,7 +46,7 @@ class TestCommandSpec < MiniTest::Unit::TestCase
 
   def test_execute
     (status, stdout, stderr) = @c.execute
-    assert(status.success?)
+    assert_equal 0, status
     assert_equal("hi\n", stdout)
     assert_equal("", stderr)
   end
@@ -55,7 +55,7 @@ class TestCommandSpec < MiniTest::Unit::TestCase
     @c.command = "cat"
     @c.stdin = "hi"
     (status, stdout, stderr) = @c.execute
-    assert(status.success?)
+    assert_equal 0, status
     assert_equal("hi", stdout)
     assert_equal("", stderr)
   end
