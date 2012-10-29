@@ -15,9 +15,10 @@ class CommandResponse
     @status.to_i == 0
   end
 
-  def error?
+  def fail?
     not success?
   end
+  alias_method :error?, :fail?
 
   def decode
     MultiJson.load(@stdout)

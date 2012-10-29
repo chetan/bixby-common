@@ -42,6 +42,7 @@ class JsonResponse
   def fail?
     @status && @status == FAIL
   end
+  alias_method :error?, :fail?
 
   # Create a JsonResponse representing an invalid request
   #
