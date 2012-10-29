@@ -52,6 +52,12 @@ class TestCommandSpec < MiniTest::Unit::TestCase
     c = CommandSpec.new({ :repo => "support", :bundle => "test_bundle", 'command' => "echofoo" })
   end
 
+  def test_exec_digest_changed_throws_error
+    assert_throws(BundleNotFound) do
+      @c.validate("alkjasdfasd")
+    end
+  end
+
   def test_update_digest
     expected = MultiJson.load(File.read(BundleRepository.path + "/support/test_bundle/digest"))
 

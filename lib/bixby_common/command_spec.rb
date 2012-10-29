@@ -24,17 +24,22 @@ class CommandSpec
   end
 
   # Validate the existence of this Command on the local system
+  # and compare digest to local version
   #
+  # @param [String] expected_digest
   # @return [Boolean] returns true if available, else raises error
   # @raise [BundleNotFound]
   # @raise [CommandNotFound]
-  def validate
+  def validate(expected_digest=nil)
     if not bundle_exists? then
       raise BundleNotFound.new("repo = #{@repo}; bundle = #{@bundle}")
     end
 
     if not command_exists? then
       raise CommandNotFound.new("repo = #{@repo}; bundle = #{@bundle}; command = #{@command}")
+    end
+    if expected_digest and self.digest != expected_digest then
+      raise BundleNotFound, "digest does not match", caller
     end
     return true
   end
