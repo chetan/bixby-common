@@ -44,22 +44,6 @@ class TestCommandSpec < MiniTest::Unit::TestCase
     end
   end
 
-  def test_execute
-    (status, stdout, stderr) = @c.execute
-    assert_equal 0, status
-    assert_equal("hi\n", stdout)
-    assert_equal("", stderr)
-  end
-
-  def test_execute_stdin
-    @c.command = "cat"
-    @c.stdin = "hi"
-    (status, stdout, stderr) = @c.execute
-    assert_equal 0, status
-    assert_equal("hi", stdout)
-    assert_equal("", stderr)
-  end
-
   def test_digest
     assert_equal "2429629015110c29f8fae8ca97e0e494410a28b981653c0e094cfe4a7567f1b7", @c.digest
   end

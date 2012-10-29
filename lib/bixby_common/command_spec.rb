@@ -2,9 +2,9 @@
 require 'digest'
 require 'tempfile'
 
-require 'systemu'
-
 module Bixby
+
+# Describes a Command execution request for the Agent
 class CommandSpec
 
   include Jsonify
@@ -21,26 +21,6 @@ class CommandSpec
 
     digest = load_digest()
     @digest = digest["digest"] if digest
-  end
-
-  # Execute this command
-  #
-  # @param [String] cmd  Command string to execute
-  #
-  # @return [Array<FixNum, String, String>] status code, stdout, stderr
-  def execute
-    if @stdin and not @stdin.empty? then
-      temp = Tempfile.new("input-")
-      temp << @stdin
-      temp.flush
-      temp.close
-      cmd = "sh -c 'cat #{temp.path} | #{self.command_file}"
-    else
-      cmd = "sh -c '#{self.command_file}"
-    end
-    cmd += @args ? " #{@args}'" : "'"
-
-    status, stdout, stderr = system_exec(cmd)
   end
 
   # Validate the existence of this Command on the local system
@@ -125,24 +105,6 @@ class CommandSpec
     @digest = { :digest => bundle_sha.hexdigest(), :files => digests }
     File.open(path+"/digest", 'w'){ |f| f.write(MultiJson.dump(@digest, :pretty => true) + "\n") }
 
-  end
-
-
-  private
-
-  # Cleanup the ENV before executing command
-  #
-  # @param [String] cmd  Command string to execute
-  #
-  # @return [Array<FixNum, String, String>] status, stdout, stderr
-  def system_exec(cmd)
-    rem = [ "BUNDLE_BIN_PATH", "BUNDLE_GEMFILE", "RUBYOPT" ]
-    old_env = {}
-    rem.each{ |r| old_env[r] = ENV.delete(r) }
-    status, stdout, stderr = systemu(cmd)
-    rem.each{ |r| ENV[r] = old_env[r] if old_env[r] }
-
-    return [ status.exitstatus, stdout, stderr ]
   end
 
 end # CommandSpec
