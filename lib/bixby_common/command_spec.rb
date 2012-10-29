@@ -28,8 +28,8 @@ class CommandSpec
   #
   # @param [String] expected_digest
   # @return [Boolean] returns true if available, else raises error
-  # @raise [BundleNotFound]
-  # @raise [CommandNotFound]
+  # @raise [BundleNotFound] If bundle doesn't exist or digest does not match
+  # @raise [CommandNotFound] If command doesn't exist
   def validate(expected_digest=nil)
     if not bundle_exists? then
       raise BundleNotFound.new("repo = #{@repo}; bundle = #{@bundle}")
