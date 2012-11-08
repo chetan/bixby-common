@@ -3,7 +3,7 @@ source "http://rubygems.org"
 gem "multi_json"
 gem "oj"
 gem "curb"
-gem "systemu"
+gem 'systemu', :git => "https://github.com/chetan/systemu.git", :branch => "forkbomb"
 
 group :development do
   gem "yard", "~> 0.8"
