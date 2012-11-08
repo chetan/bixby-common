@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chetan Sarva"]
-  s.date = "2012-10-25"
+  s.date = "2012-11-08"
   s.description = "Bixby Common files/libs"
   s.email = "chetan@pixelcop.net"
   s.files = [
@@ -39,6 +39,7 @@ Gem::Specification.new do |s|
     "test/support/test_bundle/digest",
     "test/support/test_bundle/manifest.json",
     "test/test_bixby_common.rb",
+    "test/test_command_response.rb",
     "test/test_command_spec.rb",
     "test/test_jsonify.rb"
   ]
@@ -64,7 +65,6 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<test-unit>, [">= 0"])
       s.add_development_dependency(%q<turn>, [">= 0"])
       s.add_development_dependency(%q<test_guard>, [">= 0"])
-      s.add_development_dependency(%q<rb-fsevent>, ["~> 0.9.1"])
     else
       s.add_dependency(%q<multi_json>, [">= 0"])
       s.add_dependency(%q<oj>, [">= 0"])
@@ -79,7 +79,6 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<test-unit>, [">= 0"])
       s.add_dependency(%q<turn>, [">= 0"])
       s.add_dependency(%q<test_guard>, [">= 0"])
-      s.add_dependency(%q<rb-fsevent>, ["~> 0.9.1"])
     end
   else
     s.add_dependency(%q<multi_json>, [">= 0"])
@@ -95,7 +94,6 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<test-unit>, [">= 0"])
     s.add_dependency(%q<turn>, [">= 0"])
     s.add_dependency(%q<test_guard>, [">= 0"])
-    s.add_dependency(%q<rb-fsevent>, ["~> 0.9.1"])
   end
 end
 
