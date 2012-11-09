@@ -70,10 +70,10 @@ class JsonResponse
   # @return [String]
   def to_s
     s = []
-    s << "JsonResponse:" + self.object_id.to_s
-    s << "  status:   " + self.status
-    s << "  code:     " + self.code.to_s
-    s << "  message:  " + self.message
+    s << "JsonResponse:#{self.object_id}"
+    s << "  status:   #{self.status}"
+    s << "  code:     #{self.code}"
+    s << "  message:  #{self.message}"
     s << "  data:     " + MultiJson.dump(self.data)
     s.join("\n")
   end

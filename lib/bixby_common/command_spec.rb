@@ -117,15 +117,15 @@ class CommandSpec
   # @return [String]
   def to_s
     s = []
-    s << "CommandSpec:" + self.object_id.to_s
-    s << "  digest:   " + self.digest
-    s << "  repo:     " + self.repo
-    s << "  bundle:   " + self.bundle
-    s << "  command:  " + self.command
-    s << "  args:     " + self.args
+    s << "CommandSpec:#{self.object_id}"
+    s << "  digest:   #{self.digest}"
+    s << "  repo:     #{self.repo}"
+    s << "  bundle:   #{self.bundle}"
+    s << "  command:  #{self.command}"
+    s << "  args:     #{self.args}"
     s << "  env:      " + MultiJson.dump(self.env)
     s << "  stdin:    <<-EOF"
-    s << self.stdin
+    s << self.stdin if self.stdin and not self.stdin.empty?
     s << "EOF"
     s.join("\n")
   end

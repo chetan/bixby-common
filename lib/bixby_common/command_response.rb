@@ -45,13 +45,13 @@ class CommandResponse
   # @return [String]
   def to_s
     s = []
-    s << "CommandResponse:" + self.object_id.to_s
-    s << "  status:   " + self.status.to_s
+    s << "CommandResponse:#{self.object_id}"
+    s << "  status:   #{self.status}"
     s << "  stdout:   <<-EOF"
-    s << self.stdout
+    s << self.stdout if self.stdout and not self.stdout.empty?
     s << "EOF"
     s << "  stderr:   <<-EOF"
-    s << self.stderr
+    s << self.stderr if self.stderr and not self.stderr.empty?
     s << "EOF"
     s.join("\n")
   end
