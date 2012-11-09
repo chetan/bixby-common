@@ -86,6 +86,7 @@ DEPENDENCIES
   minitest
   multi_json
   oj
+  pry
   rcov
   simplecov
   systemu!

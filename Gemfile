@@ -9,6 +9,7 @@ group :development do
   gem "yard", "~> 0.8"
   gem "bundler", "~> 1.1"
   gem "jeweler", "~> 1.8.3"
+  gem "pry"
 
   gem "simplecov",    :platforms => :mri_19
   gem "rcov",         :platforms => :mri_18
