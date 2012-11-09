@@ -21,5 +21,16 @@ class JsonRequest
     @params = params
   end
 
+  # Convert object to String, useful for debugging
+  #
+  # @return [String]
+  def to_s
+    s = []
+    s << "JsonRequest:" + self.object_id.to_s
+    s << "  operation:  " + self.operation
+    s << "  params:     " + MultiJson.dump(self.params)
+    s.join("\n")
+  end
+
 end # JsonRequest
 end # Bixby

@@ -40,5 +40,21 @@ class CommandResponse
     MultiJson.load(@stderr)
   end
 
+  # Convert object to String, useful for debugging
+  #
+  # @return [String]
+  def to_s
+    s = []
+    s << "CommandResponse:" + self.object_id.to_s
+    s << "  status:   " + self.status.to_s
+    s << "  stdout:   <<-EOF"
+    s << self.stdout
+    s << "EOF"
+    s << "  stderr:   <<-EOF"
+    s << self.stderr
+    s << "EOF"
+    s.join("\n")
+  end
+
 end # CommandResponse
 end # Bixby

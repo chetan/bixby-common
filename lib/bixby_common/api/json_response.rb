@@ -65,6 +65,19 @@ class JsonResponse
     new("fail", "command not found: #{command}", nil, 404)
   end
 
+  # Convert object to String, useful for debugging
+  #
+  # @return [String]
+  def to_s
+    s = []
+    s << "JsonResponse:" + self.object_id.to_s
+    s << "  status:   " + self.status
+    s << "  code:     " + self.code.to_s
+    s << "  message:  " + self.message
+    s << "  data:     " + MultiJson.dump(self.data)
+    s.join("\n")
+  end
+
 end # JsonResponse
 
 end # Bixby
