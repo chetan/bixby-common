@@ -12,9 +12,11 @@ class CommandResponse
   #
   # @return [CommandResponse]
   def self.from_json_response(res)
-    cr = CommandResponse.new
-    cr.status = res.code || 255
-    cr.stderr = res.message
+    cr = CommandResponse.new(res.data)
+    if res.message then
+      cr.status ||= 255
+      cr.stderr = res.message
+    end
     return cr
   end
 
