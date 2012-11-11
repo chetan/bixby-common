@@ -101,7 +101,7 @@ class CommandSpec
 
     digests = []
     Dir.glob("#{path}/**/*").sort.each do |f|
-      next if File.directory? f || File.basename(f) == "digest"
+      next if File.directory? f or File.basename(f) == "digest"
       bundle_sha.file(f)
       sha.reset()
       digests << { :file => f.gsub(/#{path}\//, ''), :digest => sha.file(f).hexdigest() }

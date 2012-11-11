@@ -71,7 +71,10 @@ class TestCommandSpec < MiniTest::Unit::TestCase
     refute File.exist? d
     @c.update_digest
     assert File.exist? d
+    assert_equal MultiJson.dump(expected), MultiJson.dump(MultiJson.load(File.read(d)))
 
+    @c.update_digest
+    assert File.exist? d
     assert_equal MultiJson.dump(expected), MultiJson.dump(MultiJson.load(File.read(d)))
     `rm -rf #{t}`
   end
