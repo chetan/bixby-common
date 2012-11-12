@@ -31,21 +31,21 @@ class TestCommandSpec < MiniTest::Unit::TestCase
 
   end
 
-  def test_validate
-    @c.validate
-  end
-
   def test_validate_failures
     assert_throws(BundleNotFound) do
-      CommandSpec.new(:repo => "support", :bundle => "foobar").validate
+      CommandSpec.new(:repo => "support", :bundle => "foobar").validate(nil)
     end
     assert_throws(CommandNotFound) do
-      CommandSpec.new(:repo => "support", :bundle => "test_bundle", :command => "foobar").validate
+      CommandSpec.new(:repo => "support", :bundle => "test_bundle", :command => "foobar").validate(nil)
+    end
+    assert_throws(BundleNotFound) do
+      @c.validate(nil)
     end
   end
 
   def test_digest
     assert_equal "2429629015110c29f8fae8ca97e0e494410a28b981653c0e094cfe4a7567f1b7", @c.digest
+    assert @c.validate("2429629015110c29f8fae8ca97e0e494410a28b981653c0e094cfe4a7567f1b7")
   end
 
   def test_digest_no_err

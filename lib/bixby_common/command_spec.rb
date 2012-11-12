@@ -30,7 +30,7 @@ class CommandSpec
   # @return [Boolean] returns true if available, else raises error
   # @raise [BundleNotFound] If bundle doesn't exist or digest does not match
   # @raise [CommandNotFound] If command doesn't exist
-  def validate(expected_digest=nil)
+  def validate(expected_digest)
     if not bundle_exists? then
       raise BundleNotFound.new("repo = #{@repo}; bundle = #{@bundle}")
     end
@@ -38,8 +38,8 @@ class CommandSpec
     if not command_exists? then
       raise CommandNotFound.new("repo = #{@repo}; bundle = #{@bundle}; command = #{@command}")
     end
-    if expected_digest and self.digest != expected_digest then
-      raise BundleNotFound, "digest does not match", caller
+    if self.digest != expected_digest then
+      raise BundleNotFound, "digest does not match ('#{self.digest}' != '#{expected_digest}'", caller
     end
     return true
   end
