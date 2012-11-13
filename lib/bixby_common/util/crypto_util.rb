@@ -86,6 +86,8 @@ module Bixby
       end
 
       def new_cipher
+        # TODO make this configurable? perhaps use CTR when available
+        # we can store a CTR support flag on the master
         OpenSSL::Cipher.new("AES-256-CBC")
       end
 
