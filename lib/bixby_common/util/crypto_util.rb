@@ -10,10 +10,10 @@ module Bixby
 
       # Encrypt the given payload for over-the-wire transmission
       #
-      # @param [Object] data      payload, usually a JSON-encoded String
-      # @param [String] uuid      UUID of the sender
+      # @param [Object] data                    payload, usually a JSON-encoded String
+      # @param [String] uuid                    UUID of the sender
       # @param [OpenSSL::PKey::RSA] key_pem     Public key of the receiver
-      # @param [OpenSSL::PKey::RSA] iv_pem     Private key of the sender
+      # @param [OpenSSL::PKey::RSA] iv_pem      Private key of the sender
       def encrypt(data, uuid, key_pem, iv_pem)
         c = new_cipher()
         c.encrypt
@@ -23,7 +23,7 @@ module Bixby
 
         out = []
         out << uuid
-        out << create_hmac(data)
+        out << create_hmac(key, iv, encrypted)
         out << w( key_pem.public_encrypt(key) )
         out << w( iv_pem.private_encrypt(iv) )
         out << e64(encrypted)
@@ -33,7 +33,7 @@ module Bixby
 
       # Decrypt the given payload from over-the-wire transmission
       #
-      # @param [Object] data      encrypted payload, usually a JSON-encoded String
+      # @param [Object] data                    encrypted payload, usually a JSON-encoded String
       # @param [OpenSSL::PKey::RSA] key_pem     Private key of the receiver
       # @param [OpenSSL::PKey::RSA] iv_pem      Public key of the sender
       def decrypt(data, key_pem, iv_pem)
@@ -47,24 +47,42 @@ module Bixby
         c.key = key
         c.iv = iv
 
-        ret = c.update(d64(data.read)) + c.final
+        payload = d64(data.read)
 
-        if not verify_hmac(hmac, ret) then
+        # very hmac of encrypted payload
+        if not verify_hmac(hmac, key, iv, payload) then
           raise "hmac verification failed"
         end
 
-        ret
+        return c.update(payload) + c.final
       end
 
 
       private
 
-      def create_hmac(payload)
-        Digest::SHA2.new(256).hexdigest(payload)
+      # Compute an HMAC using SHA2-256
+      #
+      # @param [String] key
+      # @param [String] iv
+      # @param [String] payload     encrypted payload
+      #
+      # @return [String] digest in hexadecimal format
+      def create_hmac(key, iv, payload)
+        d = Digest::SHA2.new(256)
+        d << key << iv << payload
+        return d.hexdigest()
       end
 
-      def verify_hmac(hmac, payload)
-        Digest::SHA2.new(256).hexdigest(payload) == hmac
+      # Verify the given HMAC of the incoming message
+      #
+      # @param [String] hmac
+      # @param [String] key
+      # @param [String] iv
+      # @param [String] payload     encrypted payload
+      #
+      # @return [Boolean] true if hmac matches
+      def verify_hmac(hmac, key, iv, payload)
+        create_hmac(key, iv, payload) == hmac
       end
 
       def new_cipher
