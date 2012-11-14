@@ -53,14 +53,14 @@ module Bixby
 
         # very hmac of encrypted payload
         if not verify_hmac(hmac, key, iv, payload) then
-          raise "hmac verification failed"
+          raise Bixby::EncryptionError, "hmac verification failed", caller
         end
 
         data = StringIO.new(c.update(payload) + c.final)
 
         ts = data.readline.strip
         if (Time.new.to_i - ts.to_i) > 60 then
-          raise "payload verification failed"
+          raise Bixby::EncryptionError, "payload verification failed", caller
         end
 
         return data.read
