@@ -19,6 +19,8 @@ module Bixby
         c.encrypt
         key = c.random_key
         iv = c.random_iv
+
+        data = Time.new.to_i.to_s + "\n" + data # prepend timestamp
         encrypted = c.update(data) + c.final
 
         out = []
@@ -54,7 +56,14 @@ module Bixby
           raise "hmac verification failed"
         end
 
-        return c.update(payload) + c.final
+        data = StringIO.new(c.update(payload) + c.final)
+
+        ts = data.readline.strip
+        if (Time.new.to_i - ts.to_i) > 60 then
+          raise "payload verification failed"
+        end
+
+        return data.read
       end
 
 
