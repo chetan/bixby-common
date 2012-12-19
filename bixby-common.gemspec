@@ -9,9 +9,10 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chetan Sarva"]
-  s.date = "2012-11-09"
+  s.date = "2012-12-19"
   s.description = "Bixby Common files/libs"
   s.email = "chetan@pixelcop.net"
+  s.extensions = ["ext/mkrf_conf.rb"]
   s.files = [
     ".document",
     "Gemfile",
@@ -29,6 +30,7 @@ Gem::Specification.new do |s|
     "lib/bixby_common/command_spec.rb",
     "lib/bixby_common/exception/bundle_not_found.rb",
     "lib/bixby_common/exception/command_not_found.rb",
+    "lib/bixby_common/exception/encryption_error.rb",
     "lib/bixby_common/util/crypto_util.rb",
     "lib/bixby_common/util/hashify.rb",
     "lib/bixby_common/util/http_client.rb",
@@ -53,7 +55,6 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<multi_json>, [">= 0"])
-      s.add_runtime_dependency(%q<oj>, [">= 0"])
       s.add_runtime_dependency(%q<curb>, [">= 0"])
       s.add_runtime_dependency(%q<systemu>, [">= 0"])
       s.add_development_dependency(%q<yard>, ["~> 0.8"])
@@ -68,7 +69,6 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<test_guard>, [">= 0"])
     else
       s.add_dependency(%q<multi_json>, [">= 0"])
-      s.add_dependency(%q<oj>, [">= 0"])
       s.add_dependency(%q<curb>, [">= 0"])
       s.add_dependency(%q<systemu>, [">= 0"])
       s.add_dependency(%q<yard>, ["~> 0.8"])
@@ -84,7 +84,6 @@ Gem::Specification.new do |s|
     end
   else
     s.add_dependency(%q<multi_json>, [">= 0"])
-    s.add_dependency(%q<oj>, [">= 0"])
     s.add_dependency(%q<curb>, [">= 0"])
     s.add_dependency(%q<systemu>, [">= 0"])
     s.add_dependency(%q<yard>, ["~> 0.8"])

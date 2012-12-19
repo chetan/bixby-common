@@ -1,7 +1,8 @@
 source "http://rubygems.org"
 
 gem "multi_json"
-gem "oj"
+gem "json",         :platforms => [:jruby]
+gem "oj",           :platforms => [:mri, :rbx]
 gem "curb"
 gem 'systemu', :git => "https://github.com/chetan/systemu.git", :branch => "forkbomb"
 
