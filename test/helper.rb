@@ -8,6 +8,19 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 
+begin
+  require 'curb'
+  require 'curb_threadpool'
+rescue LoadError
+end
+
+begin
+  require 'httpclient'
+rescue LoadError
+end
+
+require 'webmock'
+
 require 'test_guard'
 TestGuard.load_simplecov()
 

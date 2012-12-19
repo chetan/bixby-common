@@ -19,6 +19,7 @@ group :development do
 
   gem "minitest",     :platforms => :mri_19
   gem "test-unit",    :platforms => :mri_18
+  gem "webmock",      :require => false
 
   gem "turn"
 

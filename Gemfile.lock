@@ -22,10 +22,12 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
+    addressable (2.3.2)
     ansi (1.4.3)
     awesome_print (1.1.0)
     coderay (1.0.8)
     colorize (0.5.8)
+    crack (0.3.1)
     curb (0.8.3)
     ffi (1.1.5)
     git (1.2.5)
@@ -74,6 +76,9 @@ GEM
     thor (0.16.0)
     turn (0.9.6)
       ansi
+    webmock (1.9.0)
+      addressable (>= 2.2.7)
+      crack (>= 0.1.7)
     yard (0.8.3)
 
 PLATFORMS
@@ -95,4 +100,5 @@ DEPENDENCIES
   test-unit
   test_guard!
   turn
+  webmock
   yard (~> 0.8)
