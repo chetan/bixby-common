@@ -8,6 +8,9 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 
+require 'test_guard'
+TestGuard.load_simplecov()
+
 begin
   require 'curb'
   require 'curb_threadpool'
@@ -20,9 +23,7 @@ rescue LoadError
 end
 
 require 'webmock'
-
-require 'test_guard'
-TestGuard.load_simplecov()
+require 'mocha/setup'
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))

@@ -3,8 +3,13 @@ source "http://rubygems.org"
 gem "multi_json"
 gem "json",         :platforms => [:jruby]
 gem "oj",           :platforms => [:mri, :rbx]
-gem "curb"
-gem "systemu", :git => "https://github.com/chetan/systemu.git", :branch => "forkbomb"
+
+gem "httpi"
+gem "httpclient",   :platforms => [:jruby]
+gem "curb",         :platforms => [:mri, :rbx]
+
+gem "systemu",      :git => "https://github.com/chetan/systemu.git",
+                    :branch => "forkbomb"
 
 gem "jruby-openssl", :platforms => [:jruby]
 
@@ -20,6 +25,7 @@ group :development do
   gem "minitest",     :platforms => :mri_19
   gem "test-unit",    :platforms => :mri_18
   gem "webmock",      :require => false
+  gem "mocha",        :require => false
 
   gem "turn"
 

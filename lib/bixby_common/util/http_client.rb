@@ -1,10 +1,12 @@
 
-require 'curb'
+require 'httpi'
 require 'multi_json'
+
+HTTPI.log = false
 
 module Bixby
 
-# Utilities for creating HTTP Clients. Just a thin wrapper around curb and JSON
+# Utilities for using HTTP Clients. Just a thin wrapper around httpi and JSON
 # for common cases.
 module HttpClient
 
@@ -13,7 +15,7 @@ module HttpClient
   # @param [String] url
   # @return [String] Contents of the response's body
   def http_get(url)
-    Curl::Easy.http_get(url).body_str
+    HTTPI.get(url).body
   end
 
   # Execute an HTTP GET request (see #http_get) and parse the JSON response
@@ -24,24 +26,14 @@ module HttpClient
     MultiJson.load(http_get(url))
   end
 
-  # Convert a Hash into a Curl::Postfield array for use with Curb
-  #
-  # @param [Hash] data
-  # @return [Array<Curl::PostField>]
-  def create_post_data(data)
-    if data.kind_of? Hash then
-      data = data.map{ |k,v| Curl::PostField.content(k, v) }
-    end
-    data
-  end
-
   # Execute an HTTP POST request to the given URL
   #
   # @param [String] url
   # @param [Hash] data  Key/Value pairs to POST
   # @return [String] Contents of the response's body
   def http_post(url, data)
-    return Curl::Easy.http_post(url, create_post_data(data)).body_str
+    req = HTTPI::Request.new(:url => url, :body => data)
+    return HTTPI.post(req).body
   end
 
   # Execute an HTTP POST request (see #http_get) and parse the JSON response
