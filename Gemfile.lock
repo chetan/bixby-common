@@ -83,6 +83,7 @@ DEPENDENCIES
   bundler (~> 1.1)
   curb
   jeweler (~> 1.8.3)
+  jruby-openssl
   json
   minitest
   multi_json

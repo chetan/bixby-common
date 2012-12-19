@@ -6,6 +6,8 @@ gem "oj",           :platforms => [:mri, :rbx]
 gem "curb"
 gem 'systemu', :git => "https://github.com/chetan/systemu.git", :branch => "forkbomb"
 
+gem "jruby-openssl", :platforms => [:jruby]
+
 group :development do
   gem "yard", "~> 0.8"
   gem "bundler", "~> 1.1"

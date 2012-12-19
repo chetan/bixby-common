@@ -9,6 +9,7 @@ inst = Gem::DependencyInstaller.new
 begin
   if ENV["RUBY_VERSION"] =~ /^jruby/ then
     inst.install "json", ">= 1.6"
+    inst.install "jruby-openssl"
   else
     inst.install "oj"
   end
