@@ -52,10 +52,11 @@ module HttpClient
   # @return [void]
   def http_post_download(url, data, dest)
     File.open(dest, "w") do |io|
-      c = Curl::Easy.new(url)
-      c.on_body { |d| io << d; d.length }
-      c.http_post(data)
+      req = HTTPI::Request.new(:url => url, :body => data)
+      req.on_body { |d| io << d; d.length }
+      HTTPI.post(req)
     end
+    true
   end
 
 end # HttpClient

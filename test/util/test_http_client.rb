@@ -40,6 +40,18 @@ class TestHttpClient < MiniTest::Unit::TestCase
     assert_equal "foobar", body
   end
 
+  def test_http_post_download
+    stub_request(:post, "http://www.google.com/").
+      with(:body => "fooey").
+      to_return(:status => 200, :body => "baznab", :headers => {})
+
+    tmp = Tempfile.new("bc-post-")
+    body = Foo.new.http_post_download("http://www.google.com", "fooey", tmp.path)
+
+    s = File.read(tmp.path)
+    assert_equal "baznab", s
+  end
+
 end # TestHttpClient
 
 end # Test

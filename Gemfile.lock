@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/chetan/httpi.git
+  revision: 2196a1cf0d2cbfb9008fdc901983864fe7c4f2d5
+  branch: chunked_responses
+  specs:
+    httpi (2.0.0)
+      rack
+
+GIT
   remote: https://github.com/chetan/systemu.git
   revision: cb6524a4c50213bec52262f6c0f090e11bb3a586
   branch: forkbomb
@@ -42,8 +50,6 @@ GEM
       thor (>= 0.14.6)
     hirb (0.7.0)
     httpclient (2.3.0.1)
-    httpi (2.0.0)
-      rack
     jeweler (1.8.4)
       bundler (~> 1.0)
       git (>= 1.2.5)
@@ -108,7 +114,7 @@ DEPENDENCIES
   bundler (~> 1.1)
   curb
   httpclient
-  httpi
+  httpi!
   jeweler (~> 1.8.3)
   jruby-openssl
   json

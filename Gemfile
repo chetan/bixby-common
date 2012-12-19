@@ -4,7 +4,9 @@ gem "multi_json"
 gem "json",         :platforms => [:jruby]
 gem "oj",           :platforms => [:mri, :rbx]
 
-gem "httpi"
+gem "httpi",        :git => "https://github.com/chetan/httpi.git",
+                    :branch => "chunked_responses"
+
 gem "httpclient",   :platforms => [:jruby]
 gem "curb",         :platforms => [:mri, :rbx]
 
