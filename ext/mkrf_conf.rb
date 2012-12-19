@@ -10,8 +10,10 @@ begin
   if ENV["RUBY_VERSION"] =~ /^jruby/ then
     inst.install "json", ">= 1.6"
     inst.install "jruby-openssl"
+    inst.install "httpclient"
   else
     inst.install "oj"
+    inst.install "curb"
   end
 rescue
   exit(1)
