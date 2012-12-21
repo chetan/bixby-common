@@ -9,10 +9,9 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chetan Sarva"]
-  s.date = "2012-12-19"
+  s.date = "2012-12-21"
   s.description = "Bixby Common files/libs"
   s.email = "chetan@pixelcop.net"
-  s.extensions = ["ext/mkrf_conf.rb"]
   s.files = [
     ".document",
     "Gemfile",
@@ -20,7 +19,6 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "bixby-common.gemspec",
-    "ext/mkrf_conf.rb",
     "lib/bixby-common.rb",
     "lib/bixby_common.rb",
     "lib/bixby_common/api/base_module.rb",
