@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/chetan/httpi.git
-  revision: 20a70135c0c3238400168132bbafa4b4282ae072
+  revision: f6e49303fee6778c714bcc556fa5f9247bc3a3f3
   branch: chunked_responses
   specs:
     httpi (2.0.0)
