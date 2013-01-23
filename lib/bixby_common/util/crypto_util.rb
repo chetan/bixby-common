@@ -66,6 +66,14 @@ module Bixby
         return data.read
       end
 
+      def generate_access_key
+        Digest.hexencode(Digest::MD5.new.digest(OpenSSL::Random.random_bytes(512)))
+      end
+
+      def generate_secret_key
+        Digest.hexencode(Digest::SHA2.new(512).digest(OpenSSL::Random.random_bytes(512)))
+      end
+
 
       private
 
