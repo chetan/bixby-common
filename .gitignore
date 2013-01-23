@@ -1,5 +1,6 @@
 pkg/
 .rbenv*
+.rbx
 coverage/
 .yardoc/
 doc/

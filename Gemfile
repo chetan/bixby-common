@@ -21,10 +21,10 @@ group :development do
   gem "jeweler", "~> 1.8.3"
   gem "pry"
 
-  gem "simplecov",    :platforms => :mri_19
+  gem "simplecov",    :platforms => [:mri_19, :rbx]
   gem "rcov",         :platforms => :mri_18
 
-  gem "minitest",     :platforms => :mri_19
+  gem "minitest",     :platforms => [:mri_19, :rbx]
   gem "test-unit",    :platforms => :mri_18
   gem "webmock",      :require => false
   gem "mocha",        :require => false
