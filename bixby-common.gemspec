@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "bixby-common"
-  s.version = "0.3.1"
+  s.version = "0.3.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chetan Sarva"]
-  s.date = "2013-01-23"
+  s.date = "2013-01-25"
   s.description = "Bixby Common files/libs"
   s.email = "chetan@pixelcop.net"
   s.files = [
@@ -69,6 +69,11 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<mocha>, [">= 0"])
       s.add_development_dependency(%q<turn>, [">= 0"])
       s.add_development_dependency(%q<test_guard>, [">= 0"])
+      s.add_development_dependency(%q<json>, [">= 0"])
+      s.add_development_dependency(%q<oj>, [">= 0"])
+      s.add_development_dependency(%q<httpclient>, [">= 0"])
+      s.add_development_dependency(%q<curb>, [">= 0"])
+      s.add_development_dependency(%q<jruby-openssl>, [">= 0"])
     else
       s.add_dependency(%q<multi_json>, [">= 0"])
       s.add_dependency(%q<httpi>, [">= 0"])
@@ -85,6 +90,11 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<mocha>, [">= 0"])
       s.add_dependency(%q<turn>, [">= 0"])
       s.add_dependency(%q<test_guard>, [">= 0"])
+      s.add_dependency(%q<json>, [">= 0"])
+      s.add_dependency(%q<oj>, [">= 0"])
+      s.add_dependency(%q<httpclient>, [">= 0"])
+      s.add_dependency(%q<curb>, [">= 0"])
+      s.add_dependency(%q<jruby-openssl>, [">= 0"])
     end
   else
     s.add_dependency(%q<multi_json>, [">= 0"])
@@ -102,6 +112,11 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<mocha>, [">= 0"])
     s.add_dependency(%q<turn>, [">= 0"])
     s.add_dependency(%q<test_guard>, [">= 0"])
+    s.add_dependency(%q<json>, [">= 0"])
+    s.add_dependency(%q<oj>, [">= 0"])
+    s.add_dependency(%q<httpclient>, [">= 0"])
+    s.add_dependency(%q<curb>, [">= 0"])
+    s.add_dependency(%q<jruby-openssl>, [">= 0"])
   end
 end
 
