@@ -27,7 +27,7 @@ Dir['tasks/**/*.rake'].each { |rake| load rake }
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
   test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
+  test.pattern = 'test/**/*_test.rb'
   test.verbose = true
 end
 
@@ -36,7 +36,7 @@ if Module.const_defined? :Rcov then
     require 'rcov/rcovtask'
     Rcov::RcovTask.new do |test|
       test.libs << 'test'
-      test.pattern = 'test/**/test_*.rb'
+      test.pattern = 'test/**/*_test.rb'
       test.verbose = true
       test.rcov_opts << '--exclude "gems/*"'
     end
@@ -45,6 +45,14 @@ if Module.const_defined? :Rcov then
 end
 
 task :default => :test
+
+begin
+  require 'single_test'
+  SingleTest.load_tasks
+
+rescue LoadError
+  warn "single_test not available"
+end
 
 require 'yard'
 YARD::Rake::YardocTask.new
