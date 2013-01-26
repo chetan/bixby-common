@@ -18,5 +18,6 @@ module Bixby
   autoload :HttpClient, "bixby_common/util/http_client"
   autoload :Jsonify, "bixby_common/util/jsonify"
   autoload :Hashify, "bixby_common/util/hashify"
+  autoload :Log, "bixby_common/util/log"
 
 end
