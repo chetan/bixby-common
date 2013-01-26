@@ -1,4 +1,6 @@
 
+require "logging"
+
 module Bixby
 
   # A simple logging mixin
@@ -21,6 +23,26 @@ module Bixby
       end
       EOF
       eval(code)
+    end
+
+    # Setup logging
+    #
+    # @param [Symbol] level       Log level to use (default = :warn)
+    # @param [String] pattern     Log pattern
+    def self.setup_logger(level=nil, pattern=nil)
+      # set level: ENV flag overrides; default to warn
+      level = :debug if ENV["BIXBY_DEBUG"]
+      level ||= :warn
+
+      pattern ||= '%.1l, [%d] %5l -- %c: %m\n'
+
+      # TODO always use stdout for now
+      Logging.appenders.stdout(
+        :level  => level,
+        :layout => Logging.layouts.pattern(:pattern => pattern)
+        )
+      Logging::Logger.root.add_appenders(Logging.appenders.stdout)
+      Logging::Logger.root.level = level
     end
 
   end # Log

@@ -7,6 +7,7 @@ gem "httpi",        :git => "https://github.com/chetan/httpi.git",
 gem "systemu",      :git => "https://github.com/chetan/systemu.git",
                     :branch => "forkbomb"
 
+gem "logging"
 
 group :development do
   gem "yard", "~> 0.8"
