@@ -7,6 +7,17 @@ GIT
       rack
 
 GIT
+  remote: https://github.com/chetan/jeweler.git
+  revision: 41062abfc55dc1f5775d6419c796fd1c8756fc7b
+  branch: bixby
+  specs:
+    jeweler (1.8.4)
+      bundler (~> 1.0)
+      git (>= 1.2.5)
+      rake
+      rdoc
+
+GIT
   remote: https://github.com/chetan/systemu.git
   revision: cb6524a4c50213bec52262f6c0f090e11bb3a586
   branch: forkbomb
@@ -46,11 +57,6 @@ GEM
       thor (>= 0.14.6)
     hirb (0.7.1)
     httpclient (2.3.2)
-    jeweler (1.8.4)
-      bundler (~> 1.0)
-      git (>= 1.2.5)
-      rake
-      rdoc
     jruby-openssl (0.8.2)
       bouncy-castle-java (>= 1.5.0146.1)
     json (1.7.6)
@@ -112,7 +118,7 @@ DEPENDENCIES
   curb
   httpclient
   httpi!
-  jeweler (~> 1.8.3)
+  jeweler!
   jruby-openssl
   json
   logging
