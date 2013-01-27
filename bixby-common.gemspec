@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chetan Sarva"]
-  s.date = "2013-01-26"
+  s.date = "2013-01-27"
   s.description = "Bixby Common files/libs"
   s.email = "chetan@pixelcop.net"
   s.files = [
@@ -21,10 +21,9 @@ Gem::Specification.new do |s|
     "bixby-common.gemspec",
     "lib/bixby-common.rb",
     "lib/bixby_common.rb",
-    "lib/bixby_common/api/base_module.rb",
-    "lib/bixby_common/api/bundle_repository.rb",
     "lib/bixby_common/api/json_request.rb",
     "lib/bixby_common/api/json_response.rb",
+    "lib/bixby_common/bixby.rb",
     "lib/bixby_common/command_response.rb",
     "lib/bixby_common/command_spec.rb",
     "lib/bixby_common/exception/bundle_not_found.rb",
@@ -72,6 +71,9 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<mocha>, [">= 0"])
       s.add_development_dependency(%q<turn>, [">= 0"])
       s.add_development_dependency(%q<test_guard>, [">= 0"])
+      s.add_development_dependency(%q<rb-inotify>, [">= 0"])
+      s.add_development_dependency(%q<rb-fsevent>, [">= 0"])
+      s.add_development_dependency(%q<rb-fchange>, [">= 0"])
       s.add_development_dependency(%q<json>, [">= 0"])
       s.add_development_dependency(%q<oj>, [">= 0"])
       s.add_development_dependency(%q<httpclient>, [">= 0"])
@@ -94,6 +96,9 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<mocha>, [">= 0"])
       s.add_dependency(%q<turn>, [">= 0"])
       s.add_dependency(%q<test_guard>, [">= 0"])
+      s.add_dependency(%q<rb-inotify>, [">= 0"])
+      s.add_dependency(%q<rb-fsevent>, [">= 0"])
+      s.add_dependency(%q<rb-fchange>, [">= 0"])
       s.add_dependency(%q<json>, [">= 0"])
       s.add_dependency(%q<oj>, [">= 0"])
       s.add_dependency(%q<httpclient>, [">= 0"])
@@ -117,6 +122,9 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<mocha>, [">= 0"])
     s.add_dependency(%q<turn>, [">= 0"])
     s.add_dependency(%q<test_guard>, [">= 0"])
+    s.add_dependency(%q<rb-inotify>, [">= 0"])
+    s.add_dependency(%q<rb-fsevent>, [">= 0"])
+    s.add_dependency(%q<rb-fchange>, [">= 0"])
     s.add_dependency(%q<json>, [">= 0"])
     s.add_dependency(%q<oj>, [">= 0"])
     s.add_dependency(%q<httpclient>, [">= 0"])
