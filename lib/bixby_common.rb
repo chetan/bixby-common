@@ -1,4 +1,6 @@
 
+require "bixby_common/bixby"
+
 module Bixby
 
   autoload :CommandResponse, "bixby_common/command_response"
@@ -6,9 +8,6 @@ module Bixby
 
   autoload :JsonRequest, "bixby_common/api/json_request"
   autoload :JsonResponse, "bixby_common/api/json_response"
-
-  autoload :BaseModule, "bixby_common/api/base_module"
-  autoload :BundleRepository, "bixby_common/api/bundle_repository"
 
   autoload :BundleNotFound, "bixby_common/exception/bundle_not_found"
   autoload :CommandNotFound, "bixby_common/exception/command_not_found"

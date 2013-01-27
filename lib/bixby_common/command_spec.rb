@@ -50,7 +50,7 @@ class CommandSpec
       # only resolve the special "local" repo for Agents
       return File.expand_path(File.join(AGENT_ROOT, "../repo", @bundle))
     end
-    File.join(BundleRepository.path, self.relative_path)
+    File.join(Bixby.repo_path, self.relative_path)
   end
 
   def relative_path

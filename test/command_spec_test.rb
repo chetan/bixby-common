@@ -8,7 +8,7 @@ module Test
 class TestCommandSpec < MiniTest::Unit::TestCase
 
   def setup
-    BundleRepository.path = File.expand_path(File.dirname(__FILE__))
+    Bixby.repo_path = File.expand_path(File.dirname(__FILE__))
     h = { :repo => "support", :bundle => "test_bundle", 'command' => "echo", :foobar => "baz" }
     @c = CommandSpec.new(h)
   end
@@ -59,14 +59,14 @@ class TestCommandSpec < MiniTest::Unit::TestCase
   end
 
   def test_update_digest
-    expected = MultiJson.load(File.read(BundleRepository.path + "/support/test_bundle/digest"))
+    expected = MultiJson.load(File.read(Bixby.repo_path + "/support/test_bundle/digest"))
 
     t = "/tmp/foobar_test_repo"
     d = "#{t}/support/test_bundle/digest"
     `mkdir -p #{t}`
-    `cp -a #{BundleRepository.path}/support #{t}/`
+    `cp -a #{Bixby.repo_path}/support #{t}/`
     `rm #{d}`
-    BundleRepository.path = t
+    Bixby.repo_path = t
 
     refute File.exist? d
     @c.update_digest
