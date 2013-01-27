@@ -26,6 +26,9 @@ group :development do
   gem "turn"
 
   gem "test_guard", :git => "https://github.com/chetan/test_guard.git"
+  gem 'rb-inotify', :require => false
+  gem 'rb-fsevent', :require => false
+  gem 'rb-fchange', :require => false
 
   # platform specific gemms
   # not sure we need to include these at all
