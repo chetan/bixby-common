@@ -46,13 +46,19 @@ class CommandSpec
 
   # resolve the given bundle
   def bundle_dir
-    if @repo == "local" and Module.constants.include? :AGENT_ROOT then
-      # only resolve the special "local" repo for Agents
-      return File.expand_path(File.join(AGENT_ROOT, "../repo", @bundle))
-    end
     File.join(Bixby.repo_path, self.relative_path)
   end
 
+  # Return the relative path to the bundle (inside the repository)
+  #
+  # e.g., if Bixby.repo_path = /opt/bixby/repo then a relative path would
+  #       look like:
+  #
+  #         vendor/system/monitoring
+  #         or
+  #         megacorp/sysops/scripts
+  #
+  # @return [String]
   def relative_path
     File.join(@repo, @bundle)
   end
