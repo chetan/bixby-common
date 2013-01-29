@@ -121,9 +121,7 @@ class CommandSpec
   # Convert object to String, useful for debugging
   #
   # @return [String]
-  #
-  # :nocov:
-  def to_s
+  def to_s # :nocov:
     s = []
     s << "CommandSpec:#{self.object_id}"
     s << "  digest:   #{self.digest}"
@@ -134,7 +132,7 @@ class CommandSpec
     s << "  env:      " + MultiJson.dump(self.env)
     s << "  stdin:    " + Debug.pretty_str(stdin)
     s.join("\n")
-  end
+  end # :nocov:
 
 end # CommandSpec
 end # Bixby

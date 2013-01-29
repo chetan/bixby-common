@@ -24,15 +24,13 @@ class JsonRequest
   # Convert object to String, useful for debugging
   #
   # @return [String]
-  #
-  # :nocov:
-  def to_s
+  def to_s # :nocov:
     s = []
     s << "JsonRequest:#{self.object_id}"
     s << "  operation:  #{self.operation}"
     s << "  params:     " + MultiJson.dump(self.params)
     s.join("\n")
-  end
+  end # :nocov:
 
 end # JsonRequest
 end # Bixby

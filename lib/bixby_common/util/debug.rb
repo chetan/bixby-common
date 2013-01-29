@@ -2,9 +2,8 @@
 module Bixby
   module Debug
 
-    # Simply helper for use in to_s methods
-    # :nocov:
-    def self.pretty_str(str)
+    # Simple helper for use in to_s methods
+    def self.pretty_str(str) # :nocov:
       if str.nil? then
         "nil"
       elsif str.empty? then
@@ -14,7 +13,7 @@ module Bixby
       else
         '"' + str + '"'
       end
-    end
+    end # :nocov:
 
   end # Debug
 end # Bixby

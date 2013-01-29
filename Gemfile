@@ -15,7 +15,7 @@ group :development do
   gem "jeweler", :git => "https://github.com/chetan/jeweler.git", :branch => "bixby"
   gem "pry"
 
-  gem "simplecov",    :platforms => [:mri_19, :rbx]
+  gem "simplecov",    :platforms => [:mri_19, :rbx], :git => "https://github.com/chetan/simplecov.git", :branch => "inline_nocov"
   gem "rcov",         :platforms => :mri_18
 
   gem "minitest",     :platforms => [:mri_19, :rbx]

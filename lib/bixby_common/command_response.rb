@@ -45,16 +45,14 @@ class CommandResponse
   # Convert object to String, useful for debugging
   #
   # @return [String]
-  #
-  # :nocov:
-  def to_s
+  def to_s # :nocov:
     s = []
     s << "CommandResponse:#{self.object_id}"
     s << "  status:   #{self.status}"
     s << "  stdout:   " + Debug.pretty_str(stdout)
     s << "  stderr:   " + Debug.pretty_str(stderr)
     s.join("\n")
-  end
+  end # :nocov:
 
 end # CommandResponse
 end # Bixby

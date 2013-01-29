@@ -47,30 +47,28 @@ class JsonResponse
   # Create a JsonResponse representing an invalid request
   #
   # @param [String] msg Optional message (default: "invalid request")
-  def self.invalid_request(msg = nil)
+  def self.invalid_request(msg = nil) # :nocov:
     new("fail", (msg || "invalid request"), nil, 400)
-  end
+  end # :nocov:
 
   # Create a JsonResponse indicating "bundle not found"
   #
   # @param [String] bundle  Name of bundle
-  def self.bundle_not_found(bundle)
+  def self.bundle_not_found(bundle) # :nocov:
     new("fail", "bundle not found: #{bundle}", nil, 404)
-  end
+  end # :nocov:
 
   # Create a JsonResponse indicating "command not found"
   #
   # @param [String] command  Name of command
-  def self.command_not_found(command)
+  def self.command_not_found(command) # :nocov:
     new("fail", "command not found: #{command}", nil, 404)
-  end
+  end # :nocov:
 
   # Convert object to String, useful for debugging
   #
   # @return [String]
-  #
-  # :nocov:
-  def to_s
+  def to_s # :nocov:
     s = []
     s << "JsonResponse:#{self.object_id}"
     s << "  status:   #{self.status}"
@@ -78,7 +76,7 @@ class JsonResponse
     s << "  message:  #{self.message}"
     s << "  data:     " + MultiJson.dump(self.data)
     s.join("\n")
-  end
+  end # :nocov:
 
 end # JsonResponse
 
