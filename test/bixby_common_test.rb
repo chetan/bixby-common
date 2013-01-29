@@ -12,6 +12,15 @@ class TestBixbyCommon < MiniTest::Unit::TestCase
     assert_equal(CommandSpec, CommandSpec.new.class)
   end
 
+  def test_strings
+    assert_kind_of String, JsonRequest.new(nil, nil).to_s
+    assert_kind_of String, JsonResponse.new.to_s
+    assert_kind_of String, CommandResponse.new.to_s
+
+    assert_includes Debug.pretty_str("abc"), "EOF"
+    assert_equal "''", Debug.pretty_str("")
+  end
+
 end
 
 end # Test

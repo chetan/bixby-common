@@ -49,12 +49,8 @@ class CommandResponse
     s = []
     s << "CommandResponse:#{self.object_id}"
     s << "  status:   #{self.status}"
-    s << "  stdout:   <<-EOF"
-    s << self.stdout if self.stdout and not self.stdout.empty?
-    s << "EOF"
-    s << "  stderr:   <<-EOF"
-    s << self.stderr if self.stderr and not self.stderr.empty?
-    s << "EOF"
+    s << "  stdout:   " + Debug.pretty_str(stdout)
+    s << "  stderr:   " + Debug.pretty_str(stderr)
     s.join("\n")
   end
 
