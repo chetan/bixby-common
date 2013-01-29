@@ -33,6 +33,18 @@ class TestCommandSpec < MiniTest::Unit::TestCase
     refute_includes @c.to_s, "EOF"
   end
 
+  def test_load_config
+    config = @c.load_config
+    assert config
+    assert_kind_of Hash, config
+    assert_empty config
+
+    @c.command = "cat"
+    config = @c.load_config
+    assert config
+    assert_equal "cat", config["name"]
+  end
+
   def test_validate_failures
     assert_throws(BundleNotFound) do
       CommandSpec.new(:repo => "support", :bundle => "foobar").validate(nil)
@@ -46,8 +58,9 @@ class TestCommandSpec < MiniTest::Unit::TestCase
   end
 
   def test_digest
-    assert_equal "2429629015110c29f8fae8ca97e0e494410a28b981653c0e094cfe4a7567f1b7", @c.digest
-    assert @c.validate("2429629015110c29f8fae8ca97e0e494410a28b981653c0e094cfe4a7567f1b7")
+    expected_digest = "8980372485fc6bcd287e481ab1e15710e2b63c68db75085c2d24386ced272ca4"
+    assert_equal expected_digest, @c.digest
+    assert @c.validate(expected_digest)
   end
 
   def test_digest_no_err

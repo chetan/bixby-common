@@ -1,9 +1,13 @@
 {
-  "digest": "2429629015110c29f8fae8ca97e0e494410a28b981653c0e094cfe4a7567f1b7",
+  "digest": "8980372485fc6bcd287e481ab1e15710e2b63c68db75085c2d24386ced272ca4",
   "files": [
     {
       "file": "bin/cat",
       "digest": "6d14ab63802f3ef51bdc16db1cfeb6df93167fe7a2aa09a6c737293d42c118b2"
+    },
+    {
+      "file": "bin/cat.json",
+      "digest": "1d1f4247f1412aa595c3df27226ebe808dfa8c72c1edc3ebbee452401153503b"
     },
     {
       "file": "bin/echo",
