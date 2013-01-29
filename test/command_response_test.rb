@@ -21,6 +21,18 @@ class TestCommandResponse < MiniTest::Unit::TestCase
     assert_nil cr.stderr
   end
 
+  def test_status
+    cr = CommandResponse.new
+    cr.status = 0
+    assert cr.success?
+    refute cr.fail?
+    refute cr.error?
+
+    cr.status = "255"
+    refute cr.success?
+    assert cr.fail?
+  end
+
 end # TestCommandResponse
 
 end # Test
