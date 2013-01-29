@@ -18,5 +18,6 @@ module Bixby
   autoload :Jsonify, "bixby_common/util/jsonify"
   autoload :Hashify, "bixby_common/util/hashify"
   autoload :Log, "bixby_common/util/log"
+  autoload :Debug, "bixby_common/util/debug"
 
 end

@@ -130,9 +130,7 @@ class CommandSpec
     s << "  command:  #{self.command}"
     s << "  args:     #{self.args}"
     s << "  env:      " + MultiJson.dump(self.env)
-    s << "  stdin:    <<-EOF"
-    s << self.stdin if self.stdin and not self.stdin.empty?
-    s << "EOF"
+    s << "  stdin:    " + Debug.pretty_str(stdin)
     s.join("\n")
   end
 

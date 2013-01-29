@@ -15,20 +15,22 @@ class TestCommandSpec < MiniTest::Unit::TestCase
 
 
   def test_init_with_hash
-
     assert(@c)
     assert_equal("support", @c.repo)
     assert_equal("test_bundle", @c.bundle)
     assert_equal("echo", @c.command)
-
   end
 
   def test_to_hash
-
     assert_equal("support", @c.to_hash[:repo])
     assert_equal("test_bundle", @c.to_hash[:bundle])
     assert_equal("echo", @c.to_hash[:command])
+  end
 
+  def test_to_s
+    assert @c.to_s
+    assert_includes @c.to_s, "digest:"
+    refute_includes @c.to_s, "EOF"
   end
 
   def test_validate_failures
