@@ -34,13 +34,13 @@ class CommandResponse
   end
   alias_method :error?, :fail?
 
-  def decode
+  def decode # :nocov:
     MultiJson.load(@stdout)
-  end
+  end # :nocov:
 
-  def decode_stderr
+  def decode_stderr # :nocov:
     MultiJson.load(@stderr)
-  end
+  end # :nocov:
 
   # Convert object to String, useful for debugging
   #
