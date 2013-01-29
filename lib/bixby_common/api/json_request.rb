@@ -24,6 +24,8 @@ class JsonRequest
   # Convert object to String, useful for debugging
   #
   # @return [String]
+  #
+  # :nocov:
   def to_s
     s = []
     s << "JsonRequest:#{self.object_id}"

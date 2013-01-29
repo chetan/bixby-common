@@ -121,6 +121,8 @@ class CommandSpec
   # Convert object to String, useful for debugging
   #
   # @return [String]
+  #
+  # :nocov:
   def to_s
     s = []
     s << "CommandSpec:#{self.object_id}"

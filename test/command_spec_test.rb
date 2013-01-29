@@ -27,12 +27,6 @@ class TestCommandSpec < MiniTest::Unit::TestCase
     assert_equal("echo", @c.to_hash[:command])
   end
 
-  def test_to_s
-    assert @c.to_s
-    assert_includes @c.to_s, "digest:"
-    refute_includes @c.to_s, "EOF"
-  end
-
   def test_load_config
     config = @c.load_config
     assert config

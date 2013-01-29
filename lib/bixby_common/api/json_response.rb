@@ -68,6 +68,8 @@ class JsonResponse
   # Convert object to String, useful for debugging
   #
   # @return [String]
+  #
+  # :nocov:
   def to_s
     s = []
     s << "JsonResponse:#{self.object_id}"

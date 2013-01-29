@@ -45,6 +45,8 @@ class CommandResponse
   # Convert object to String, useful for debugging
   #
   # @return [String]
+  #
+  # :nocov:
   def to_s
     s = []
     s << "CommandResponse:#{self.object_id}"
