@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chetan Sarva"]
-  s.date = "2013-01-29"
+  s.date = "2013-02-02"
   s.description = "Bixby Common files/libs"
   s.email = "chetan@pixelcop.net"
   s.files = [
@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
     "lib/bixby_common/command_response.rb",
     "lib/bixby_common/command_spec.rb",
     "lib/bixby_common/exception/bundle_not_found.rb",
+    "lib/bixby_common/exception/command_exception.rb",
     "lib/bixby_common/exception/command_not_found.rb",
     "lib/bixby_common/exception/encryption_error.rb",
     "lib/bixby_common/util/crypto_util.rb",
