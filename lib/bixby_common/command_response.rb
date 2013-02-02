@@ -34,6 +34,15 @@ class CommandResponse
   end
   alias_method :error?, :fail?
 
+  def raise!
+    if fail? then
+      msg = stdout || ""
+      msg += "\n" if !(stdout.nil? or stdout.empty?)
+      msg += stderr || ""
+      raise CommandException.new(msg, msg)
+    end
+  end
+
   def decode # :nocov:
     MultiJson.load(@stdout)
   end # :nocov:

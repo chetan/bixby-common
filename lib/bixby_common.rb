@@ -11,6 +11,7 @@ module Bixby
 
   autoload :BundleNotFound, "bixby_common/exception/bundle_not_found"
   autoload :CommandNotFound, "bixby_common/exception/command_not_found"
+  autoload :CommandException, "bixby_common/exception/command_exception"
   autoload :EncryptionError, "bixby_common/exception/encryption_error"
 
   autoload :CryptoUtil, "bixby_common/util/crypto_util"

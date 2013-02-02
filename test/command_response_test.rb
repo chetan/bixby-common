@@ -14,6 +14,11 @@ class TestCommandResponse < MiniTest::Unit::TestCase
     assert_kind_of CommandResponse, cr
     assert_equal 255, cr.status
     assert_equal "unknown", cr.stderr
+    begin
+      cr.raise!
+    rescue CommandException => ex
+      assert_equal "unknown", ex.message
+    end
 
     res = JsonResponse.new("success", nil, {:status => 0, :stdout => "foobar", :stderr => nil})
     assert res.success?
