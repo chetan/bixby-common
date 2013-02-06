@@ -1,4 +1,4 @@
-source "http://rubygems.org"
+source "https://rubygems.org"
 
 gem "multi_json"
 gem "httpi",        :git => "https://github.com/chetan/httpi.git",
