@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chetan Sarva"]
-  s.date = "2013-02-02"
+  s.date = "2013-02-07"
   s.description = "Bixby Common files/libs"
   s.email = "chetan@pixelcop.net"
   s.files = [
@@ -40,11 +40,11 @@ Gem::Specification.new do |s|
     "test/command_response_test.rb",
     "test/command_spec_test.rb",
     "test/helper.rb",
-    "test/support/test_bundle/bin/cat",
-    "test/support/test_bundle/bin/cat.json",
-    "test/support/test_bundle/bin/echo",
-    "test/support/test_bundle/digest",
-    "test/support/test_bundle/manifest.json",
+    "test/support/repo/vendor/test_bundle/bin/cat",
+    "test/support/repo/vendor/test_bundle/bin/cat.json",
+    "test/support/repo/vendor/test_bundle/bin/echo",
+    "test/support/repo/vendor/test_bundle/digest",
+    "test/support/repo/vendor/test_bundle/manifest.json",
     "test/util/http_client_test.rb",
     "test/util/jsonify_test.rb",
     "test/util/log_test.rb"
