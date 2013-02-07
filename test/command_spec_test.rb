@@ -8,21 +8,29 @@ module Test
 class TestCommandSpec < MiniTest::Unit::TestCase
 
   def setup
-    Bixby.repo_path = File.expand_path(File.dirname(__FILE__))
-    h = { :repo => "support", :bundle => "test_bundle", 'command' => "echo", :foobar => "baz" }
+    ENV["BIXBY_HOME"] = File.join(File.expand_path(File.dirname(__FILE__)), "support")
+    h = { :repo => "vendor", :bundle => "test_bundle", 'command' => "echo", :foobar => "baz" }
     @c = CommandSpec.new(h)
+  end
+
+  def teardown
+    super
+    system("rm -rf /tmp/_test_bixby_home")
+    Bixby.instance_eval do
+      @root = nil # make sure we can pickup the new ENV
+    end
   end
 
 
   def test_init_with_hash
     assert(@c)
-    assert_equal("support", @c.repo)
+    assert_equal("vendor", @c.repo)
     assert_equal("test_bundle", @c.bundle)
     assert_equal("echo", @c.command)
   end
 
   def test_to_hash
-    assert_equal("support", @c.to_hash[:repo])
+    assert_equal("vendor", @c.to_hash[:repo])
     assert_equal("test_bundle", @c.to_hash[:bundle])
     assert_equal("echo", @c.to_hash[:command])
   end
@@ -41,10 +49,10 @@ class TestCommandSpec < MiniTest::Unit::TestCase
 
   def test_validate_failures
     assert_throws(BundleNotFound) do
-      CommandSpec.new(:repo => "support", :bundle => "foobar").validate(nil)
+      CommandSpec.new(:repo => "vendor", :bundle => "foobar").validate(nil)
     end
     assert_throws(CommandNotFound) do
-      CommandSpec.new(:repo => "support", :bundle => "test_bundle", :command => "foobar").validate(nil)
+      CommandSpec.new(:repo => "vendor", :bundle => "test_bundle", :command => "foobar").validate(nil)
     end
     assert_throws(BundleNotFound) do
       @c.validate(nil)
@@ -58,7 +66,7 @@ class TestCommandSpec < MiniTest::Unit::TestCase
   end
 
   def test_digest_no_err
-    c = CommandSpec.new({ :repo => "support", :bundle => "test_bundle", 'command' => "echofoo" })
+    c = CommandSpec.new({ :repo => "vendor", :bundle => "test_bundle", 'command' => "echofoo" })
   end
 
   def test_exec_digest_changed_throws_error
@@ -68,14 +76,18 @@ class TestCommandSpec < MiniTest::Unit::TestCase
   end
 
   def test_update_digest
-    expected = MultiJson.load(File.read(Bixby.repo_path + "/support/test_bundle/digest"))
+    expected = MultiJson.load(File.read(Bixby.repo_path + "/vendor/test_bundle/digest"))
 
-    t = "/tmp/foobar_test_repo"
-    d = "#{t}/support/test_bundle/digest"
+    t = "/tmp/_test_bixby_home"
+    d = "#{t}/repo/vendor/test_bundle/digest"
     `mkdir -p #{t}`
-    `cp -a #{Bixby.repo_path}/support #{t}/`
+    `cp -a #{Bixby.repo_path}/ #{t}/`
     `rm #{d}`
-    Bixby.repo_path = t
+    ENV["BIXBY_HOME"] = t
+
+    Bixby.instance_eval do
+      @root = nil # make sure we can pickup the new ENV
+    end
 
     refute File.exist? d
     @c.update_digest
@@ -85,7 +97,6 @@ class TestCommandSpec < MiniTest::Unit::TestCase
     @c.update_digest
     assert File.exist? d
     assert_equal MultiJson.dump(expected), MultiJson.dump(MultiJson.load(File.read(d)))
-    `rm -rf #{t}`
   end
 
 end # TestCommandSpec
