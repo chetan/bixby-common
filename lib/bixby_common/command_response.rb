@@ -20,6 +20,13 @@ class CommandResponse
     return cr
   end
 
+  # Create a JsonResponse from this CommandResponse
+  #
+  # @return [JsonResponse]
+  def to_json_response
+    return JsonResponse.new((status == 0 ? "success" : "fail"), nil, self)
+  end
+
   def initialize(params = nil)
     return if params.nil? or params.empty?
     params.each{ |k,v| self.send("#{k}=", v) if self.respond_to? "#{k}=" }
