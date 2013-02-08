@@ -15,7 +15,7 @@ class CommandResponse
     cr = CommandResponse.new(res.data)
     if res.message then
       cr.status ||= 255
-      cr.stderr = res.message
+      cr.stderr ||= res.message
     end
     return cr
   end
@@ -28,8 +28,14 @@ class CommandResponse
   end
 
   def initialize(params = nil)
-    return if params.nil? or params.empty?
-    params.each{ |k,v| self.send("#{k}=", v) if self.respond_to? "#{k}=" }
+    if params.kind_of? Hash then
+      params.each{ |k,v| self.send("#{k}=", v) if self.respond_to? "#{k}=" }
+
+    elsif params.class.to_s == "Mixlib::ShellOut" then
+      @status = params.exitstatus
+      @stdout = params.stdout
+      @stderr = params.stderr
+    end
   end
 
   def success?
