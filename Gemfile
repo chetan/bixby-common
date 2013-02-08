@@ -4,9 +4,6 @@ gem "multi_json"
 gem "httpi",        :git => "https://github.com/chetan/httpi.git",
                     :branch => "chunked_responses"
 
-gem "systemu",      :git => "https://github.com/chetan/systemu.git",
-                    :branch => "forkbomb"
-
 gem "logging"
 
 group :development do

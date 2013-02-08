@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chetan Sarva"]
-  s.date = "2013-02-07"
+  s.date = "2013-02-08"
   s.description = "Bixby Common files/libs"
   s.email = "chetan@pixelcop.net"
   s.files = [
@@ -60,7 +60,6 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<multi_json>, [">= 0"])
       s.add_runtime_dependency(%q<httpi>, [">= 0"])
-      s.add_runtime_dependency(%q<systemu>, [">= 0"])
       s.add_runtime_dependency(%q<logging>, [">= 0"])
       s.add_development_dependency(%q<yard>, ["~> 0.8"])
       s.add_development_dependency(%q<bundler>, ["~> 1.1"])
@@ -85,7 +84,6 @@ Gem::Specification.new do |s|
     else
       s.add_dependency(%q<multi_json>, [">= 0"])
       s.add_dependency(%q<httpi>, [">= 0"])
-      s.add_dependency(%q<systemu>, [">= 0"])
       s.add_dependency(%q<logging>, [">= 0"])
       s.add_dependency(%q<yard>, ["~> 0.8"])
       s.add_dependency(%q<bundler>, ["~> 1.1"])
@@ -111,7 +109,6 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<multi_json>, [">= 0"])
     s.add_dependency(%q<httpi>, [">= 0"])
-    s.add_dependency(%q<systemu>, [">= 0"])
     s.add_dependency(%q<logging>, [">= 0"])
     s.add_dependency(%q<yard>, ["~> 0.8"])
     s.add_dependency(%q<bundler>, ["~> 1.1"])
