@@ -9,7 +9,7 @@ module Bixby
 
     # Path to BIXBY_HOME
     def root
-      @root ||= ENV["BIXBY_HOME"]
+      ENV["BIXBY_HOME"]
     end
     alias_method :home, :root
 

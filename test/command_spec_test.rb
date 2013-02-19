@@ -16,9 +16,6 @@ class TestCommandSpec < MiniTest::Unit::TestCase
   def teardown
     super
     system("rm -rf /tmp/_test_bixby_home")
-    Bixby.instance_eval do
-      @root = nil # make sure we can pickup the new ENV
-    end
   end
 
 
@@ -84,10 +81,6 @@ class TestCommandSpec < MiniTest::Unit::TestCase
     `cp -a #{Bixby.repo_path}/ #{t}/`
     `rm #{d}`
     ENV["BIXBY_HOME"] = t
-
-    Bixby.instance_eval do
-      @root = nil # make sure we can pickup the new ENV
-    end
 
     refute File.exist? d
     @c.update_digest
