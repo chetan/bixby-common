@@ -39,7 +39,7 @@ class CommandSpec
       raise CommandNotFound.new("repo = #{@repo}; bundle = #{@bundle}; command = #{@command}")
     end
     if self.digest != expected_digest then
-      raise BundleNotFound, "digest does not match ('#{self.digest}' != '#{expected_digest}'", caller
+      raise BundleNotFound, "digest does not match ('#{self.digest}' != '#{expected_digest}')", caller
     end
     return true
   end
