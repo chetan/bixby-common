@@ -27,31 +27,35 @@ module Bixby
 
     # Setup logging
     #
-    # @param [Symbol] level       Log level to use (default = :warn)
-    # @param [String] pattern     Log pattern
-    def self.setup_logger(level=nil, pattern=nil)
+    # @param [Hash] opts                  Options for the rolling file appender
+    # @option opts [String] :filename     Filename to log to
+    # @option opts [Symbol] :level        Log level to use (default = :warn)
+    # @option opts [String] :pattern      Log pattern
+    def self.setup_logger(opts={})
+
       # set level: ENV flag overrides; default to warn
-      level = :debug if ENV["BIXBY_DEBUG"]
-      level ||= :warn
+      opts[:level] = :debug if ENV["BIXBY_DEBUG"]
+      opts[:level] ||= :warn
 
-      pattern ||= '%.1l, [%d] %5l -- %c: %m\n'
+      pattern = opts.delete(:pattern) || '%.1l, [%d] %5l -- %c: %m\n'
+      layout = Logging.layouts.pattern(:pattern => pattern)
 
-      FileUtils.mkdir_p(Bixby.path("var"))
+      opts[:filename] ||= Bixby.path("var", "bixby-agent.log")
+      FileUtils.mkdir_p(File.dirname(opts[:filename]))
 
-      # TODO always use stdout for now
-      Logging.appenders.rolling_file("file",
-        :filename      => Bixby.path("var", "bixby-agent.log"),
+      options = {
         :keep          => 7,
         :roll_by       => 'date',
         :age           => 'daily',
         :truncate      => false,
         :auto_flushing => true,
-        :level         => level,
-        :layout        => Logging.layouts.pattern(:pattern => pattern)
-        )
+        :layout        => layout
+      }.merge(opts)
+
+      Logging.appenders.rolling_file("file", options)
 
       Logging::Logger.root.add_appenders("file")
-      Logging::Logger.root.level = level
+      Logging::Logger.root.level = opts[:level]
     end
 
   end # Log

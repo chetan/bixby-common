@@ -16,7 +16,7 @@ class TestLog < MiniTest::Unit::TestCase
     assert_equal 2, Logging::Logger.root.level # warn
 
     ENV.delete("BIXBY_DEBUG")
-    Bixby::Log.setup_logger(:info)
+    Bixby::Log.setup_logger(:level => :info)
     assert_equal 1, Logging::Logger.root.level # info
   end
 
