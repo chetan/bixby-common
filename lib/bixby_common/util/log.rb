@@ -36,12 +36,21 @@ module Bixby
 
       pattern ||= '%.1l, [%d] %5l -- %c: %m\n'
 
+      FileUtils.mkdir_p(Bixby.path("var"))
+
       # TODO always use stdout for now
-      Logging.appenders.stdout(
-        :level  => level,
-        :layout => Logging.layouts.pattern(:pattern => pattern)
+      Logging.appenders.rolling_file("file",
+        :filename      => Bixby.path("var", "bixby-agent.log"),
+        :keep          => 7,
+        :roll_by       => 'date',
+        :age           => 'daily',
+        :truncate      => false,
+        :auto_flushing => true,
+        :level         => level,
+        :layout        => Logging.layouts.pattern(:pattern => pattern)
         )
-      Logging::Logger.root.add_appenders(Logging.appenders.stdout)
+
+      Logging::Logger.root.add_appenders("file")
       Logging::Logger.root.level = level
     end
 
