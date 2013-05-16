@@ -1,4 +1,8 @@
 
+# TODO temp fix to make sure we use oj
+require "oj"
+require "multi_json"
+
 require "bixby_common/bixby"
 
 module Bixby
