@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "bixby-common"
-  s.version = "0.3.10"
+  s.version = "0.3.11"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chetan Sarva"]
-  s.date = "2013-05-16"
+  s.date = "2013-05-18"
   s.description = "Bixby Common files/libs"
   s.email = "chetan@pixelcop.net"
   s.files = [
@@ -36,6 +36,7 @@ Gem::Specification.new do |s|
     "lib/bixby_common/util/http_client.rb",
     "lib/bixby_common/util/jsonify.rb",
     "lib/bixby_common/util/log.rb",
+    "lib/bixby_common/util/log/filtering_layout.rb",
     "test/bixby_common_test.rb",
     "test/command_response_test.rb",
     "test/command_spec_test.rb",
