@@ -1,6 +1,8 @@
 
 require "logging"
 
+require "bixby_common/util/log/filtering_layout"
+
 module Bixby
 
   # A simple logging mixin
