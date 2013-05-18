@@ -46,7 +46,7 @@ class CommandSpec
 
   # resolve the given bundle
   def bundle_dir
-    File.join(Bixby.repo_path, self.relative_path)
+    File.expand_path(File.join(Bixby.repo_path, self.relative_path))
   end
 
   # Return the relative path to the bundle (inside the repository)
@@ -107,14 +107,16 @@ class CommandSpec
 
     digests = []
     Dir.glob("#{path}/**/*").sort.each do |f|
-      next if File.directory? f or File.basename(f) == "digest"
+      next if File.directory?(f) || File.basename(f) == "digest" || f =~ /^#{path}\/test/
       bundle_sha.file(f)
       sha.reset()
       digests << { :file => f.gsub(/#{path}\//, ''), :digest => sha.file(f).hexdigest() }
     end
 
     @digest = { :digest => bundle_sha.hexdigest(), :files => digests }
-    File.open(path+"/digest", 'w'){ |f| f.write(MultiJson.dump(@digest, :pretty => true) + "\n") }
+    File.open(path+"/digest", 'w'){ |f|
+      f.write(MultiJson.dump(@digest, :pretty => true, :adapter => :json_gem) + "\n")
+    }
 
   end
 
