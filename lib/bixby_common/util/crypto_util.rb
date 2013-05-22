@@ -59,7 +59,7 @@ module Bixby
         data = StringIO.new(c.update(payload) + c.final)
 
         ts = data.readline.strip
-        if (Time.new.to_i - ts.to_i) > 60 then
+        if (Time.new.to_i - ts.to_i) > 900 then # must be within last 15 min
           raise Bixby::EncryptionError, "payload verification failed", caller
         end
 
