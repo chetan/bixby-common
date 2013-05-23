@@ -14,6 +14,7 @@ module Bixby
     def log
       @log ||= Logging.logger[self]
     end
+    alias_method :logger, :log
 
     # Create a method for each log level. Allows receiver to simply call
     #
