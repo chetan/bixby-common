@@ -12,10 +12,10 @@ group :development do
   gem "jeweler", :git => "https://github.com/chetan/jeweler.git", :branch => "bixby"
   gem "pry"
 
-  gem "simplecov",    :platforms => [:mri_19, :rbx], :git => "https://github.com/chetan/simplecov.git", :branch => "inline_nocov"
+  gem "simplecov",    :platforms => [:mri_19, :mri_20, :rbx], :git => "https://github.com/chetan/simplecov.git", :branch => "inline_nocov"
   gem "rcov",         :platforms => :mri_18
 
-  gem "minitest",     :platforms => [:mri_19, :rbx]
+  gem "minitest",     "~> 4.0", :platforms => [:mri_19, :mri_20, :rbx]
   gem "test-unit",    :platforms => :mri_18
   gem "webmock",      :require => false
   gem "mocha",        :require => false
@@ -29,7 +29,7 @@ group :development do
 
   # platform specific gemms
   # not sure we need to include these at all
-  gem "json",         :platforms => [:jruby]
+  gem "json",         :platforms => [:mri, :jruby]
   gem "oj",           :platforms => [:mri, :rbx]
 
   gem "httpclient",   :platforms => [:jruby]
