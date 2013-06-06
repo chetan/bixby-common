@@ -68,7 +68,7 @@ class CommandSpec
   end
 
   def command_file
-    File.join(self.bundle_dir, "bin", @command)
+    path("bin", @command)
   end
 
   def command_exists?
@@ -88,7 +88,7 @@ class CommandSpec
   end
 
   def digest_file
-    File.join(self.bundle_dir, "digest")
+    path("digest")
   end
 
   def load_digest
@@ -97,6 +97,23 @@ class CommandSpec
     rescue => ex
     end
     nil
+  end
+
+  def load_manifest
+    begin
+      return MultiJson.load(path("manifest.json"))
+    rescue => ex
+    end
+    nil
+  end
+
+  # Create and return an absolute pathname pointing to the given file
+  #
+  # @param [String] *relative
+  #
+  # @return [String]
+  def path(*relative)
+    File.join(self.bundle_dir, *relative)
   end
 
   def update_digest
