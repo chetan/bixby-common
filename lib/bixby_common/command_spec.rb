@@ -131,6 +131,7 @@ class CommandSpec
     end
 
     @digest = { :digest => bundle_sha.hexdigest(), :files => digests }
+    MultiJson.load_adapter(:json_gem).activate!
     File.open(path+"/digest", 'w'){ |f|
       f.write(MultiJson.dump(@digest, :pretty => true, :adapter => :json_gem) + "\n")
     }
