@@ -101,7 +101,7 @@ class CommandSpec
 
   def load_manifest
     begin
-      return MultiJson.load(path("manifest.json"))
+      return MultiJson.load(File.read(path("manifest.json")))
     rescue => ex
     end
     nil

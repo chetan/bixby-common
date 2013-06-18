@@ -11,6 +11,7 @@ class TestCommandSpec < MiniTest::Unit::TestCase
     ENV["BIXBY_HOME"] = File.join(File.expand_path(File.dirname(__FILE__)), "support")
     h = { :repo => "vendor", :bundle => "test_bundle", 'command' => "echo", :foobar => "baz" }
     @c = CommandSpec.new(h)
+    @expected_digest = "2bb6900420c87d5a7cbd8acc9dd1978593670f4e31bfa9218bb9c7c31d4472dd"
   end
 
   def teardown
@@ -57,9 +58,22 @@ class TestCommandSpec < MiniTest::Unit::TestCase
   end
 
   def test_digest
-    expected_digest = "8980372485fc6bcd287e481ab1e15710e2b63c68db75085c2d24386ced272ca4"
-    assert_equal expected_digest, @c.digest
-    assert @c.validate(expected_digest)
+    assert_equal @expected_digest, @c.digest
+    assert @c.validate(@expected_digest)
+  end
+
+  def test_has_digest
+    digest = @c.load_digest
+    assert digest
+    assert_equal @expected_digest, digest["digest"]
+    assert_equal 4, digest["files"].size
+  end
+
+  def test_has_manifest
+    manifest = @c.load_manifest
+    assert manifest
+    assert_kind_of Hash, manifest
+    assert_equal "test_bundle", manifest["name"]
   end
 
   def test_digest_no_err

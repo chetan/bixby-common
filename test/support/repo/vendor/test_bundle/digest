@@ -1,20 +1,21 @@
 {
-  "digest":"8980372485fc6bcd287e481ab1e15710e2b63c68db75085c2d24386ced272ca4",
-  "files":[
+  "digest": "2bb6900420c87d5a7cbd8acc9dd1978593670f4e31bfa9218bb9c7c31d4472dd",
+  "files": [
     {
-      "file":"bin/cat",
-      "digest":"6d14ab63802f3ef51bdc16db1cfeb6df93167fe7a2aa09a6c737293d42c118b2"
+      "file": "bin/cat",
+      "digest": "6d14ab63802f3ef51bdc16db1cfeb6df93167fe7a2aa09a6c737293d42c118b2"
     },
     {
-      "file":"bin/cat.json",
-      "digest":"1d1f4247f1412aa595c3df27226ebe808dfa8c72c1edc3ebbee452401153503b"
+      "file": "bin/cat.json",
+      "digest": "1d1f4247f1412aa595c3df27226ebe808dfa8c72c1edc3ebbee452401153503b"
     },
     {
-      "file":"bin/echo",
-      "digest":"299001868fb8c02fd431c336c6d058f5558c5dff5b5af5e6fe04b870a6a9cbba"
+      "file": "bin/echo",
+      "digest": "299001868fb8c02fd431c336c6d058f5558c5dff5b5af5e6fe04b870a6a9cbba"
     },
     {
-      "file":"manifest.json",
-      "digest":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      "file": "manifest.json",
+      "digest": "4e26d93b1b75adfc0bfa10ba15decc3216ec32da8316bfd73d717ee8313390db"
     }
-  ]}
+  ]
+}
