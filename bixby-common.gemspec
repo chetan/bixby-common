@@ -9,34 +9,37 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chetan Sarva"]
-  s.date = "2013-06-18"
+  s.date = "2013-08-13"
   s.description = "Bixby Common files/libs"
   s.email = "chetan@pixelcop.net"
+  s.extra_rdoc_files = [
+    "LICENSE"
+  ]
   s.files = [
     ".document",
     "Gemfile",
     "Gemfile.lock",
+    "LICENSE",
     "Rakefile",
     "VERSION",
     "bixby-common.gemspec",
     "lib/bixby-common.rb",
-    "lib/bixby_common.rb",
-    "lib/bixby_common/api/json_request.rb",
-    "lib/bixby_common/api/json_response.rb",
-    "lib/bixby_common/bixby.rb",
-    "lib/bixby_common/command_response.rb",
-    "lib/bixby_common/command_spec.rb",
-    "lib/bixby_common/exception/bundle_not_found.rb",
-    "lib/bixby_common/exception/command_exception.rb",
-    "lib/bixby_common/exception/command_not_found.rb",
-    "lib/bixby_common/exception/encryption_error.rb",
-    "lib/bixby_common/util/crypto_util.rb",
-    "lib/bixby_common/util/debug.rb",
-    "lib/bixby_common/util/hashify.rb",
-    "lib/bixby_common/util/http_client.rb",
-    "lib/bixby_common/util/jsonify.rb",
-    "lib/bixby_common/util/log.rb",
-    "lib/bixby_common/util/log/filtering_layout.rb",
+    "lib/bixby-common/api/json_request.rb",
+    "lib/bixby-common/api/json_response.rb",
+    "lib/bixby-common/bixby.rb",
+    "lib/bixby-common/command_response.rb",
+    "lib/bixby-common/command_spec.rb",
+    "lib/bixby-common/exception/bundle_not_found.rb",
+    "lib/bixby-common/exception/command_exception.rb",
+    "lib/bixby-common/exception/command_not_found.rb",
+    "lib/bixby-common/exception/encryption_error.rb",
+    "lib/bixby-common/util/crypto_util.rb",
+    "lib/bixby-common/util/debug.rb",
+    "lib/bixby-common/util/hashify.rb",
+    "lib/bixby-common/util/http_client.rb",
+    "lib/bixby-common/util/jsonify.rb",
+    "lib/bixby-common/util/log.rb",
+    "lib/bixby-common/util/log/filtering_layout.rb",
     "test/bixby_common_test.rb",
     "test/command_response_test.rb",
     "test/command_spec_test.rb",
@@ -52,11 +55,11 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://github.com/chetan/bixby-common"
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.25"
+  s.rubygems_version = "2.0.3"
   s.summary = "Bixby Common"
 
   if s.respond_to? :specification_version then
-    s.specification_version = 3
+    s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<multi_json>, [">= 0"])
