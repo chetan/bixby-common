@@ -24,7 +24,7 @@ class CommandResponse
   #
   # @return [JsonResponse]
   def to_json_response
-    return JsonResponse.new((status == 0 ? "success" : "fail"), nil, self)
+    return JsonResponse.new((status == 0 ? "success" : "fail"), nil, self.to_hash)
   end
 
   def initialize(params = nil)
