@@ -1,7 +1,7 @@
 
 require "logging"
 
-require "bixby_common/util/log/filtering_layout"
+require "bixby-common/util/log/filtering_layout"
 
 module Bixby
 

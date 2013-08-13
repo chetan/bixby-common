@@ -3,26 +3,26 @@
 require "oj"
 require "multi_json"
 
-require "bixby_common/bixby"
+require "bixby-common/bixby"
 
 module Bixby
 
-  autoload :CommandResponse, "bixby_common/command_response"
-  autoload :CommandSpec, "bixby_common/command_spec"
+  autoload :CommandResponse, "bixby-common/command_response"
+  autoload :CommandSpec, "bixby-common/command_spec"
 
-  autoload :JsonRequest, "bixby_common/api/json_request"
-  autoload :JsonResponse, "bixby_common/api/json_response"
+  autoload :JsonRequest, "bixby-common/api/json_request"
+  autoload :JsonResponse, "bixby-common/api/json_response"
 
-  autoload :BundleNotFound, "bixby_common/exception/bundle_not_found"
-  autoload :CommandNotFound, "bixby_common/exception/command_not_found"
-  autoload :CommandException, "bixby_common/exception/command_exception"
-  autoload :EncryptionError, "bixby_common/exception/encryption_error"
+  autoload :BundleNotFound, "bixby-common/exception/bundle_not_found"
+  autoload :CommandNotFound, "bixby-common/exception/command_not_found"
+  autoload :CommandException, "bixby-common/exception/command_exception"
+  autoload :EncryptionError, "bixby-common/exception/encryption_error"
 
-  autoload :CryptoUtil, "bixby_common/util/crypto_util"
-  autoload :HttpClient, "bixby_common/util/http_client"
-  autoload :Jsonify, "bixby_common/util/jsonify"
-  autoload :Hashify, "bixby_common/util/hashify"
-  autoload :Log, "bixby_common/util/log"
-  autoload :Debug, "bixby_common/util/debug"
+  autoload :CryptoUtil, "bixby-common/util/crypto_util"
+  autoload :HttpClient, "bixby-common/util/http_client"
+  autoload :Jsonify, "bixby-common/util/jsonify"
+  autoload :Hashify, "bixby-common/util/hashify"
+  autoload :Log, "bixby-common/util/log"
+  autoload :Debug, "bixby-common/util/debug"
 
 end
