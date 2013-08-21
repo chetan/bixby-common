@@ -79,7 +79,8 @@ module Bixby
         cmd = MultiJson.load(event.data)
 
         if cmd["type"] == "rpc" then
-          do_rpc(cmd)
+          result = do_rpc(cmd)
+          ws.send(MultiJson.dump(result))
 
         elsif cmd["type"] == "rpc_result" then
           do_result(cmd)
@@ -89,11 +90,12 @@ module Bixby
 
       private
 
+      # Execute the requested method and return the result
       def do_rpc(cmd)
-        response = { :type => "rpc_result", :id => cmd["id"], :data => SecureRandom.random_number(100) }
-        ws.send(MultiJson.dump(response))
+        { :type => "rpc_result", :id => cmd["id"], :data => SecureRandom.random_number(100) }
       end
 
+      # Pass the result back to the caller
       def do_result(cmd)
         id = cmd["id"]
         @requests[id].response = cmd["data"]
