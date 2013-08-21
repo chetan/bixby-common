@@ -28,13 +28,13 @@ module Bixby
         end
 
         EM.run {
-          reconnect()
+          connect()
         }
       end
 
       # Connect to the WebSocket endpoint given by @url. Will attempt to keep
       # the connection open forever, reconnecting as needed.
-      def reconnect
+      def connect
         @ws = Faye::WebSocket::Client.new(@url, nil, :ping => 60)
         @api = Bixby::WebSocket::API.new(@ws)
 
@@ -59,7 +59,7 @@ module Bixby
           begin
             api.close(e)
             backoff()
-            reconnect()
+            connect()
           rescue Exception => ex
             logger.error ex
           end
