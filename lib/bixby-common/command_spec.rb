@@ -14,7 +14,7 @@ class CommandSpec
 
   # Create new CommandSpec
   #
-  # @params [Hash] params  Hash of attributes to initialize with
+  # @param [Hash] params  Hash of attributes to initialize with
   def initialize(params = nil)
     return if params.nil? or params.empty?
     params.each{ |k,v| self.send("#{k}=", v) if self.respond_to? "#{k}=" }
