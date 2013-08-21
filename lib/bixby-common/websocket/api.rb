@@ -12,6 +12,7 @@ module Bixby
       def initialize(ws)
         @ws = ws
         @requests = {}
+        @connected = false
       end
 
       # Perform RPC
@@ -36,7 +37,9 @@ module Bixby
         id = SecureRandom.uuid
         @requests[id] = AsyncRequest.new(id)
         cmd = { :type => "rpc", :id => id, :operation => operation, :params => params}
-        ws.send(MultiJson.dump(cmd))
+        EM.next_tick {
+          ws.send(MultiJson.dump(cmd))
+        }
         id
       end
 
@@ -54,17 +57,25 @@ module Bixby
 
       # Handle channel events
 
+      def connected?
+        @connected
+      end
+
       def open(event)
         # TODO extract Agent ID, if Agent
-        logger.info "new channel opened"
+        logger.debug "new channel opened"
+        @connected = true
       end
 
       def close(event)
-        logger.info "client disconnected"
+        if @connected then
+          logger.debug "client disconnected"
+          @connected = false
+        end
       end
 
       def message(event)
-        logger.info "got a message: #{event.data.ai}"
+        logger.debug "got a message: #{event.data.ai}"
         cmd = MultiJson.load(event.data)
 
         if cmd["type"] == "rpc" then
