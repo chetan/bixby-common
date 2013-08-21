@@ -13,6 +13,12 @@ module Bixby
   autoload :JsonRequest, "bixby-common/api/json_request"
   autoload :JsonResponse, "bixby-common/api/json_response"
 
+  module WebSocket
+    autoload :API, "bixby-common/websocket/api"
+    autoload :AsyncRequest, "bixby-common/websocket/async_request"
+    autoload :Client, "bixby-common/websocket/client"
+  end
+
   autoload :BundleNotFound, "bixby-common/exception/bundle_not_found"
   autoload :CommandNotFound, "bixby-common/exception/command_not_found"
   autoload :CommandException, "bixby-common/exception/command_exception"
