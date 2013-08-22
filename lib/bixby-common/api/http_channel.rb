@@ -25,7 +25,7 @@ module Bixby
     #
     # @return [JsonResponse] response
     def execute_download(json_request, &block)
-      execute_internal(json_request, block)
+      execute_internal(json_request, &block)
     end
 
 
@@ -54,7 +54,7 @@ module Bixby
 
       if block then
         # execute request with block
-        req.on_body(block)
+        req.on_body(&block)
         HTTPI.post(req)
         return JsonResponse.new("success")
 
