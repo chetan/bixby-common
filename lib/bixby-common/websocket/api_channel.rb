@@ -40,10 +40,10 @@ module Bixby
       def execute_async(json_request)
         id = SecureRandom.uuid
         @responses[id] = AsyncResponse.new(id)
+        request = Request.new(id, json_request)
 
         EM.next_tick {
-          hash = { :type => "rpc", :id => id, :data => json_request.to_wire }
-          ws.send(MultiJson.dump(hash))
+          ws.send(request.to_wire)
         }
         id
       end
@@ -88,31 +88,20 @@ module Bixby
       # Fired whenever a message is received on the channel
       def message(event)
         logger.debug "got a message:\n#{event.data}"
-        cmd = MultiJson.load(event.data)
+        req = Request.from_wire(event.data)
 
-        if cmd["type"] == "rpc" then
-          json_response = do_rpc(cmd)
-          # wrap response & send
-          result = { :type => "rpc_result", :id => cmd["id"], :data => json_response }
+        if req.type == "rpc" then
+          # Execute the requested method and return the result
+          json_response = @handler.new(req).handle(req.json_request)
+
+          result = { :type => "rpc_result", :id => req.id, :data => json_response }
           ws.send(MultiJson.dump(result))
 
-        elsif cmd["type"] == "rpc_result" then
-          do_result(cmd)
+        elsif req.type == "rpc_result" then
+          # Pass the result back to the caller
+          @responses[req.id].response = req.body
+
         end
-      end
-
-
-      private
-
-      # Execute the requested method and return the result
-      def do_rpc(cmd)
-        @handler.new(nil).handle(cmd["data"])
-      end
-
-      # Pass the result back to the caller
-      def do_result(cmd)
-        id = cmd["id"]
-        @responses[id].response = cmd["data"]
       end
 
     end

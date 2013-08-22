@@ -2,11 +2,13 @@
 module Bixby
   class SignedJsonRequest < JsonRequest
 
-    attr_reader :headers
+    attr_accessor :headers
 
     def initialize(json_request, access_key=nil, secret_key=nil)
       @operation = json_request.operation
       @params = json_request.params
+      @access_key = access_key
+      @secret_key = secret_key
       @headers = {}
     end
 
@@ -28,7 +30,7 @@ module Bixby
     end
 
     def to_wire
-      ApiAuth.sign!(self, access_key, secret_key)
+      ApiAuth.sign!(self, @access_key, @secret_key)
       body
     end
 

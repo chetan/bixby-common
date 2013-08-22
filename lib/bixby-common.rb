@@ -22,6 +22,7 @@ module Bixby
     autoload :APIChannel, "bixby-common/websocket/api_channel"
     autoload :AsyncResponse, "bixby-common/websocket/async_response"
     autoload :Client, "bixby-common/websocket/client"
+    autoload :Request, "bixby-common/websocket/request"
   end
 
   autoload :BundleNotFound, "bixby-common/exception/bundle_not_found"
