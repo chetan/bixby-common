@@ -47,8 +47,7 @@ end
 task :default => :test
 
 begin
-  require 'single_test'
-  SingleTest.load_tasks
+  require 'single_test/tasks'
 
 rescue LoadError
   warn "single_test not available"
