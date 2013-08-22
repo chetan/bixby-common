@@ -4,24 +4,17 @@ require 'thread'
 module Bixby
   module WebSocket
 
-    class AsyncRequest
+    # Asynchronously receive a response via WebSocket channel
+    class AsyncResponse
 
-      attr_reader :id, :headers
-      attr_accessor :body
+      attr_reader :id
 
-      def initialize(id, json_request)
+      def initialize(id)
         @id = id
-        @json_request = json_request
-        @body = MultiJson.dump(@json_request)
-        @headers = {}
         @mutex = Mutex.new
         @cond = ConditionVariable.new
         @response = nil
         @completed = false
-      end
-
-      def json_request
-        return JsonRequest.from_json(body)
       end
 
       # Set the response and signal any blocking threads
@@ -49,10 +42,6 @@ module Bixby
         return @response if @completed
         @mutex.synchronize { @cond.wait(@mutex) }
         return @response
-      end
-
-      def to_wire_format
-        hash = { :type => "rpc", :id => id, :headers => headers, :data => body }
       end
 
     end

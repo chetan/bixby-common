@@ -37,7 +37,7 @@ module Bixby
       # the connection open forever, reconnecting as needed.
       def connect
         @ws = Faye::WebSocket::Client.new(@url, nil, :ping => 60)
-        @api = Bixby::WebSocket::API.new(@ws, @handler)
+        @api = Bixby::WebSocket::APIChannel.new(@ws, @handler)
 
         ws.on :open do |e|
           begin

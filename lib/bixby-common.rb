@@ -12,11 +12,15 @@ module Bixby
 
   autoload :JsonRequest, "bixby-common/api/json_request"
   autoload :JsonResponse, "bixby-common/api/json_response"
+  autoload :SignedJsonRequest, "bixby-common/api/signed_json_request"
+  autoload :EncryptedJsonRequest, "bixby-common/api/encrypted_json_request"
   autoload :RpcHandler, "bixby-common/api/rpc_handler"
+  autoload :HttpChannel, "bixby-common/api/http_channel"
+  autoload :APIChannel, "bixby-common/api/api_channel"
 
   module WebSocket
-    autoload :API, "bixby-common/websocket/api"
-    autoload :AsyncRequest, "bixby-common/websocket/async_request"
+    autoload :APIChannel, "bixby-common/websocket/api_channel"
+    autoload :AsyncResponse, "bixby-common/websocket/async_response"
     autoload :Client, "bixby-common/websocket/client"
   end
 

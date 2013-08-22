@@ -1,5 +1,5 @@
 
-require "bixby-common/websocket/async_request"
+require "bixby-common/websocket/async_response"
 require "api-auth"
 
 module Bixby
@@ -9,7 +9,7 @@ module Bixby
     #
     # Implements a simple request/response interface over a WebSocket channel.
     # Requests can be sent in either direction, in a sync or async manner.
-    class API
+    class APIChannel
 
       include Bixby::Log
       attr_reader :ws
@@ -17,35 +17,33 @@ module Bixby
       def initialize(ws, handler)
         @ws = ws
         @handler = handler
-        @requests = {}
+        @responses = {}
         @connected = false
       end
 
       # Perform RPC
 
-      # Perform the given RPC request and return the response
+      # Execute the given request (synchronously)
       #
-      # @param [String] operation
-      # @param [Array] params
+      # @param [JsonRequest] json_request
       #
-      # @return [Object] JsonResponse
-      def rpc(operation, params)
-        fetch_response( async_rpc(operation, params) )
+      # @return [JsonResponse] response
+      def execute(json_request)
+        fetch_response( execute_async(json_request) )
       end
 
-      # Make an asynchronous RPC request
+      # Execute the given request (asynchronously)
       #
-      # @param [String] operation
-      # @param [Array] params
+      # @param [JsonRequest] json_request
       #
       # @return [String] request id
-      def async_rpc(operation, params)
+      def execute_async(json_request)
         id = SecureRandom.uuid
-        json_req = JsonRequest.new(operation, params)
-        req = @requests[id] = AsyncRequest.new(id, json_req)
+        @responses[id] = AsyncResponse.new(id)
 
         EM.next_tick {
-          ws.send(req.to_wire_format)
+          hash = { :type => "rpc", :id => id, :data => json_request.to_wire }
+          ws.send(MultiJson.dump(hash))
         }
         id
       end
@@ -56,8 +54,8 @@ module Bixby
       #
       # @return [Object] JsonResponse
       def fetch_response(id)
-        res = @requests[id].response
-        @requests.delete(id)
+        res = @responses[id].response
+        @responses.delete(id)
         res
       end
 
@@ -89,7 +87,7 @@ module Bixby
       #
       # Fired whenever a message is received on the channel
       def message(event)
-        logger.debug "got a message: #{event.data.ai}"
+        logger.debug "got a message:\n#{event.data}"
         cmd = MultiJson.load(event.data)
 
         if cmd["type"] == "rpc" then
@@ -108,13 +106,13 @@ module Bixby
 
       # Execute the requested method and return the result
       def do_rpc(cmd)
-        @handler.handle(cmd["data"])
+        @handler.new(nil).handle(cmd["data"])
       end
 
       # Pass the result back to the caller
       def do_result(cmd)
         id = cmd["id"]
-        @requests[id].response = cmd["data"]
+        @responses[id].response = cmd["data"]
       end
 
     end

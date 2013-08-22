@@ -32,5 +32,9 @@ class JsonRequest
     s.join("\n")
   end # :nocov:
 
+  def to_wire
+    MultiJson.dump(self)
+  end
+
 end # JsonRequest
 end # Bixby
