@@ -12,8 +12,9 @@ module Bixby
 
       attr_reader :ws, :api
 
-      def initialize(url)
+      def initialize(url, handler)
         @url = url
+        @handler = handler
         @tries = 0
         @exiting = false
       end
@@ -36,7 +37,7 @@ module Bixby
       # the connection open forever, reconnecting as needed.
       def connect
         @ws = Faye::WebSocket::Client.new(@url, nil, :ping => 60)
-        @api = Bixby::WebSocket::API.new(@ws)
+        @api = Bixby::WebSocket::API.new(@ws, @handler)
 
         ws.on :open do |e|
           begin

@@ -1,16 +1,22 @@
 
 require "bixby-common/websocket/async_request"
+require "api-auth"
 
 module Bixby
   module WebSocket
 
+    # WebSocket API channel
+    #
+    # Implements a simple request/response interface over a WebSocket channel.
+    # Requests can be sent in either direction, in a sync or async manner.
     class API
 
       include Bixby::Log
       attr_reader :ws
 
-      def initialize(ws)
+      def initialize(ws, handler)
         @ws = ws
+        @handler = handler
         @requests = {}
         @connected = false
       end
@@ -35,10 +41,11 @@ module Bixby
       # @return [String] request id
       def async_rpc(operation, params)
         id = SecureRandom.uuid
-        @requests[id] = AsyncRequest.new(id)
-        cmd = { :type => "rpc", :id => id, :operation => operation, :params => params}
+        json_req = JsonRequest.new(operation, params)
+        req = @requests[id] = AsyncRequest.new(id, json_req)
+
         EM.next_tick {
-          ws.send(MultiJson.dump(cmd))
+          ws.send(req.to_wire_format)
         }
         id
       end
@@ -61,12 +68,16 @@ module Bixby
         @connected
       end
 
+      # Open
       def open(event)
         # TODO extract Agent ID, if Agent
         logger.debug "new channel opened"
         @connected = true
       end
 
+      # Close
+      #
+      # Can be fired either due to disconnection or failure to connect
       def close(event)
         if @connected then
           logger.debug "client disconnected"
@@ -74,12 +85,17 @@ module Bixby
         end
       end
 
+      # Message
+      #
+      # Fired whenever a message is received on the channel
       def message(event)
         logger.debug "got a message: #{event.data.ai}"
         cmd = MultiJson.load(event.data)
 
         if cmd["type"] == "rpc" then
-          result = do_rpc(cmd)
+          json_response = do_rpc(cmd)
+          # wrap response & send
+          result = { :type => "rpc_result", :id => cmd["id"], :data => json_response }
           ws.send(MultiJson.dump(result))
 
         elsif cmd["type"] == "rpc_result" then
@@ -92,7 +108,7 @@ module Bixby
 
       # Execute the requested method and return the result
       def do_rpc(cmd)
-        { :type => "rpc_result", :id => cmd["id"], :data => SecureRandom.random_number(100) }
+        @handler.handle(cmd["data"])
       end
 
       # Pass the result back to the caller

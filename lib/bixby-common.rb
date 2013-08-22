@@ -12,6 +12,7 @@ module Bixby
 
   autoload :JsonRequest, "bixby-common/api/json_request"
   autoload :JsonResponse, "bixby-common/api/json_response"
+  autoload :RpcHandler, "bixby-common/api/rpc_handler"
 
   module WebSocket
     autoload :API, "bixby-common/websocket/api"
