@@ -89,7 +89,7 @@ module Bixby
       # Fired whenever a message is received on the channel
       def message(event)
         logger.debug "got a message:\n#{event.data}"
-        req = Request.from_wire(event.data)
+        req = Message.from_wire(event.data)
 
         if req.type == "rpc" then
           # Execute the requested method and return the result
