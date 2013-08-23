@@ -80,6 +80,7 @@ module Bixby
         if @connected then
           logger.debug "client disconnected"
           @connected = false
+          @handler.new(nil).disconnect(self)
         end
       end
 
@@ -100,6 +101,9 @@ module Bixby
         elsif req.type == "rpc_result" then
           # Pass the result back to the caller
           @responses[req.id].response = req.body
+
+        elsif req.type == "connect" then
+          @handler.new(req).connect(req.json_request, self)
 
         end
       end

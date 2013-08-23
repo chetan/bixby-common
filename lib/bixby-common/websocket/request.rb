@@ -6,10 +6,10 @@ module Bixby
 
       attr_reader :id, :type, :headers, :body
 
-      def initialize(id, json_request)
+      def initialize(id, json_request, type = "rpc")
         @id = id
 
-        hash = { :type => "rpc", :id => id, :data => json_request.to_wire }
+        hash = { :type => type, :id => id, :data => json_request.to_wire }
         if json_request.respond_to? :headers then
           @headers = hash[:headers] = json_request.headers
         end
