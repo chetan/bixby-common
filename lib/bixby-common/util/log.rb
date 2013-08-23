@@ -46,6 +46,27 @@ module Bixby
       opts[:filename] ||= Bixby.path("var", "bixby-agent.log")
       FileUtils.mkdir_p(File.dirname(opts[:filename]))
 
+      # configure stdout appender (used in debug modes, etc)
+      Logging.color_scheme( 'bright',
+        :levels => {
+          :info  => :green,
+          :warn  => :yellow,
+          :error => :red,
+          :fatal => [:white, :on_red]
+        },
+        :date => :blue,
+        :logger => :cyan,
+        :message => :magenta
+      )
+      Logging.appenders.stdout( 'stdout',
+        :auto_flushing => true,
+        :layout => Logging.layouts.pattern(
+          :pattern => pattern,
+          :color_scheme => 'bright'
+        )
+      )
+
+      # configure rolling file appender
       options = {
         :keep          => 7,
         :roll_by       => 'date',
@@ -54,7 +75,6 @@ module Bixby
         :auto_flushing => true,
         :layout        => layout
       }.merge(opts)
-
       Logging.appenders.rolling_file("file", options)
 
       Logging::Logger.root.add_appenders("file")
