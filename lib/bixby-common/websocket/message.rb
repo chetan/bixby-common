@@ -19,8 +19,7 @@ module Bixby
         obj = MultiJson.load(body)
 
         clazz = case obj["type"]
-        when "rpc"
-        when "connect"
+        when "rpc", "connect"
           Request
         when "rpc_result"
           Repsonse
