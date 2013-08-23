@@ -4,13 +4,12 @@ module Bixby
 
     class Response < Message
 
-      def initialize(json_response, id)
-        super(id, "rpc_result")
+      def initialize(json_response, id, headers=nil)
         if json_response.respond_to? :headers then
-          @headers = @hash[:headers] = json_response.headers
-        else
-          @headers = @hash[:headers] = {}
+          headers = json_response.headers
         end
+        super(id, "rpc_result", headers)
+
         @hash[:data] = json_response.to_wire
         @body = MultiJson.dump(@hash)
       end
