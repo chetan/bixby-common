@@ -6,8 +6,8 @@ module Bixby
 
       attr_reader :id, :type, :headers, :body
 
-      def initialize(id, type = "rpc")
-        @id = id
+      def initialize(id=nil, type="rpc")
+        @id = id || SecureRandom.uuid
         @hash = { :type => type, :id => id }
       end
 

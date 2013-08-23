@@ -38,9 +38,9 @@ module Bixby
       #
       # @return [String] request id
       def execute_async(json_request)
-        id = SecureRandom.uuid
+        request = Request.new(json_request)
+        id = request.id
         @responses[id] = AsyncResponse.new(id)
-        request = Request.new(id, json_request)
 
         EM.next_tick {
           ws.send(request.to_wire)
@@ -95,8 +95,9 @@ module Bixby
           # Execute the requested method and return the result
           json_response = @handler.new(req).handle(req.json_request)
 
-          result = { :type => "rpc_result", :id => req.id, :data => json_response }
-          ws.send(MultiJson.dump(result))
+          # result = { :type => "rpc_result", :id => req.id, :data => json_response }
+          # ws.send(MultiJson.dump(result))
+          ws.send(Response.new(json_response, req.id).to_wire)
 
         elsif req.type == "rpc_result" then
           # Pass the result back to the caller
