@@ -78,6 +78,10 @@ class JsonResponse
     s.join("\n")
   end # :nocov:
 
+  def to_wire
+    MultiJson.dump(self)
+  end
+
 end # JsonResponse
 
 end # Bixby

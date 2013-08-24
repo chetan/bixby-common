@@ -3,6 +3,9 @@ module Bixby
 
   class APIChannel
 
+    include Bixby::Log
+    extend  Bixby::Log
+
     # Execute the given request
     #
     # @param [JsonRequest] json_request

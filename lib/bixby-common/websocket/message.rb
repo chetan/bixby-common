@@ -22,7 +22,7 @@ module Bixby
         when "rpc", "connect"
           Request
         when "rpc_result"
-          Repsonse
+          Response
         end
 
         req = clazz.allocate

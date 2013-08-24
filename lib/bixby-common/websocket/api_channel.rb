@@ -9,9 +9,8 @@ module Bixby
     #
     # Implements a simple request/response interface over a WebSocket channel.
     # Requests can be sent in either direction, in a sync or async manner.
-    class APIChannel
+    class APIChannel < Bixby::APIChannel
 
-      include Bixby::Log
       attr_reader :ws
 
       def initialize(ws, handler)
@@ -52,7 +51,7 @@ module Bixby
       #
       # @param [String] request id
       #
-      # @return [Object] JsonResponse
+      # @return [JsonResponse]
       def fetch_response(id)
         res = @responses[id].response
         @responses.delete(id)
@@ -101,7 +100,7 @@ module Bixby
 
         elsif req.type == "rpc_result" then
           # Pass the result back to the caller
-          @responses[req.id].response = req.body
+          @responses[req.id].response = JsonResponse.from_json(req.body)
 
         elsif req.type == "connect" then
           @handler.new(req).connect(req.json_request, self)
