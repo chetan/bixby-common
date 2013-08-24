@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "bixby-common"
-  s.version = "0.3.16"
+  s.version = "0.4.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chetan Sarva"]
-  s.date = "2013-08-13"
+  s.date = "2013-08-24"
   s.description = "Bixby Common files/libs"
   s.email = "chetan@pixelcop.net"
   s.extra_rdoc_files = [
@@ -24,8 +24,13 @@ Gem::Specification.new do |s|
     "VERSION",
     "bixby-common.gemspec",
     "lib/bixby-common.rb",
+    "lib/bixby-common/api/api_channel.rb",
+    "lib/bixby-common/api/encrypted_json_request.rb",
+    "lib/bixby-common/api/http_channel.rb",
     "lib/bixby-common/api/json_request.rb",
     "lib/bixby-common/api/json_response.rb",
+    "lib/bixby-common/api/rpc_handler.rb",
+    "lib/bixby-common/api/signed_json_request.rb",
     "lib/bixby-common/bixby.rb",
     "lib/bixby-common/command_response.rb",
     "lib/bixby-common/command_spec.rb",
@@ -40,6 +45,12 @@ Gem::Specification.new do |s|
     "lib/bixby-common/util/jsonify.rb",
     "lib/bixby-common/util/log.rb",
     "lib/bixby-common/util/log/filtering_layout.rb",
+    "lib/bixby-common/websocket/api_channel.rb",
+    "lib/bixby-common/websocket/async_response.rb",
+    "lib/bixby-common/websocket/client.rb",
+    "lib/bixby-common/websocket/message.rb",
+    "lib/bixby-common/websocket/request.rb",
+    "lib/bixby-common/websocket/response.rb",
     "test/bixby_common_test.rb",
     "test/command_response_test.rb",
     "test/command_spec_test.rb",
@@ -55,13 +66,15 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://github.com/chetan/bixby-common"
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.25"
+  s.rubygems_version = "2.0.3"
   s.summary = "Bixby Common"
 
   if s.respond_to? :specification_version then
-    s.specification_version = 3
+    s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<faye-websocket>, [">= 0"])
+      s.add_runtime_dependency(%q<api-auth>, [">= 0"])
       s.add_runtime_dependency(%q<multi_json>, [">= 0"])
       s.add_runtime_dependency(%q<httpi>, [">= 0"])
       s.add_runtime_dependency(%q<logging>, [">= 0"])
@@ -86,6 +99,8 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<curb>, [">= 0"])
       s.add_development_dependency(%q<jruby-openssl>, [">= 0"])
     else
+      s.add_dependency(%q<faye-websocket>, [">= 0"])
+      s.add_dependency(%q<api-auth>, [">= 0"])
       s.add_dependency(%q<multi_json>, [">= 0"])
       s.add_dependency(%q<httpi>, [">= 0"])
       s.add_dependency(%q<logging>, [">= 0"])
@@ -111,6 +126,8 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<jruby-openssl>, [">= 0"])
     end
   else
+    s.add_dependency(%q<faye-websocket>, [">= 0"])
+    s.add_dependency(%q<api-auth>, [">= 0"])
     s.add_dependency(%q<multi_json>, [">= 0"])
     s.add_dependency(%q<httpi>, [">= 0"])
     s.add_dependency(%q<logging>, [">= 0"])
