@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chetan Sarva"]
-  s.date = "2013-08-24"
+  s.date = "2013-08-25"
   s.description = "Bixby Common files/libs"
   s.email = "chetan@pixelcop.net"
   s.extra_rdoc_files = [
@@ -65,6 +65,7 @@ Gem::Specification.new do |s|
     "test/util/log_test.rb"
   ]
   s.homepage = "http://github.com/chetan/bixby-common"
+  s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = "2.0.3"
   s.summary = "Bixby Common"

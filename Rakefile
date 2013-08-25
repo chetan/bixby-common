@@ -19,6 +19,7 @@ Jeweler::Tasks.new do |gemspec|
   gemspec.email = "chetan@pixelcop.net"
   gemspec.homepage = "http://github.com/chetan/bixby-common"
   gemspec.authors = ["Chetan Sarva"]
+  gemspec.license = "MIT"
 end
 Jeweler::RubygemsDotOrgTasks.new
 
