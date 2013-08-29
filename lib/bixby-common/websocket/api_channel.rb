@@ -37,6 +37,8 @@ module Bixby
       #
       # @return [String] request id
       def execute_async(json_request)
+        logger.debug { "execute_async:\n#{json_request.to_s}" }
+
         request = Request.new(json_request)
         id = request.id
         @responses[id] = AsyncResponse.new(id)
@@ -67,8 +69,6 @@ module Bixby
 
       # Open
       def open(event)
-        # TODO extract Agent ID, if Agent
-        logger.debug "new channel opened"
         @connected = true
       end
 
@@ -77,7 +77,6 @@ module Bixby
       # Can be fired either due to disconnection or failure to connect
       def close(event)
         if @connected then
-          logger.debug "client disconnected"
           @connected = false
           @handler.new(nil).disconnect(self)
         end
@@ -87,12 +86,14 @@ module Bixby
       #
       # Fired whenever a message is received on the channel
       def message(event)
-        logger.debug "got a message:\n#{event.data}"
         req = Message.from_wire(event.data)
+        logger.debug { "new '#{req.type}' message" }
 
         if req.type == "rpc" then
           # Execute the requested method and return the result
-          json_response = @handler.new(req).handle(req.json_request)
+          json_req = req.json_request
+          logger.debug { json_req.to_s }
+          json_response = @handler.new(req).handle(json_req)
 
           # result = { :type => "rpc_result", :id => req.id, :data => json_response }
           # ws.send(MultiJson.dump(result))
@@ -100,7 +101,9 @@ module Bixby
 
         elsif req.type == "rpc_result" then
           # Pass the result back to the caller
-          @responses[req.id].response = JsonResponse.from_json(req.body)
+          res = req.json_response
+          logger.debug { res.to_s }
+          @responses[req.id].response = res
 
         elsif req.type == "connect" then
           @handler.new(req).connect(req.json_request, self)
