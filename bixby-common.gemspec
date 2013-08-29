@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "bixby-common"
-  s.version = "0.4.0"
+  s.version = "0.4.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chetan Sarva"]
-  s.date = "2013-08-25"
+  s.date = "2013-08-29"
   s.description = "Bixby Common files/libs"
   s.email = "chetan@pixelcop.net"
   s.extra_rdoc_files = [
@@ -45,6 +45,7 @@ Gem::Specification.new do |s|
     "lib/bixby-common/util/jsonify.rb",
     "lib/bixby-common/util/log.rb",
     "lib/bixby-common/util/log/filtering_layout.rb",
+    "lib/bixby-common/util/log/logger.rb",
     "lib/bixby-common/websocket/api_channel.rb",
     "lib/bixby-common/websocket/async_response.rb",
     "lib/bixby-common/websocket/client.rb",
@@ -75,10 +76,10 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<faye-websocket>, [">= 0"])
-      s.add_runtime_dependency(%q<api-auth>, [">= 0"])
       s.add_runtime_dependency(%q<multi_json>, [">= 0"])
       s.add_runtime_dependency(%q<httpi>, [">= 0"])
       s.add_runtime_dependency(%q<logging>, [">= 0"])
+      s.add_runtime_dependency(%q<api-auth>, [">= 0"])
       s.add_development_dependency(%q<yard>, ["~> 0.8"])
       s.add_development_dependency(%q<bundler>, ["~> 1.1"])
       s.add_development_dependency(%q<jeweler>, [">= 0"])
@@ -101,10 +102,10 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<jruby-openssl>, [">= 0"])
     else
       s.add_dependency(%q<faye-websocket>, [">= 0"])
-      s.add_dependency(%q<api-auth>, [">= 0"])
       s.add_dependency(%q<multi_json>, [">= 0"])
       s.add_dependency(%q<httpi>, [">= 0"])
       s.add_dependency(%q<logging>, [">= 0"])
+      s.add_dependency(%q<api-auth>, [">= 0"])
       s.add_dependency(%q<yard>, ["~> 0.8"])
       s.add_dependency(%q<bundler>, ["~> 1.1"])
       s.add_dependency(%q<jeweler>, [">= 0"])
@@ -128,10 +129,10 @@ Gem::Specification.new do |s|
     end
   else
     s.add_dependency(%q<faye-websocket>, [">= 0"])
-    s.add_dependency(%q<api-auth>, [">= 0"])
     s.add_dependency(%q<multi_json>, [">= 0"])
     s.add_dependency(%q<httpi>, [">= 0"])
     s.add_dependency(%q<logging>, [">= 0"])
+    s.add_dependency(%q<api-auth>, [">= 0"])
     s.add_dependency(%q<yard>, ["~> 0.8"])
     s.add_dependency(%q<bundler>, ["~> 1.1"])
     s.add_dependency(%q<jeweler>, [">= 0"])
