@@ -4,20 +4,30 @@ require 'thread'
 module Bixby
   module WebSocket
 
-    # Asynchronously receive a response via WebSocket channel
+    # Asynchronously receive a response via some channel
     class AsyncResponse
 
       attr_reader :id
 
-      def initialize(id)
+      # Create a new AsyncResponse. Optionally pass a callback block which will
+      # be fired when the response is set.
+      #
+      # @param [String] id
+      #
+      # @yieldparam [JsonResponse] response
+      #
+      # @return [AsyncResponse]
+      def initialize(id, &block)
         @id = id
+        @block = block
         @mutex = Mutex.new
         @cond = ConditionVariable.new
         @response = nil
         @completed = false
       end
 
-      # Set the response and signal any blocking threads
+      # Set the response and signal any blocking threads. Triggers callback, if
+      # one was set.
       #
       # @param [Object] obj       result of request, usually a JsonResponse
       def response=(obj)
@@ -26,6 +36,10 @@ module Bixby
           @response = obj
           @cond.signal
         }
+
+        if not @block.nil? then
+          @block.call(@response)
+        end
       end
 
       # Has the request completed?

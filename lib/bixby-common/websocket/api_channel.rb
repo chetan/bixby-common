@@ -36,12 +36,12 @@ module Bixby
       # @param [JsonRequest] json_request
       #
       # @return [String] request id
-      def execute_async(json_request)
+      def execute_async(json_request, &block)
         logger.debug { "execute_async:\n#{json_request.to_s}" }
 
         request = Request.new(json_request)
         id = request.id
-        @responses[id] = AsyncResponse.new(id)
+        @responses[id] = AsyncResponse.new(id, &block)
 
         EM.next_tick {
           ws.send(request.to_wire)
