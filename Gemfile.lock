@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/chetan/jeweler.git
-  revision: 9b8b2376c79299b823a5e9aafae3d647df943b6f
+  revision: c83ba18b074e82415052e80499a770bff87bf944
   branch: bixby
   specs:
     jeweler (1.8.7)
