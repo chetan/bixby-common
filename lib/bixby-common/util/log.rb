@@ -2,6 +2,7 @@
 require "logging"
 
 require "bixby-common/util/log/filtering_layout"
+require "bixby-common/util/log/logger"
 
 module Bixby
 
@@ -40,7 +41,7 @@ module Bixby
       opts[:level] = :debug if ENV["BIXBY_DEBUG"]
       opts[:level] ||= :warn
 
-      pattern = opts.delete(:pattern) || '%.1l, [%d] %5l -- %c: %m\n'
+      pattern = opts.delete(:pattern) || '%.1l, [%d] %5l -- %c:%L: %m\n'
       layout = Logging.layouts.pattern(:pattern => pattern)
 
       opts[:filename] ||= Bixby.path("var", "bixby-agent.log")
@@ -79,6 +80,7 @@ module Bixby
 
       Logging::Logger.root.add_appenders("file")
       Logging::Logger.root.level = opts[:level]
+      Logging::Logger.root.trace = true
     end
 
   end # Log
