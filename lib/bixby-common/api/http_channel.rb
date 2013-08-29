@@ -39,17 +39,16 @@ module Bixby
     # @return [JsonResponse] response
     def execute_internal(json_request, &block)
 
+      if json_request.respond_to?(:headers) then
+        # always required for posting to API
+        json_request.headers["Content-Type"] = "application/json"
+      end
+
       req = HTTPI::Request.new(:url => @uri, :body => json_request.to_wire)
 
       # add in extra headers if we have a SignedJsonRequest (or anything which has additional headers)
       if json_request.respond_to? :headers then
         req.headers.merge!(json_request.headers)
-      end
-
-      if not req.headers.include? "Content-Type" then
-        # add content-type if not set
-        # may be set when creating a signed request
-        req.headers["Content-Type"] = "application/json"
       end
 
       if block then
