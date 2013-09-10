@@ -30,6 +30,7 @@ module Bixby
           @exiting = true
         end
 
+        logger.debug "connecting to #{@url}"
         EM.run {
           connect()
         }
@@ -46,11 +47,13 @@ module Bixby
       # Connect to the WebSocket endpoint given by @url. Will attempt to keep
       # the connection open forever, reconnecting as needed.
       def connect
+
         @ws = Faye::WebSocket::Client.new(@url, nil, :ping => 60)
         @api = Bixby::WebSocket::APIChannel.new(@ws, @handler)
 
         ws.on :open do |e|
           begin
+            logger.info "connected to manager at #{@url}"
             api.open(e)
             @tries = 0
 
@@ -78,6 +81,11 @@ module Bixby
 
         ws.on :close do |e|
           begin
+            if api.connected? then
+              logger.info "lost connection to manager"
+            else
+              logger.debug "failed to connect"
+            end
             api.close(e)
             backoff()
             connect()
