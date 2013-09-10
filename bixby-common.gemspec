@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "bixby-common"
-  s.version = "0.4.3"
+  s.version = "0.4.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chetan Sarva"]
-  s.date = "2013-09-04"
+  s.date = "2013-09-10"
   s.description = "Bixby Common files/libs"
   s.email = "chetan@pixelcop.net"
   s.extra_rdoc_files = [
