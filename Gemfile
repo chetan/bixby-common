@@ -8,6 +8,10 @@ gem "logging"
 gem "api-auth", :git => "https://github.com/chetan/api_auth.git", :branch => "bixby"
 
 group :development do
+
+  # for some tests
+  gem "mixlib-shellout"
+
   gem "yard", "~> 0.8"
   gem "bundler", "~> 1.1"
   gem "jeweler", :git => "https://github.com/chetan/jeweler.git", :branch => "bixby"

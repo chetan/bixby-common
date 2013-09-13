@@ -110,6 +110,7 @@ GEM
     metaclass (0.0.1)
     method_source (0.8.2)
     minitest (4.7.5)
+    mixlib-shellout (1.2.0)
     mocha (0.14.0)
       metaclass (~> 0.0.1)
     multi_json (1.7.9)
@@ -184,6 +185,7 @@ DEPENDENCIES
   json
   logging
   minitest (~> 4.0)
+  mixlib-shellout
   mocha
   multi_json
   oj
