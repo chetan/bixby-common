@@ -32,8 +32,8 @@ module Bixby
       # @param [Object] obj       result of request, usually a JsonResponse
       def response=(obj)
         @mutex.synchronize {
-          @completed = true
           @response = obj
+          @completed = true
           @cond.signal
         }
 
