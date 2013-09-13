@@ -10,7 +10,6 @@ end
 
 require 'test_guard'
 TestGuard.load_simplecov()
-require "base"
 
 begin
   require 'curb'
@@ -29,6 +28,10 @@ require 'mocha/setup'
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'bixby-common'
+
+require "base"
+require "test_handler"
+require "side_effect"
 
 Dir.glob(File.dirname(__FILE__) + "/../lib/**/*.rb").each{ |f| require f }
 

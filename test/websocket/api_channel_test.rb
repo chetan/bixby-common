@@ -3,6 +3,7 @@ require 'helper'
 
 module Bixby
 
+
   module WebSocket
     class APIChannel
       def responses
@@ -11,22 +12,9 @@ module Bixby
     end
   end
 
+
 module Test
-
-  class SideEffect
-    def initialize(&block)
-      @block = block
-    end
-    def perform
-      @block.call
-    end
-  end
-
 module WebSocket
-
-class TestHandler < Bixby::RpcHandler
-end
-
 class TestAPIChannel < TestCase
 
   attr_reader :api_chan, :ws
