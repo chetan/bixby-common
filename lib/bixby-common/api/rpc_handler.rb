@@ -2,6 +2,9 @@
 module Bixby
   class RpcHandler
 
+    def initialize(*args)
+    end
+
     # Handle a request
     #
     # @param [JsonRequest] request
