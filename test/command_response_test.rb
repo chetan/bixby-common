@@ -1,10 +1,11 @@
 
 require 'helper'
+require 'mixlib/shellout'
 
 module Bixby
 module Test
 
-class TestCommandResponse < MiniTest::Unit::TestCase
+class TestCommandResponse < TestCase
 
   def test_from_json_response
     res = JsonResponse.new("fail", "unknown")
@@ -28,6 +29,36 @@ class TestCommandResponse < MiniTest::Unit::TestCase
     assert_equal 0, cr.status
     assert_equal "foobar", cr.stdout
     assert_nil cr.stderr
+  end
+
+  def test_to_json_response
+    cr = CommandResponse.new(:status => 50, :stdout => "foobar", :stderr => "baz")
+    js = cr.to_json_response
+
+    assert js
+    assert_kind_of JsonResponse, js
+
+    refute js.success?
+    assert js.fail?
+
+    assert_nil js.message
+    assert js.data
+
+    assert_equal 50, js.data[:status]
+    assert_equal "foobar", js.data[:stdout]
+    assert_equal "baz", js.data[:stderr]
+  end
+
+  def test_from_shellout
+    cmd = Mixlib::ShellOut.new("uname")
+    cmd.run_command
+
+    cr = CommandResponse.new(cmd)
+    assert cr
+
+    assert_equal 0, cr.status
+    assert cr.stdout =~ /^Darwin|Linux$/
+    assert_empty cr.stderr
   end
 
   def test_status
