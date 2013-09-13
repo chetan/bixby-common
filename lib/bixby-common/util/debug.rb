@@ -2,8 +2,10 @@
 module Bixby
   module Debug
 
+    # :nocov:
+
     # Simple helper for use in to_s methods
-    def self.pretty_str(str) # :nocov:
+    def self.pretty_str(str)
       if str.nil? then
         "nil"
       elsif str.empty? then
@@ -13,7 +15,7 @@ module Bixby
       else
         '"' + str + '"'
       end
-    end # :nocov:
+    end
 
     # Pretty print a hash
     #
@@ -40,6 +42,8 @@ module Bixby
     def self.indent_lines(str, indent="\t")
       str.gsub(/\n/, "\n#{indent}")
     end
+
+    # :nocov:
 
   end # Debug
 end # Bixby

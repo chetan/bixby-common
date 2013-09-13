@@ -3,6 +3,7 @@
 
 module Logging
   class Logger
+    # :nocov:
 
     # Override to pass trace flag from parent to child
     def initialize( name )
@@ -16,6 +17,7 @@ module Logging
       _setup(name, :parent => parent, :trace => parent.trace)
     end
 
+    # :nocov:
   end
 end
 

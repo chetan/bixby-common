@@ -22,9 +22,11 @@ module HttpClient
   #
   # @param [String] url
   # @return [Object] Result of calling JSON.parse() on the response body
+  # :nocov:
   def http_get_json(url)
     MultiJson.load(http_get(url))
   end
+  # :nocov:
 
   # Execute an HTTP POST request to the given URL
   #
@@ -41,9 +43,11 @@ module HttpClient
   # @param [String] url
   # @param [Hash] data  Key/Value pairs to POST
   # @return [Object] Result of calling JSON.parse() on the response body
+  # :nocov:
   def http_post_json(url, data)
     MultiJson.load(http_post(url, data))
   end
+  # :nocov:
 
   # Execute an HTTP post request and save the response body
   #
