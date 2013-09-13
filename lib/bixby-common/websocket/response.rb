@@ -10,8 +10,7 @@ module Bixby
         end
         super(id, "rpc_result", headers)
 
-        @hash[:data] = json_response.to_wire
-        @body = MultiJson.dump(@hash)
+        @body = json_response.to_wire
       end
 
       def json_response

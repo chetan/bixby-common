@@ -36,5 +36,14 @@ class JsonRequest
     MultiJson.dump(self)
   end
 
+  # Test if this object is equal to some other object
+  #
+  # @param [JsonRequest] other
+  #
+  # @return [Boolean]
+  def ==(other)
+    operation == other.operation && params == other.params
+  end
+
 end # JsonRequest
 end # Bixby

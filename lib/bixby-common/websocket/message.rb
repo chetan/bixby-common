@@ -9,10 +9,7 @@ module Bixby
       def initialize(id=nil, type="rpc", headers=nil)
         @id = id || SecureRandom.uuid
         @type = type
-        @hash = { :type => @type, :id => @id }
-
-        headers ||= {}
-        @headers = @hash[:headers] = headers
+        @headers = headers || {}
       end
 
       def self.from_wire(body)
@@ -39,7 +36,12 @@ module Bixby
       end
 
       def to_wire
-        @body
+        hash = { :type    => @type,
+                 :id      => @id,
+                 :headers => @headers,
+                 :data    => @body }
+
+        MultiJson.dump(hash)
       end
 
       # Convert object to String, useful for debugging

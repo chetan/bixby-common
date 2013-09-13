@@ -10,8 +10,7 @@ module Bixby
         end
         super(id, type, headers)
 
-        @hash[:data] = json_request.to_wire
-        @body = MultiJson.dump(@hash)
+        @body = json_request.to_wire
       end
 
       def json_request
