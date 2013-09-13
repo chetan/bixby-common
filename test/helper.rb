@@ -10,6 +10,7 @@ end
 
 require 'test_guard'
 TestGuard.load_simplecov()
+require "base"
 
 begin
   require 'curb'

@@ -5,10 +5,10 @@ require 'helper'
 module Bixby
 module Test
 
-class TestCommandSpec < MiniTest::Unit::TestCase
+class TestCommandSpec < TestCase
 
   def setup
-    ENV["BIXBY_HOME"] = File.join(File.expand_path(File.dirname(__FILE__)), "support")
+    super
     h = { :repo => "vendor", :bundle => "test_bundle", 'command' => "echo", :foobar => "baz" }
     @c = CommandSpec.new(h)
     @expected_digest = "2bb6900420c87d5a7cbd8acc9dd1978593670f4e31bfa9218bb9c7c31d4472dd"
