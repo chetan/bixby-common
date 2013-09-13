@@ -25,10 +25,6 @@ class TestAPIChannel < TestCase
     @api_chan = Bixby::WebSocket::APIChannel.new(ws, TestHandler)
   end
 
-  def teardown
-    EM.stop_event_loop if EM.reactor_running?
-  end
-
   def test_open
     refute api_chan.connected?
     api_chan.open(nil)

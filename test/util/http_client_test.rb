@@ -4,11 +4,12 @@ require 'helper'
 module Bixby
 module Test
 
-class TestHttpClient < MiniTest::Unit::TestCase
+class TestHttpClient < TestCase
 
   include WebMock::API
 
   def teardown
+    super
     WebMock.reset!
   end
 
