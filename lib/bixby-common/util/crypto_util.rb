@@ -66,13 +66,30 @@ module Bixby
         return data.read
       end
 
+      # Generate a new 2048-bit RSA keypair
+      #
+      # @return [OpenSSL::PKey::RSA]
+      def generate_keypair
+        OpenSSL::PKey::RSA.generate(2048)
+      end
+
+      # Generate a new access key
+      #
+      # @return [String]
+      # :nocov:
       def generate_access_key
         Digest.hexencode(Digest::MD5.new.digest(OpenSSL::Random.random_bytes(512)))
       end
+      # :nocov:
 
+      # Generate a new secret key
+      #
+      # @return [String]
+      # :nocov:
       def generate_secret_key
         Digest.hexencode(Digest::SHA2.new(512).digest(OpenSSL::Random.random_bytes(512)))
       end
+      # :nocov:
 
 
       private
