@@ -22,7 +22,7 @@ class TestAPIChannel < TestCase
   def setup
     @em_thread = Thread.new { EM.run{} }
     @ws = mock()
-    @api_chan = Bixby::WebSocket::APIChannel.new(ws, TestHandler)
+    @api_chan = Bixby::WebSocket::APIChannel.new(ws, SampleHandler)
   end
 
   def test_open
@@ -50,7 +50,7 @@ class TestAPIChannel < TestCase
 
     event = mock()
     event.expects(:data).once.returns(req.to_wire)
-    TestHandler.any_instance.expects(:handle).with{ |r| r == json_req }.returns(json_res)
+    SampleHandler.any_instance.expects(:handle).with{ |r| r == json_req }.returns(json_res)
     ws.expects(:send).once.with { |str|
       res = Bixby::WebSocket::Message.from_wire(str)
       !res.nil? && res.json_response.to_wire == json_res.to_wire
@@ -82,14 +82,14 @@ class TestAPIChannel < TestCase
 
     event = mock()
     event.expects(:data).once.returns(req.to_wire)
-    TestHandler.any_instance.expects(:connect).with(json_req, api_chan)
+    SampleHandler.any_instance.expects(:connect).with(json_req, api_chan)
     api_chan.message(event)
   end
 
   def test_close
     # close
     api_chan.open(nil)
-    TestHandler.any_instance.expects(:disconnect).with(api_chan).once()
+    SampleHandler.any_instance.expects(:disconnect).with(api_chan).once()
     api_chan.close(nil)
 
   end

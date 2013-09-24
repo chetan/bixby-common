@@ -1,7 +1,7 @@
 
 module Bixby
   module Test
-    class TestHandler < Bixby::RpcHandler
+    class SampleHandler < Bixby::RpcHandler
     end
   end
 end
