@@ -1,4 +1,22 @@
 GIT
+  remote: git://github.com/chetan/easycov.git
+  revision: da4651bd6fb2887fe078e7fd3a6cb74ad7f4bc3f
+  specs:
+    easycov (0.1.0)
+      multi_json
+      simplecov
+
+GIT
+  remote: git://github.com/chetan/micron.git
+  revision: 01471f1e203c5e232c0ad6cadfae23becf5f3ee9
+  specs:
+    micron (0.1.0)
+      easycov
+      hitimes
+      mixlib-shellout
+      parallel
+
+GIT
   remote: https://github.com/chetan/api_auth.git
   revision: 86a79ca157402bd1c12d683a6b9948564b493443
   branch: bixby
@@ -31,7 +49,7 @@ GIT
 
 GIT
   remote: https://github.com/chetan/test_guard.git
-  revision: b60ce3e2cc47746142f0eba0cff5bcf3b550a88c
+  revision: 233c03ae1cfc62417ee9145d568c9dbe2deef20e
   specs:
     test_guard (0.2.1)
       awesome_print
@@ -47,7 +65,7 @@ GEM
   specs:
     addressable (2.3.5)
     ansi (1.4.3)
-    awesome_print (1.1.0)
+    awesome_print (1.2.0)
     bouncy-castle-java (1.5.0147)
     builder (3.2.2)
     coderay (1.0.9)
@@ -76,6 +94,8 @@ GEM
     hashie (2.0.5)
     highline (1.6.19)
     hirb (0.7.1)
+    hitimes (1.2.1)
+    hitimes (1.2.1-java)
     httpauth (0.2.0)
     httpclient (2.3.4.1)
     httpi (2.1.0)
@@ -97,7 +117,6 @@ GEM
       multi_json (>= 1.3.6)
     metaclass (0.0.1)
     method_source (0.8.2)
-    minitest (4.7.5)
     mixlib-shellout (1.2.0)
     mocha (0.14.0)
       metaclass (~> 0.0.1)
@@ -114,6 +133,7 @@ GEM
       multi_xml (~> 0.5)
       rack (~> 1.2)
     oj (2.1.4)
+    parallel (0.8.3)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -132,7 +152,6 @@ GEM
       ffi (>= 0.5.0)
     rb-kqueue (0.2.0)
       ffi (>= 0.5.0)
-    rcov (1.0.0)
     rdoc (4.0.1)
       json (~> 1.4)
     rubyntlm (0.3.4)
@@ -147,7 +166,6 @@ GEM
     slop (3.4.6)
     spoon (0.0.4)
       ffi
-    test-unit (2.5.5)
     turn (0.9.6)
       ansi
     webmock (1.13.0)
@@ -165,6 +183,7 @@ DEPENDENCIES
   api-auth!
   bundler (~> 1.1)
   curb
+  easycov!
   faye-websocket
   httpclient
   httpi
@@ -172,7 +191,7 @@ DEPENDENCIES
   jruby-openssl
   json
   logging
-  minitest (~> 4.0)
+  micron!
   mixlib-shellout
   mocha
   multi_json
@@ -181,10 +200,7 @@ DEPENDENCIES
   rb-fchange
   rb-fsevent
   rb-inotify
-  rcov
   simplecov!
-  test-unit
   test_guard!
-  turn
   webmock
   yard (~> 0.8)

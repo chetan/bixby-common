@@ -18,16 +18,14 @@ group :development do
   gem "pry"
 
   gem "simplecov",    :platforms => [:mri_19, :mri_20, :rbx], :git => "https://github.com/chetan/simplecov.git", :branch => "inline_nocov"
-  gem "rcov",         :platforms => :mri_18
 
-  gem "minitest",     "~> 4.0", :platforms => [:mri_19, :mri_20, :rbx]
-  gem "test-unit",    :platforms => :mri_18
   gem "webmock",      :require => false
   gem "mocha",        :require => false
 
-  gem "turn"
-
   gem "test_guard", :git => "https://github.com/chetan/test_guard.git"
+  gem "easycov", :github => "chetan/easycov"
+  gem "micron", :github => "chetan/micron"
+
   gem 'rb-inotify', :require => false
   gem 'rb-fsevent', :require => false
   gem 'rb-fchange', :require => false

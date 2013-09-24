@@ -25,34 +25,10 @@ Jeweler::RubygemsDotOrgTasks.new
 
 Dir['tasks/**/*.rake'].each { |rake| load rake }
 
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/*_test.rb'
-  test.verbose = true
+require "micron/rake"
+Micron::Rake.new do |task|
 end
-
-if Module.const_defined? :Rcov then
-  begin
-    require 'rcov/rcovtask'
-    Rcov::RcovTask.new do |test|
-      test.libs << 'test'
-      test.pattern = 'test/**/*_test.rb'
-      test.verbose = true
-      test.rcov_opts << '--exclude "gems/*"'
-    end
-  rescue Exception => ex
-  end
-end
-
 task :default => :test
-
-begin
-  require 'single_test/tasks'
-
-rescue LoadError
-  warn "single_test not available"
-end
 
 require 'yard'
 YARD::Rake::YardocTask.new

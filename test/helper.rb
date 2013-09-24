@@ -9,7 +9,7 @@ rescue Bundler::BundlerError => e
 end
 
 require 'test_guard'
-TestGuard.load_simplecov()
+require 'micron/minitest'
 
 begin
   require 'curb'
@@ -30,9 +30,11 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'bixby-common'
 
 require "base"
-require "test_handler"
+require "sample_handler"
 require "side_effect"
 
 Dir.glob(File.dirname(__FILE__) + "/../lib/**/*.rb").each{ |f| require f }
 
-MiniTest::Unit.autorun
+EasyCov.path = "coverage"
+EasyCov.filters << EasyCov::IGNORE_GEMS << EasyCov::IGNORE_STDLIB
+EasyCov.start
