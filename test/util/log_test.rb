@@ -32,13 +32,13 @@ class TestLog < TestCase
     begin
       raise "foo"
     rescue => ex
-      assert filter.format_obj(ex) =~ /turn/
+      assert filter.format_obj(ex) =~ /micron/
 
       # filter out all turn lines
       filter.set_filter do |ex|
-        ex.backtrace.reject{ |s| s =~ /turn/ }
+        ex.backtrace.reject{ |s| s =~ /micron/ }
       end
-      refute filter.format_obj(ex) =~ /turn/
+      refute filter.format_obj(ex) =~ /micron/
 
     end
   end
