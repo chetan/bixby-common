@@ -49,7 +49,7 @@ GIT
 
 GIT
   remote: https://github.com/chetan/test_guard.git
-  revision: 233c03ae1cfc62417ee9145d568c9dbe2deef20e
+  revision: 72fade8f2fda1747ece442aee40be53d5cb293c9
   specs:
     test_guard (0.2.1)
       awesome_print
@@ -69,7 +69,7 @@ GEM
     bouncy-castle-java (1.5.0147)
     builder (3.2.2)
     coderay (1.0.9)
-    colorize (0.5.8)
+    colorize (0.6.0)
     crack (0.4.1)
       safe_yaml (~> 0.9.0)
     curb (0.8.4)
@@ -156,6 +156,7 @@ GEM
       json (~> 1.4)
     rubyntlm (0.3.4)
     safe_yaml (0.9.5)
+    semver2 (3.3.2)
     simplecov-console (0.1.1)
       colorize
       hirb
@@ -200,6 +201,7 @@ DEPENDENCIES
   rb-fchange
   rb-fsevent
   rb-inotify
+  semver2
   simplecov!
   test_guard!
   webmock

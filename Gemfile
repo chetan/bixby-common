@@ -7,6 +7,8 @@ gem "logging"
 
 gem "api-auth", :git => "https://github.com/chetan/api_auth.git", :branch => "bixby"
 
+gem "semver2"
+
 group :development do
 
   # for some tests
