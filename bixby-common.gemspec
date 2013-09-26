@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chetan Sarva"]
-  s.date = "2013-09-13"
+  s.date = "2013-09-26"
   s.description = "Bixby Common files/libs"
   s.email = "chetan@pixelcop.net"
   s.extra_rdoc_files = [
@@ -58,13 +58,13 @@ Gem::Specification.new do |s|
     "test/command_response_test.rb",
     "test/command_spec_test.rb",
     "test/helper.rb",
+    "test/sample_handler.rb",
     "test/side_effect.rb",
     "test/support/repo/vendor/test_bundle/bin/cat",
     "test/support/repo/vendor/test_bundle/bin/cat.json",
     "test/support/repo/vendor/test_bundle/bin/echo",
     "test/support/repo/vendor/test_bundle/digest",
     "test/support/repo/vendor/test_bundle/manifest.json",
-    "test/test_handler.rb",
     "test/util/crypto_util_test.rb",
     "test/util/http_client_test.rb",
     "test/util/jsonify_test.rb",
@@ -95,12 +95,10 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<jeweler>, [">= 0"])
       s.add_development_dependency(%q<pry>, [">= 0"])
       s.add_development_dependency(%q<simplecov>, [">= 0"])
-      s.add_development_dependency(%q<rcov>, [">= 0"])
-      s.add_development_dependency(%q<minitest>, ["~> 4.0"])
-      s.add_development_dependency(%q<test-unit>, [">= 0"])
       s.add_development_dependency(%q<webmock>, [">= 0"])
       s.add_development_dependency(%q<mocha>, [">= 0"])
-      s.add_development_dependency(%q<turn>, [">= 0"])
+      s.add_development_dependency(%q<easycov>, [">= 0"])
+      s.add_development_dependency(%q<micron>, [">= 0"])
       s.add_development_dependency(%q<test_guard>, [">= 0"])
       s.add_development_dependency(%q<rb-inotify>, [">= 0"])
       s.add_development_dependency(%q<rb-fsevent>, [">= 0"])
@@ -122,12 +120,10 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<jeweler>, [">= 0"])
       s.add_dependency(%q<pry>, [">= 0"])
       s.add_dependency(%q<simplecov>, [">= 0"])
-      s.add_dependency(%q<rcov>, [">= 0"])
-      s.add_dependency(%q<minitest>, ["~> 4.0"])
-      s.add_dependency(%q<test-unit>, [">= 0"])
       s.add_dependency(%q<webmock>, [">= 0"])
       s.add_dependency(%q<mocha>, [">= 0"])
-      s.add_dependency(%q<turn>, [">= 0"])
+      s.add_dependency(%q<easycov>, [">= 0"])
+      s.add_dependency(%q<micron>, [">= 0"])
       s.add_dependency(%q<test_guard>, [">= 0"])
       s.add_dependency(%q<rb-inotify>, [">= 0"])
       s.add_dependency(%q<rb-fsevent>, [">= 0"])
@@ -150,12 +146,10 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<jeweler>, [">= 0"])
     s.add_dependency(%q<pry>, [">= 0"])
     s.add_dependency(%q<simplecov>, [">= 0"])
-    s.add_dependency(%q<rcov>, [">= 0"])
-    s.add_dependency(%q<minitest>, ["~> 4.0"])
-    s.add_dependency(%q<test-unit>, [">= 0"])
     s.add_dependency(%q<webmock>, [">= 0"])
     s.add_dependency(%q<mocha>, [">= 0"])
-    s.add_dependency(%q<turn>, [">= 0"])
+    s.add_dependency(%q<easycov>, [">= 0"])
+    s.add_dependency(%q<micron>, [">= 0"])
     s.add_dependency(%q<test_guard>, [">= 0"])
     s.add_dependency(%q<rb-inotify>, [">= 0"])
     s.add_dependency(%q<rb-fsevent>, [">= 0"])
