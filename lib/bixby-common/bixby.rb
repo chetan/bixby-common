@@ -3,9 +3,10 @@ module Bixby
   class << self
     attr_accessor :manager_uri
 
-    def repo_path
-      path("repo")
+    def repo(*args)
+      path("repo", *args)
     end
+    alias_method :repo_path, :repo
 
     # Path to BIXBY_HOME
     def root
@@ -17,7 +18,6 @@ module Bixby
     def path(*args)
       File.expand_path(File.join(root, *args))
     end
-
 
   end
 end
