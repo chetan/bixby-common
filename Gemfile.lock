@@ -1,20 +1,19 @@
 GIT
   remote: git://github.com/chetan/easycov.git
-  revision: da4651bd6fb2887fe078e7fd3a6cb74ad7f4bc3f
+  revision: 58be40eddda14fb8db4f1b72427922e8054bae7a
   specs:
-    easycov (0.1.0)
+    easycov (0.1.1)
       multi_json
       simplecov
 
 GIT
   remote: git://github.com/chetan/micron.git
-  revision: 01471f1e203c5e232c0ad6cadfae23becf5f3ee9
+  revision: 9d5bc007c74a4264c9f101b7ca275f4c6db4ba45
   specs:
     micron (0.1.0)
+      colorize
       easycov
       hitimes
-      mixlib-shellout
-      parallel
 
 GIT
   remote: https://github.com/chetan/api_auth.git
@@ -133,7 +132,6 @@ GEM
       multi_xml (~> 0.5)
       rack (~> 1.2)
     oj (2.1.4)
-    parallel (0.8.3)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
