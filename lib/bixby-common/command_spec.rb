@@ -10,7 +10,8 @@ class CommandSpec
   include Jsonify
   include Hashify
 
-  attr_accessor :repo, :digest, :bundle, :command, :args, :stdin, :env
+  attr_accessor :digest, :repo, :bundle, :command, :args, :stdin, :env,
+                :user, :group
 
   # Create new CommandSpec
   #
@@ -63,34 +64,58 @@ class CommandSpec
     File.join(@repo, @bundle)
   end
 
+  # Check if the bundle described by this CommandSpec exists
+  #
+  # @return [Boolean]
   def bundle_exists?
     File.exists? self.bundle_dir
   end
 
+  # Absolute command filename
+  #
+  # @return [String]
   def command_file
     path("bin", @command)
   end
 
+  # Check if the command file exists
+  #
+  # @return [Boolean]
   def command_exists?
     File.exists? self.command_file
   end
 
-  def config_file
+  # Command manifest filename
+  #
+  # @return [String]
+  def manifest_file
     command_file + ".json"
   end
+  alias_method :config_file, :manifest_file
 
-  def load_config
-    if File.exists? config_file then
-      MultiJson.load(File.read(config_file))
+  # Retrieve the command's Manifest, loading it from disk if necessary
+  # If no Manifest is available, returns an empty hash
+  #
+  # @return [Hash]
+  def manifest
+    if File.exists?(manifest_file) && File.readable?(manifest_file) then
+      MultiJson.load(File.read(manifest_file))
     else
       {}
     end
   end
+  alias_method :load_config, :manifest
 
+  # Bundle digest filename
+  #
+  # @return [String] path to bundle digest file
   def digest_file
     path("digest")
   end
 
+  # Retrieve the bundle digest
+  #
+  # @return [Hash]
   def load_digest
     begin
       return MultiJson.load(File.read(digest_file))
@@ -99,13 +124,17 @@ class CommandSpec
     nil
   end
 
-  def load_manifest
+  # Retrieve the bundle manifest
+  #
+  # @return [Hash]
+  def load_bundle_manifest
     begin
       return MultiJson.load(File.read(path("manifest.json")))
     rescue => ex
     end
     nil
   end
+  alias_method :load_manifest, :load_bundle_manifest
 
   # Create and return an absolute pathname pointing to the given file
   #
@@ -116,6 +145,7 @@ class CommandSpec
     File.join(self.bundle_dir, *relative)
   end
 
+  # Update the digest hashes for this bundle
   def update_digest
 
     path = self.bundle_dir
@@ -148,6 +178,8 @@ class CommandSpec
     s << "  bundle:   #{self.bundle}"
     s << "  command:  #{self.command}"
     s << "  args:     #{self.args}"
+    s << "  user:     #{self.user}"
+    s << "  group:    #{self.group}"
     s << "  env:      " + MultiJson.dump(self.env)
     s << "  stdin:    " + Debug.pretty_str(stdin)
     s.join("\n")
