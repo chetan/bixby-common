@@ -1,6 +1,8 @@
 
 # Patch Logging::Logger so that :trace becomes an inherited flag
 
+require "logging"
+
 module Logging
   class Logger
     # :nocov:

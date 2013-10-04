@@ -1,4 +1,6 @@
 
+require "logging"
+
 module Bixby
   module Log
 
