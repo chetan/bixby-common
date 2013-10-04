@@ -1,7 +1,5 @@
 language: ruby
-
-before_script: "find * -type f"
-script: "bundle exec micron"
+script: "bundle exec micron test/"
 
 rvm:
   - 2.0.0
