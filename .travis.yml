@@ -1,4 +1,6 @@
 language: ruby
+
+before_script: "find * -type f"
 script: "bundle exec micron"
 
 rvm:
