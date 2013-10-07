@@ -27,6 +27,7 @@ group :development do
   gem "test_guard", :git => "https://github.com/chetan/test_guard.git"
   gem "easycov", :github => "chetan/easycov"
   gem "micron", :github => "chetan/micron"
+  gem "coveralls", :require => false
 
   gem 'rb-inotify', :require => false
   gem 'rb-fsevent', :require => false

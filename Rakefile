@@ -30,5 +30,23 @@ Micron::Rake.new do |task|
 end
 task :default => :test
 
+# for displaying coverage
+require "easycov/rake"
+
+# for reporting to coveralls
+require "coveralls"
+desc "Report coverage to coveralls"
+task :coveralls do
+  SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+  cov_file = File.join(EasyCov.path, ".resultset.json")
+  if File.exists? cov_file then
+    data = MultiJson.load(File.read(cov_file))
+    # We report on only the most recent coverage run
+    if last_key = data.keys.last then
+      SimpleCov::Result.from_hash(last_key => data[last_key]).format!
+    end
+  end
+end
+
 require 'yard'
 YARD::Rake::YardocTask.new
