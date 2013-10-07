@@ -10,14 +10,16 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chetan Sarva"]
-  s.date = "2013-10-03"
+  s.date = "2013-10-07"
   s.description = "Bixby Common files/libs"
   s.email = "chetan@pixelcop.net"
   s.extra_rdoc_files = [
     "LICENSE"
   ]
   s.files = [
+    ".coveralls.yml",
     ".document",
+    ".travis.yml",
     "Gemfile",
     "Gemfile.lock",
     "LICENSE",
@@ -101,6 +103,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<test_guard>, [">= 0"])
       s.add_development_dependency(%q<easycov>, [">= 0"])
       s.add_development_dependency(%q<micron>, [">= 0"])
+      s.add_development_dependency(%q<coveralls>, [">= 0"])
       s.add_development_dependency(%q<rb-inotify>, [">= 0"])
       s.add_development_dependency(%q<rb-fsevent>, [">= 0"])
       s.add_development_dependency(%q<rb-fchange>, [">= 0"])
@@ -127,6 +130,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<test_guard>, [">= 0"])
       s.add_dependency(%q<easycov>, [">= 0"])
       s.add_dependency(%q<micron>, [">= 0"])
+      s.add_dependency(%q<coveralls>, [">= 0"])
       s.add_dependency(%q<rb-inotify>, [">= 0"])
       s.add_dependency(%q<rb-fsevent>, [">= 0"])
       s.add_dependency(%q<rb-fchange>, [">= 0"])
@@ -154,6 +158,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<test_guard>, [">= 0"])
     s.add_dependency(%q<easycov>, [">= 0"])
     s.add_dependency(%q<micron>, [">= 0"])
+    s.add_dependency(%q<coveralls>, [">= 0"])
     s.add_dependency(%q<rb-inotify>, [">= 0"])
     s.add_dependency(%q<rb-fsevent>, [">= 0"])
     s.add_dependency(%q<rb-fchange>, [">= 0"])
