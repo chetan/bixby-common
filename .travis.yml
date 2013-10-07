@@ -1,5 +1,6 @@
 language: ruby
 script: "bundle exec micron test/"
+after_script: "rake coveralls"
 
 rvm:
   - 2.0.0
