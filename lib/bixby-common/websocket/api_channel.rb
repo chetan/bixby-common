@@ -41,8 +41,12 @@ module Bixby
       def execute_async(json_request, &block)
         logger.debug { "execute_async:\n#{json_request.to_s}" }
 
-        request = Request.new(json_request)
-        id = request.id
+        if json_request.kind_of? Request then
+          id, request = json_request.id, json_request
+        else
+          request = Request.new(json_request)
+          id = request.id
+        end
         @responses[id] = AsyncResponse.new(id, &block)
 
         EM.next_tick {
@@ -108,7 +112,12 @@ module Bixby
           @responses[req.id].response = res
 
         elsif req.type == "connect" then
-          @handler.new(req).connect(req.json_request, self)
+          ret = @handler.new(req).connect(req.json_request, self)
+          if ret.kind_of? JsonResponse then
+            ws.send(Response.new(ret, req.id).to_wire)
+          else
+            ws.send(Response.new(JsonResponse.new("success"), req.id).to_wire)
+          end
 
         end
       end
