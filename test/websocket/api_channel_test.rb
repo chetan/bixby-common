@@ -21,7 +21,7 @@ class TestAPIChannel < TestCase
 
   def setup
     @em_thread = Thread.new { EM.run{} }
-    @ws = mock()
+    @ws = mock("websocket")
     @api_chan = Bixby::WebSocket::APIChannel.new(ws, SampleHandler)
   end
 
@@ -80,9 +80,13 @@ class TestAPIChannel < TestCase
     signed_json_req = SignedJsonRequest.new(json_req, "foo", "bar")
     req = Bixby::WebSocket::Request.new(signed_json_req, nil, "connect")
 
-    event = mock()
+    event = mock("event")
     event.expects(:data).once.returns(req.to_wire)
     SampleHandler.any_instance.expects(:connect).with(json_req, api_chan)
+    ws.expects(:send).once.with { |str|
+      res = Bixby::WebSocket::Message.from_wire(str)
+      !res.nil? && res.type == "rpc_result" && res.json_response.success?
+    }
     api_chan.message(event)
   end
 
