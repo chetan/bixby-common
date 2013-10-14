@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/chetan/easycov.git
-  revision: a4093b140a0adfbaea1c9b55c42a5c7629317025
+  revision: 0fd0c852ae174c8de7c4d5c904c59b6cd1869d66
   specs:
-    easycov (0.3.1)
+    easycov (0.4.0)
       multi_json
       simplecov
       simplecov-console
@@ -10,9 +10,9 @@ GIT
 
 GIT
   remote: git://github.com/chetan/micron.git
-  revision: 95399129ce8908484ed92a0de3a7e0ce83d99d2b
+  revision: cd888a6d8436df52d8267552ca7c0105a84b637d
   specs:
-    micron (0.1.0)
+    micron (0.5.0)
       colorize
       easycov
       hitimes
