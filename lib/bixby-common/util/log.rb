@@ -45,7 +45,15 @@ module Bixby
       layout = Logging.layouts.pattern(:pattern => pattern)
 
       opts[:filename] ||= Bixby.path("var", "bixby-agent.log")
-      FileUtils.mkdir_p(File.dirname(opts[:filename]))
+      log_dir = File.dirname(opts[:filename])
+      FileUtils.mkdir_p(log_dir)
+
+      # make sure we have the correct permissions
+      if Process.uid == 0 then
+        File.chmod(0777, log_dir)
+        File.chmod(0777, opts[:filename])
+        File.chmod(0777, opts[:filename] + ".age")
+      end
 
       # configure stdout appender (used in debug modes, etc)
       Logging.color_scheme( 'bright',
