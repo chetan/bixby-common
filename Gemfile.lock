@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/chetan/micron.git
-  revision: cd888a6d8436df52d8267552ca7c0105a84b637d
+  revision: 93984e01daf0820b2f7781aeacaee52b5934592c
   specs:
     micron (0.5.0)
       colorize
@@ -19,7 +19,7 @@ GIT
 
 GIT
   remote: https://github.com/chetan/api_auth.git
-  revision: 86a79ca157402bd1c12d683a6b9948564b493443
+  revision: 2440c3a1d23b95977185ce25210c86cbeded7cee
   branch: bixby
   specs:
     api-auth (1.0.3)
@@ -50,7 +50,7 @@ GIT
 
 GIT
   remote: https://github.com/chetan/test_guard.git
-  revision: 6e184096f7713cefe6eab3d250b18d214e09a1ca
+  revision: 0c21a29cc9aaabbeb9224da50a8cfcfb50665bf3
   specs:
     test_guard (0.2.1)
       awesome_print
@@ -114,8 +114,8 @@ GEM
     json (1.8.0-java)
     jwt (0.1.8)
       multi_json (>= 1.5)
-    listen (2.0.0)
-      celluloid (>= 0.15.1)
+    listen (2.1.0)
+      celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
     little-plugger (1.1.3)
@@ -128,7 +128,7 @@ GEM
     mixlib-shellout (1.2.0)
     mocha (0.14.0)
       metaclass (~> 0.0.1)
-    multi_json (1.8.1)
+    multi_json (1.8.2)
     multi_xml (0.5.5)
     multipart-post (1.2.0)
     nokogiri (1.5.10)
@@ -140,7 +140,7 @@ GEM
       multi_json (~> 1.0)
       multi_xml (~> 0.5)
       rack (~> 1.2)
-    oj (2.1.4)
+    oj (2.1.6)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -176,7 +176,7 @@ GEM
       tins (~> 0.8)
     thor (0.18.1)
     timers (1.1.0)
-    tins (0.11.0)
+    tins (0.12.0)
     webmock (1.14.0)
       addressable (>= 2.2.7)
       crack (>= 0.3.2)
