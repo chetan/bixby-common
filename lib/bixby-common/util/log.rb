@@ -51,7 +51,7 @@ module Bixby
       # make sure we have the correct permissions
       if Process.uid == 0 then
         if !File.exists? opts[:filename] then
-          FileUtils.touch(opts[:filename], opts[:filename] + ".age")
+          FileUtils.touch([opts[:filename], opts[:filename] + ".age"])
         end
         File.chmod(0777, log_dir)
         File.chmod(0777, opts[:filename])
