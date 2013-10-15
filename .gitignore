@@ -3,5 +3,6 @@ pkg/
 .rbx
 coverage/
 .yardoc/
+.testguardrc
 doc/
 test/support/var/
