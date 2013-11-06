@@ -10,28 +10,28 @@ gem "api-auth", :git => "https://github.com/chetan/api_auth.git", :branch => "bi
 gem "semver2"
 
 group :development do
-
-  # for some tests
-  gem "mixlib-shellout"
-
   gem "yard", "~> 0.8"
   gem "bundler", "~> 1.1"
   gem "jeweler", :git => "https://github.com/chetan/jeweler.git", :branch => "bixby"
   gem "pry"
 
-  gem "simplecov",    :platforms => [:mri_19, :mri_20, :rbx], :git => "https://github.com/chetan/simplecov.git", :branch => "inline_nocov"
-
-  gem "webmock",      :require => false
-  gem "mocha",        :require => false
-
   gem "test_guard", :git => "https://github.com/chetan/test_guard.git"
-  gem "easycov", :github => "chetan/easycov"
-  gem "micron", :github => "chetan/micron"
-  gem "coveralls", :require => false
-
   gem 'rb-inotify', :require => false
   gem 'rb-fsevent', :require => false
   gem 'rb-fchange', :require => false
+end
+
+group :test do
+  gem "simplecov",  :platforms => [:mri_19, :mri_20, :rbx], :git => "https://github.com/chetan/simplecov.git", :branch => "inline_nocov"
+  gem "easycov",    :github => "chetan/easycov"
+  gem "micron",     :github => "chetan/micron"
+  gem "coveralls", :require => false
+
+  gem "webmock",    :require => false
+  gem "mocha",      :require => false
+
+  # for some tests
+  gem "mixlib-shellout"
 
   # platform specific gemms
   # not sure we need to include these at all
