@@ -38,7 +38,7 @@ module Bixby
     def self.setup_logger(opts={})
 
       # set level: ENV flag overrides; default to warn
-      opts[:level] = :debug if ENV["BIXBY_DEBUG"]
+      opts[:level] = ENV["BIXBY_LOG"] if ENV["BIXBY_LOG"]
       opts[:level] ||= :warn
 
       pattern = opts.delete(:pattern) || '%.1l, [%d] %5l -- %c:%L: %m\n'

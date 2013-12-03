@@ -7,15 +7,18 @@ module Test
 class TestLog < TestCase
 
   def test_setup_logger
-    ENV["BIXBY_DEBUG"] = "1"
+    ENV["BIXBY_LOG"] = "DEBUG"
     Bixby::Log.setup_logger
     assert_equal 0, Logging::Logger.root.level # debug
 
-    ENV.delete("BIXBY_DEBUG")
+    ENV["BIXBY_LOG"] = "error"
+    Bixby::Log.setup_logger
+    assert_equal 3, Logging::Logger.root.level # debug
+
+    ENV.delete("BIXBY_LOG")
     Bixby::Log.setup_logger
     assert_equal 2, Logging::Logger.root.level # warn
 
-    ENV.delete("BIXBY_DEBUG")
     Bixby::Log.setup_logger(:level => :info)
     assert_equal 1, Logging::Logger.root.level # info
   end
