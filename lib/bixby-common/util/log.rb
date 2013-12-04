@@ -89,9 +89,10 @@ module Bixby
       }.merge(opts)
       Logging.appenders.rolling_file("file", options)
 
-      Logging::Logger.root.add_appenders("file")
-      Logging::Logger.root.level = opts[:level]
-      Logging::Logger.root.trace = true
+      root = Logging::Logger.root
+      root.add_appenders("file") if !root.appenders.find{ |a| a.name == "file" }
+      root.level = opts[:level]
+      root.trace = true
     end
 
   end # Log
