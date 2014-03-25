@@ -6,16 +6,23 @@ class CommandResponse
 
   attr_accessor :status, :stdout, :stderr
 
-  # Create a new CommandResponse from the given from_json_response
+  SUCCESS         = 0
+  UNKNOWN_FAILURE = 255
+
+  # Create a new CommandResponse from the given JsonResponse
   #
   # @param [JsonResponse] res
   #
   # @return [CommandResponse]
   def self.from_json_response(res)
     cr = CommandResponse.new(res.data)
-    if !(res.message.nil? || res.message.empty?) then
-      cr.status ||= 255
-      cr.stderr ||= res.message
+    if res.fail? then
+      if !(res.message.nil? || res.message.empty?) then
+        cr.status ||= UNKNOWN_FAILURE
+        cr.stderr ||= res.message
+      else
+        cr.status ||= UNKNOWN_FAILURE
+      end
     end
     return cr
   end
@@ -24,7 +31,7 @@ class CommandResponse
   #
   # @return [JsonResponse]
   def to_json_response
-    return JsonResponse.new((status == 0 ? "success" : "fail"), nil, self.to_hash)
+    return JsonResponse.new((success?() ? "success" : "fail"), nil, self.to_hash)
   end
 
   def initialize(params = nil)
@@ -39,7 +46,7 @@ class CommandResponse
   end
 
   def success?
-    @status.to_i == 0
+    @status && @status.to_i == SUCCESS
   end
 
   def fail?

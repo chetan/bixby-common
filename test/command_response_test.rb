@@ -15,6 +15,11 @@ class TestCommandResponse < TestCase
     assert_kind_of CommandResponse, cr
     assert_equal 255, cr.status
     assert_equal "unknown", cr.stderr
+
+    assert_throws(CommandException) do
+      cr.raise!
+    end
+
     begin
       cr.raise!
     rescue CommandException => ex
@@ -29,6 +34,16 @@ class TestCommandResponse < TestCase
     assert_equal 0, cr.status
     assert_equal "foobar", cr.stdout
     assert_nil cr.stderr
+
+    # empty failure message
+    res = JsonResponse.new("fail")
+    assert res.fail?
+    refute res.success?
+    cr = CommandResponse.from_json_response(res)
+    refute cr.success?
+    assert cr.fail?
+    assert cr.error?
+    assert_equal 255, cr.status
   end
 
   def test_to_json_response
