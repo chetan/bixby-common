@@ -13,7 +13,7 @@ class CommandResponse
   # @return [CommandResponse]
   def self.from_json_response(res)
     cr = CommandResponse.new(res.data)
-    if res.message then
+    if !(res.message.nil? || res.message.empty?) then
       cr.status ||= 255
       cr.stderr ||= res.message
     end
