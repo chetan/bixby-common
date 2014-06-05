@@ -1,4 +1,5 @@
 
+require "httpi"
 require "logging"
 
 require "bixby-common/util/log/filtering_layout"
@@ -93,6 +94,10 @@ module Bixby
       root.add_appenders("file") if !root.appenders.find{ |a| a.name == "file" }
       root.level = opts[:level]
       root.trace = true
+
+      # setup HTTPI logger
+      HTTPI.log = true
+      HTTPI.logger = Logging.logger[HTTPI]
     end
 
   end # Log
