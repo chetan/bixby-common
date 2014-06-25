@@ -180,7 +180,7 @@ class CommandSpec
     s << "  args:     #{self.args}"
     s << "  user:     #{self.user}"
     s << "  group:    #{self.group}"
-    s << "  env:      " + MultiJson.dump(self.env)
+    s << "  env:      " + (self.env.nil?() ? "" : MultiJson.dump(self.env))
     s << "  stdin:    " + Debug.pretty_str(stdin)
     s.join("\n")
   end # :nocov:
