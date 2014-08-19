@@ -93,25 +93,22 @@ module Bixby
       # Fired whenever a message is received on the channel
       def message(event)
         req = Message.from_wire(event.data)
-        logger.debug { "new '#{req.type}' message" }
 
         if req.type == "rpc" then
           # Execute the requested method and return the result
           json_req = req.json_request
-          logger.debug { json_req.to_s }
+          logger.debug { "RPC request\n#{json_req}" }
           json_response = @handler.new(req).handle(json_req)
-
-          # result = { :type => "rpc_result", :id => req.id, :data => json_response }
-          # ws.send(MultiJson.dump(result))
           ws.send(Response.new(json_response, req.id).to_wire)
 
         elsif req.type == "rpc_result" then
           # Pass the result back to the caller
           res = req.json_response
-          logger.debug { res.to_s }
+          logger.debug { "RPC_RESULT for request id #{req.id}\n#{res}" }
           @responses[req.id].response = res
 
         elsif req.type == "connect" then
+          logger.debug { "CONNECT request #{req.id}"}
           ret = @handler.new(req).connect(req.json_request, self)
           if ret.kind_of? JsonResponse then
             ws.send(Response.new(ret, req.id).to_wire)
