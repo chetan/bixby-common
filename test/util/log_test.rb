@@ -17,10 +17,10 @@ class TestLog < TestCase
 
     ENV.delete("BIXBY_LOG")
     Bixby::Log.setup_logger
-    assert_equal 2, Logging::Logger.root.level # warn
-
-    Bixby::Log.setup_logger(:level => :info)
     assert_equal 1, Logging::Logger.root.level # info
+
+    Bixby::Log.setup_logger(:level => :error)
+    assert_equal 3, Logging::Logger.root.level # error
   end
 
   def test_filtering_layout
