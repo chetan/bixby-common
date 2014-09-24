@@ -40,6 +40,19 @@ module Bixby
 
       # set level: ENV flag overrides; default to warn
       opts[:level] = ENV["BIXBY_LOG"] if ENV["BIXBY_LOG"]
+
+      if opts[:level].nil? then
+        # try to read from config file
+        c = Bixby.path("etc", "bixby.yml")
+        if File.exists? c then
+          if config = YAML.load_file(c) then
+            log_level = config["log_level"]
+            log_level = log_level.strip.downcase if log_level.kind_of? String
+            opts[:level] = log_level
+          end
+        end
+      end
+
       opts[:level] ||= :warn
 
       pattern = opts.delete(:pattern) || '%.1l, [%d] %5l -- %c:%L: %m\n'
