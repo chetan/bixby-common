@@ -53,7 +53,7 @@ module Bixby
         end
       end
 
-      opts[:level] ||= :warn
+      opts[:level] ||= :info
 
       pattern = opts.delete(:pattern) || '%.1l, [%d] %5l -- %c:%L: %m\n'
       layout = Logging.layouts.pattern(:pattern => pattern)
