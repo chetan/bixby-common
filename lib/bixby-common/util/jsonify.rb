@@ -6,7 +6,7 @@ module Jsonify
 
   include Hashify
 
-  def to_json
+  def to_json(*opts)
     MultiJson.dump(self.to_hash)
   end
 
