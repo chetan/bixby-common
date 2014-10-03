@@ -3,6 +3,7 @@ pkg/
 .rbenv*
 .rbx
 coverage/
+.micron/
 .yardoc/
 .testguardrc
 doc/
