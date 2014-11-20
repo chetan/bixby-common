@@ -1,7 +1,7 @@
 
 require "bixby-common/websocket/async_response"
 
-require "api-auth"
+require "bixby-auth"
 require "eventmachine"
 
 module Bixby

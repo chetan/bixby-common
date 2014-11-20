@@ -1,4 +1,6 @@
 
+require "bixby-auth"
+
 module Bixby
   class SignedJsonRequest < JsonRequest
 

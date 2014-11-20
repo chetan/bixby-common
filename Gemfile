@@ -1,11 +1,11 @@
 source "https://rubygems.org"
 
+gem "bixby-auth", "~> 0.1"
+
 gem "faye-websocket", "~> 0.7"
 gem "multi_json", "~> 1.8"
 gem "httpi", "~> 2.1"
 gem "logging", "~> 1.8"
-
-gem "api-auth", "~> 1.0", :git => "https://github.com/chetan/api_auth.git", :branch => "bixby"
 
 gem "semver2", "~> 3.3"
 
