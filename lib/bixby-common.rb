@@ -33,5 +33,8 @@ module Bixby
   autoload :Hashify, "bixby-common/util/hashify"
   autoload :Log, "bixby-common/util/log"
   autoload :Debug, "bixby-common/util/debug"
+  autoload :Signal, "bixby-common/util/signal"
+  autoload :ThreadDump, "bixby-common/util/thread_dump"
+  autoload :ThreadPool, "bixby-common/util/thread_pool"
 
 end
