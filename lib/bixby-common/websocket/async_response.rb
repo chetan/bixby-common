@@ -34,7 +34,7 @@ module Bixby
         @mutex.synchronize {
           @response = obj
           @completed = true
-          @cond.signal
+          @cond.broadcast
         }
 
         if not @block.nil? then
@@ -53,8 +53,11 @@ module Bixby
       #
       # @return [Object] response data
       def response
-        return @response if @completed
-        @mutex.synchronize { @cond.wait(@mutex) }
+        @mutex.synchronize {
+          if !@completed then
+            @cond.wait(@mutex)
+          end
+        }
         return @response
       end
 
