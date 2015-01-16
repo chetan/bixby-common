@@ -22,7 +22,12 @@ class TestAPIChannel < TestCase
   def setup
     @em_thread = Thread.new { EM.run{} }
     @ws = mock("websocket")
-    @api_chan = Bixby::WebSocket::APIChannel.new(ws, SampleHandler)
+    @thread_pool = Bixby::ThreadPool.new
+    @api_chan = Bixby::WebSocket::APIChannel.new(ws, SampleHandler, @thread_pool)
+  end
+
+  def teardown
+    @thread_pool.dispose
   end
 
   def test_open
@@ -56,6 +61,13 @@ class TestAPIChannel < TestCase
       !res.nil? && res.json_response.to_wire == json_res.to_wire
     }
     api_chan.message(event)
+
+    # wait for jobs to finish and cleanup
+    @thread_pool.dispose
+    sleep 0.05
+    while !EM.defers_finished? do
+      sleep 0.01
+    end
   end
 
   def test_message_response

@@ -15,11 +15,12 @@ module Bixby
 
       attr_reader :ws
 
-      def initialize(ws, handler)
+      def initialize(ws, handler, thread_pool)
         @ws = ws
         @handler = handler
         @responses = {}
         @connected = false
+        @thread_pool = thread_pool
       end
 
       # Perform RPC
@@ -96,10 +97,13 @@ module Bixby
 
         if req.type == "rpc" then
           # Execute the requested method and return the result
-          json_req = req.json_request
-          logger.debug { "RPC request\n#{json_req}" }
-          json_response = @handler.new(req).handle(json_req)
-          ws.send(Response.new(json_response, req.id).to_wire)
+          # Do it asynchronously so as not to hold up the EM-loop while the command is running
+          @thread_pool.perform do
+            json_req = req.json_request
+            logger.debug { "RPC request\n#{json_req}" }
+            json_response = @handler.new(req).handle(json_req)
+            EM.next_tick { ws.send(Response.new(json_response, req.id).to_wire) }
+          end
 
         elsif req.type == "rpc_result" then
           # Pass the result back to the caller
@@ -108,6 +112,8 @@ module Bixby
           @responses[req.id].response = res
 
         elsif req.type == "connect" then
+          # Agent request to CONNECT to the manager
+          # will only be received by the server-end of the channel
           logger.debug { "CONNECT request #{req.id}"}
           ret = @handler.new(req).connect(req.json_request, self)
           if ret.kind_of? JsonResponse then
