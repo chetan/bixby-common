@@ -29,6 +29,7 @@ module Bixby
     end
 
     def enqueue(command, block=nil)
+      logger.debug { "enqueue new task: #{command}" }
       @input_queue.push(Task.new(command, block))
       if command == :perform then
         grow_pool
@@ -104,7 +105,7 @@ module Bixby
 
     def expand(count)
       @lock.synchronize do
-        # logger.debug "expanding by #{count} threads (from #{@size})"
+        logger.debug "expanding by #{count} threads (from #{@size})"
         count.times do
           create_worker
         end
@@ -159,7 +160,7 @@ module Bixby
 
     def create_worker
       @lock.synchronize do
-        # logger.debug "spawning new worker thread"
+        logger.debug "spawning new worker thread"
 
         exit_handler = lambda { |worker, reason|
           @lock.synchronize do
@@ -180,12 +181,14 @@ module Bixby
     # Grow the pool by one if we have more jobs than idle workers
     def grow_pool
       @lock.synchronize do
-        # logger.debug { "busy: #{num_working}; idle: #{num_idle}" }
+        logger.debug { "jobs: #{num_jobs}; busy: #{num_working}; idle: #{num_idle}" }
         if @size < @max_size && num_jobs > 0 && num_jobs > num_idle then
           space = @max_size-@size
           jobs = num_jobs-num_idle
           needed = space < jobs ? space : jobs
           expand(needed)
+        else
+          logger.debug "NOT growing the pool!"
         end
       end
 
