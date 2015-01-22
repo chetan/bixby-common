@@ -15,6 +15,10 @@ module Bixby
 
       # Prints a thread dump on ALRM signal
       # kill -ALRM <pid>
+      #
+      # You can cancel the signal trap by saving the returned Thread and killing it
+      #
+      # @return [Thread]
       def trap!
         t = Bixby::Signal.trap("SIGALRM") do
           write(LoggerIO.new(Logging.logger[ThreadDump]))
@@ -22,6 +26,7 @@ module Bixby
         t[:_name] = "dumper [ignore me]"
 
         Logging.logger[ThreadDump].info "Trapping SIGALRM: kill -ALRM #{Process.pid}"
+        return t
       end
 
       # Write thread dump to the given IO-like handle (must respond to #puts)
