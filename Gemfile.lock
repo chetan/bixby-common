@@ -24,7 +24,7 @@ GIT
 
 GIT
   remote: git://github.com/chetan/micron.git
-  revision: 0c1e9c0b9d9e052805f43485fe3454cbd25913c5
+  revision: 576f6699e2a7ff1828ce5c333cc5fa433c0be380
   specs:
     micron (0.5.1)
       ansi
@@ -56,7 +56,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     addressable (2.3.6)
-    ansi (1.4.3)
+    ansi (1.5.0)
     awesome_print (1.6.1)
     bixby-auth (0.1.1)
     builder (3.2.2)
@@ -132,7 +132,7 @@ GEM
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (~> 1.2)
-    oj (2.11.2)
+    oj (2.11.4)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
