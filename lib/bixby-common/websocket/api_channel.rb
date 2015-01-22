@@ -40,8 +40,6 @@ module Bixby
       #
       # @return [String] request id
       def execute_async(json_request, &block)
-        logger.debug { "execute_async:\n#{json_request.to_s}" }
-
         if json_request.kind_of? Request then
           id, request = json_request.id, json_request
         else
@@ -49,6 +47,8 @@ module Bixby
           id = request.id
         end
         @responses[id] = AsyncResponse.new(id, &block)
+
+        logger.debug { json_request.type == "connect" ? "execute_async: CONNECT [#{id}]" : "execute_async: RPC [#{id}]\n#{json_request.to_s}" }
 
         EM.next_tick {
           ws.send(request.to_wire)
@@ -108,7 +108,7 @@ module Bixby
         elsif req.type == "rpc_result" then
           # Pass the result back to the caller
           res = req.json_response
-          logger.debug { "RPC_RESULT for request id #{req.id}\n#{res}" }
+          logger.debug { "RPC_RESULT for request id [#{req.id}]\n#{res}" }
           @responses[req.id].response = res
 
         elsif req.type == "connect" then
