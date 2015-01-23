@@ -22,7 +22,9 @@ module Bixby
       Thread.new do
         while true
           sig = trap_r.readline.strip
-          block.call(sig)
+          Thread.new do
+            block.call(sig)
+          end
         end
       end
 
