@@ -2,6 +2,13 @@
 require 'helper'
 
 module Bixby
+
+  class ThreadPool
+    def workers
+      @workers
+    end
+  end
+
 module Test
 class TestThreadPool < TestCase
 
@@ -76,6 +83,19 @@ class TestThreadPool < TestCase
 
     logger.debug "shrank yet?!"
     assert_equal 1, @pool.size, "pool should shrink to 1"
+  end
+
+  def test_handle_exception
+    @pool.perform do
+      raise "bleh"
+    end
+
+    while @pool.num_busy > 0 || @pool.num_jobs > 0 do
+      sleep 0.1
+    end
+
+    assert_equal 1, @pool.size
+    assert_equal 0, @pool.workers.find_all{ |w| !w.thread.alive? }.size, "no dead threads"
   end
 
 end # TestThreadPool
