@@ -98,6 +98,27 @@ class TestThreadPool < TestCase
     assert_equal 0, @pool.workers.find_all{ |w| !w.thread.alive? }.size, "no dead threads"
   end
 
+  def test_handle_killed_thread
+    assert_equal 1, @pool.size
+    assert @pool.workers.find{ |w| w.thread.alive? }
+    @pool.workers.first.thread.kill
+    sleep 0.01
+    assert_equal 1, @pool.size
+    assert_equal 1, @pool.num_idle
+    refute @pool.workers.find{ |w| w.thread.alive? }
+
+    foo = []
+    @pool.perform do
+      foo << "bar"
+    end
+
+    @pool.dispose
+
+    @pool.summary
+    assert_equal 1, foo.size
+    assert_equal "bar", foo.first
+  end
+
 end # TestThreadPool
 end # Test
 end # Bixby

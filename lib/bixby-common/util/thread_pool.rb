@@ -125,7 +125,6 @@ module Bixby
           end
 
           enqueue(:shutdown, callback)
-          @size -= 1
         end
       end
 
@@ -165,7 +164,6 @@ module Bixby
         exit_handler = lambda { |worker, reason|
           @lock.synchronize do
             if reason == :exception or (reason == :timeout && @size > @min_size) then
-              @size -= 1
               remove_worker(worker)
               grow
               return true
@@ -182,6 +180,7 @@ module Bixby
     # Grow the pool by one if we have more jobs than idle workers
     def grow
       @lock.synchronize do
+        prune
         logger.debug { "jobs: #{num_jobs}; busy: #{num_working}; idle: #{num_idle}" }
         if @size == 0 || (@size < @max_size && num_jobs > 0 && num_jobs > num_idle) then
           space = @max_size-@size
@@ -197,9 +196,19 @@ module Bixby
       nil
     end
 
+    # Remove any dead worker threads which may not have been cleaned up properly
+    # (via callback handler)
+    def prune
+      @lock.synchronize do
+        @workers.delete_if { |w| !w.alive? }
+        @size = @workers.size
+      end
+    end
+
     def remove_worker(worker)
       @lock.synchronize do
         @workers.delete(worker)
+        @size -= 1
       end
 
       nil
