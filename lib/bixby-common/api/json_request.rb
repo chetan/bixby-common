@@ -21,16 +21,18 @@ class JsonRequest
     @params = params
   end
 
-  # Convert object to String, useful for debugging
+  # Stringify, useful for debugging
+  #
+  # @param [Boolean] include_params         whether or not to include params in the output (default: true)
   #
   # @return [String]
-  def to_s # :nocov:
+  def to_s(include_params=true)
     s = []
     s << "JsonRequest:#{self.object_id}"
     s << "  operation:  #{self.operation}"
-    s << "  params:     " + MultiJson.dump(self.params)
+    s << "  params:     " + MultiJson.dump(self.params) if include_params
     s.join("\n")
-  end # :nocov:
+  end
 
   def to_wire
     MultiJson.dump(self)
