@@ -11,12 +11,6 @@ end
 require 'micron/minitest'
 
 begin
-  require 'curb'
-  require 'curb_threadpool'
-rescue LoadError
-end
-
-begin
   require 'httpclient'
 rescue LoadError
 end
