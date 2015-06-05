@@ -76,6 +76,9 @@ module Bixby
 
       # Open
       def open(event)
+        if event && !event.target.kind_of?(Faye::WebSocket::Client) then
+          logger.debug { "opened connection from #{event.target.env["REMOTE_ADDR"]}" }
+        end
         @connected = true
       end
 
@@ -83,6 +86,9 @@ module Bixby
       #
       # Can be fired either due to disconnection or failure to connect
       def close(event)
+        if event && !event.target.kind_of?(Faye::WebSocket::Client) then
+          logger.debug { "closed connection from #{event.target.env["REMOTE_ADDR"]} (code=#{event.code}; reason=\"#{event.reason}\")" }
+        end
         if @connected then
           @connected = false
           @handler.new(nil).disconnect(self)
