@@ -10,6 +10,87 @@ module Bixby
   # A simple logging mixin
   module Log
 
+    class << self
+
+      def gems_regex
+        return @gems_regex if @gems_regex
+        gems_paths = (Gem.path | [Gem.default_dir]).map { |p| Regexp.escape(p) }
+        @gems_regex = %r{(#{gems_paths.join('|')})/gems/([^/]+)-([\w.]+)/(.*)}
+      end
+
+      def ruby_regex
+        @ruby_regex ||= %r{^#{ENV["MY_RUBY_HOME"]}/lib(/.*?)?/ruby/[\d.]+/(.*)$}
+      end
+
+      # Check whether the given logger is configured to append to the console (STDOUT)
+      #
+      # @param [Logging::Logger] logger
+      #
+      # @return [Boolean] true if writing to STDOUT
+      def console_appender?(logger)
+        logger.appenders.each do |a|
+          if a.kind_of? Logging::Appenders::Stdout then
+            return true
+          end
+        end
+
+        if logger.parent then
+          return console_appender?(logger.parent)
+        end
+
+        false # at root
+      end
+      alias_method :console?, :console_appender?
+      alias_method :stdout?,  :console_appender?
+
+      def clean_ex_for_console(ex, logger)
+        console?(logger) ? clean_ex(ex) : ex
+      end
+
+      # Created a cleaned up exception, suitable for printing to the console
+      #
+      # This method should generally only be used for debugging as it can be quite slow.
+      #
+      # @param [Exception] ex
+      # @param [Boolean] exclude_gems          Whether or not to exclude all gems from the stacktrace (default: true)
+      # @param [Boolean] exclude_dupes         When exclude_gems is set to false, omits duplicate gems from the stacktrace (default: true)
+      #
+      # @return [String]
+      def clean_ex(ex, exclude_gems=true, exclude_dupes=true)
+        puts self
+        s = []
+        s << "<#{ex.class}> #{ex.message}"
+
+        last_gem = nil
+        ex.backtrace.each do |e|
+          if e =~ Log.gems_regex then
+            next if exclude_gems
+            gem_name = $2
+            gem_ver  = $3
+            trace    = $4
+            gem_str = "#{gem_name} (#{gem_ver})"
+            if !exclude_dupes || (last_gem.nil? || last_gem != gem_name) then
+              s << "    #{gem_str} #{trace}"
+            elsif exclude_dupes && last_gem == gem_name then
+              # s << "    " + (" "*(gem_str.size+1)) + "..."
+            end
+            last_gem = gem_name
+
+          elsif e =~ Log.ruby_regex then
+            next if exclude_gems
+            last_gem = nil
+            trace = $2
+            s << "    ruby (#{RUBY_VERSION}) #{trace}"
+
+          else
+            s << "    #{e}"
+          end
+        end
+
+        s.join("\n")
+      end
+    end
+
     # Get a log instance for this class
     #
     # @return [Logger]
