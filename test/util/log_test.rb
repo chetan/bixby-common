@@ -46,6 +46,31 @@ class TestLog < TestCase
     end
   end
 
+  def test_console?
+    Logging::Logger.root.clear_appenders
+    refute Bixby::Log.console?(Logging::Logger.root)
+  end
+
+  def test_cleanup_ex
+    ex = nil
+    begin
+      raise "foobar had a problem"
+    rescue Exception => ex
+    end
+
+    assert ex
+
+    Logging::Logger.root.clear_appenders
+    assert_kind_of Exception, Bixby::Log.clean_ex_for_console(ex, Logging::Logger.root)
+
+    str = Bixby::Log.clean_ex(ex)
+    assert str
+    assert_kind_of String, str
+
+    assert str.split(/\n/).first =~ /foobar had a problem/
+    refute str.include? "/gems/"
+  end
+
 end # TestLog
 
 end # Test

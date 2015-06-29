@@ -15,7 +15,12 @@ module Bixby
       def gems_regex
         return @gems_regex if @gems_regex
         gems_paths = (Gem.path | [Gem.default_dir]).map { |p| Regexp.escape(p) }
+        gems_paths << "#{Gem.path.first}/bundler" # include path for gems installed via git repo
         @gems_regex = %r{(#{gems_paths.join('|')})/gems/([^/]+)-([\w.]+)/(.*)}
+      end
+
+      def bin_regex
+        @bin_regex ||= %r{#{Gem.path.first}/(bin/.*)$}
       end
 
       def ruby_regex
@@ -34,7 +39,7 @@ module Bixby
           end
         end
 
-        if logger.parent then
+        if logger.respond_to?(:parent) && logger.parent then
           return console_appender?(logger.parent)
         end
 
@@ -75,6 +80,11 @@ module Bixby
               # s << "    " + (" "*(gem_str.size+1)) + "..."
             end
             last_gem = gem_name
+
+          elsif e =~ Log.bin_regex then
+            next if exclude_gems
+            rel_path = $1
+            s << "    #{rel_path}"
 
           elsif e =~ Log.ruby_regex then
             next if exclude_gems
